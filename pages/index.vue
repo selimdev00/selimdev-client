@@ -1,32 +1,74 @@
+<script lang="ts" setup>
+import { vIntersectionObserver } from "@vueuse/components";
+import { useNav } from "~/composables/useNav";
+
+const navSystem = useNav();
+
+const route = useRoute();
+
+const sectionIntersectionHandler = (
+  entries: IntersectionObserverEntry[],
+  id: string
+) => {
+  entries.forEach(async (e) => {
+    if (e.isIntersecting) {
+      await navSystem.setActive(route, id);
+    }
+  });
+};
+</script>
+
 <template>
   <div class="container max-w-[955px] tracking-normal">
-    <div class="grid grid-cols-2 gap-[50px]">
-      <Profile />
+    <div class="grid grid-cols-2 gap-[50px] items-start">
+      <Profile v-motion-fade />
 
-      <div class="py-2 flex flex-col gap-[22px] leading-[26px] text-gray-300">
-        <p>
-          Lorem ipsum dolor sit amet consectetur. Eu tortor facilisis blandit
-          rhoncus vestibulum potenti pellentesque netus in.
-          <span class="text-white"
-            >Ullamcorper adipiscin g enim tincidunt egestas.</span
-          >
-          Risus consectetur vulputate nulla commodo ac lorem dignissim laoreet
-          dignissim. Eu lectus vitae pellentesque leo.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur. Eu tortor facilisis blandit
-          rhoncus vestibulum potenti pellentesque netus in. Ullamcorper
-          adipiscin g enim tincidunt egestas. Risus consectetur vulputate nulla
-          commodo ac lorem dignissim laoreet dignissim. Eu lectus vitae
-          pellentesque leo.
-        </p>
-        <p>
-          Lorem ipsum dolor sit amet consectetur. Eu tortor facilisis blandit
-          rhoncus vestibulum potenti pellentesque netus in. Ullamcorper
-          adipiscin g enim tincidunt egestas. Risus consectetur vulputate nulla
-          commodo ac lorem dignissim laoreet dignissim. Eu lectus vitae
-          pellentesque leo.
-        </p>
+      <div class="flex flex-col gap-[10px] py-10">
+        <About
+          v-motion-fade
+          id="about"
+          data-section="about"
+          v-intersection-observer="[
+            (entries) => sectionIntersectionHandler(entries, 'about'),
+            { threshold: 0.5 },
+          ]"
+        />
+
+        <section
+          id="experiences"
+          data-section="experiences"
+          class="pt-4 pb-32"
+          v-intersection-observer="[
+            (entries) => sectionIntersectionHandler(entries, 'experiences'),
+            { threshold: 0.5 },
+          ]"
+        >
+          <ul class="flex flex-col gap-16">
+            <ExperienceItem v-motion-fade-visible />
+            <ExperienceItem v-motion-fade-visible />
+            <ExperienceItem v-motion-fade-visible />
+            <ExperienceItem v-motion-fade-visible />
+            <ExperienceItem v-motion-fade-visible />
+          </ul>
+        </section>
+
+        <section
+          id="projects"
+          data-section="projects"
+          class="pt-4"
+          v-intersection-observer="[
+            (entries) => sectionIntersectionHandler(entries, 'projects'),
+            { threshold: 0.5 },
+          ]"
+        >
+          <ul class="flex flex-col gap-[45px]">
+            <ProjectItem v-motion-fade-visible />
+            <ProjectItem v-motion-fade-visible />
+            <ProjectItem v-motion-fade-visible />
+            <ProjectItem v-motion-fade-visible />
+            <ProjectItem v-motion-fade-visible />
+          </ul>
+        </section>
       </div>
     </div>
   </div>

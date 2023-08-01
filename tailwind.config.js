@@ -12,9 +12,11 @@ module.exports = {
     container: {
       center: true,
       padding: '1rem',
+
     },
     extend: {
       colors: {
+        primary: "#3282B8",
         dark: {
           900: '#1B262C'
         },

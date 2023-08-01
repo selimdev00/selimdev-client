@@ -1,7 +1,7 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div class="flex flex-col gap-[44px]">
+  <div
+    class="py-10 flex flex-col gap-[44px] sticky top-0 max-h-screen overflow-hidden"
+  >
     <div class="flex flex-col gap-3">
       <div class="flex flex-col">
         <h1 class="text-[40px] font-bold">Selim Ataballyev</h1>
