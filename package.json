@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
+    "@nuxtjs/i18n": "^8.0.0-rc.1",
     "@types/node": "^18.17.0",
     "autoprefixer": "^10.4.14",
     "nuxt": "^3.6.5",
@@ -17,5 +18,9 @@
     "prettier": "^3.0.0",
     "sass": "^1.64.1",
     "tailwindcss": "^3.3.3"
+  },
+  "dependencies": {
+    "@morev/vue-transitions": "^2.3.6",
+    "nuxt-icon": "^0.4.2"
   }
 }
