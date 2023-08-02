@@ -1,13 +1,15 @@
 <template>
-  <li
-    class="flex items-start gap-[20px] relative group cursor-default p-6 hover:bg-dark-800 bg-blend-color rounded-lg"
+  <div
+    class="flex items-start gap-[20px] relative cursor-default p-6 hover:bg-dark-800 rounded-lg hover:!opacity-100 group-hover/list:opacity-50 transition-all duration-300"
   >
-    <div class="h-[105%] absolute top-1 left-[-40px] gap-3">
+    <div class="h-[105%] absolute top-7 left-[-40px] gap-3">
       <div
-        class="w-[20px] h-[20px] aspect-1/1 rotate-45 border border-primary rounded-[3px]"
+        class="w-[20px] h-[20px] aspect-1/1 rotate-45 border border-primary rounded-[3px] group-hover/item:rotate-90 transition-all duration-300"
       ></div>
 
-      <div class="h-full bg-white w-[1px] mt-4 mx-auto group-last:hidden"></div>
+      <div
+        class="h-full bg-white w-[1px] mt-4 mx-auto group-last/item:hidden"
+      ></div>
     </div>
 
     <div
@@ -22,11 +24,13 @@
 
     <div class="w-full flex flex-col gap-2">
       <div class="flex flex-col">
-        <div class="flex items-center gap-[8.5px] group-hover:text-primary">
+        <div
+          class="flex items-center gap-[8.5px] group-hover/item:text-primary transition-all duration-300"
+        >
           <h1 class="text-[12px] font-semibold">Frontend Engineer</h1>
 
           <div
-            class="w-[2px] h-[2px] rounded-full bg-white group-hover:bg-primary"
+            class="w-[2px] h-[2px] rounded-full bg-white group-hover/item:bg-primary"
           ></div>
 
           <h1 class="text-[12px] font-semibold">IDE-AL Hyzmat</h1>
@@ -59,5 +63,5 @@
         </div>
       </div>
     </div>
-  </li>
+  </div>
 </template>

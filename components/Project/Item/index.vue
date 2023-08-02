@@ -1,5 +1,7 @@
 <template>
-  <li class="grid grid-cols-[100px_1fr] items-start gap-6">
+  <div
+    class="grid grid-cols-[100px_1fr] items-start gap-6 p-4 cursor-default hover:bg-dark-800 rounded-lg hover:!opacity-100 group-hover/list:opacity-50 transition-all duration-300"
+  >
     <div class="w-[100px] h-[70px]">
       <img
         class="w-full h-full aspect-1.5/1 object-cover"
@@ -9,7 +11,9 @@
 
     <div class="flex flex-col gap-2">
       <div class="flex flex-col gap-1">
-        <div class="flex items-center gap-[7px]">
+        <div
+          class="flex items-center gap-[7px] group-hover/item:text-primary transition duration-300"
+        >
           <h1 class="text-[12px] font-semibold">Frontend Engineer</h1>
 
           <Icon name="gridicons:external" class="text-[12px]" />
@@ -36,5 +40,5 @@
         </div>
       </div>
     </div>
-  </li>
+  </div>
 </template>

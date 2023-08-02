@@ -43,12 +43,15 @@ const sectionIntersectionHandler = (
             { threshold: 0.5 },
           ]"
         >
-          <ul class="flex flex-col gap-16">
-            <ExperienceItem v-motion-fade-visible />
-            <ExperienceItem v-motion-fade-visible />
-            <ExperienceItem v-motion-fade-visible />
-            <ExperienceItem v-motion-fade-visible />
-            <ExperienceItem v-motion-fade-visible />
+          <ul class="flex flex-col gap-16 group/list">
+            <li
+              v-for="i in 5"
+              :key="`exp-${i}`"
+              v-motion-fade-visible
+              class="group/item"
+            >
+              <ExperienceItem />
+            </li>
           </ul>
         </section>
 
@@ -61,14 +64,19 @@ const sectionIntersectionHandler = (
             { threshold: 0.5 },
           ]"
         >
-          <ul class="flex flex-col gap-[45px]">
-            <ProjectItem v-motion-fade-visible />
-            <ProjectItem v-motion-fade-visible />
-            <ProjectItem v-motion-fade-visible />
-            <ProjectItem v-motion-fade-visible />
-            <ProjectItem v-motion-fade-visible />
+          <ul class="flex flex-col gap-[45px] group/list">
+            <li
+              v-for="i in 5"
+              :key="`pro-${i}`"
+              v-motion-fade-visible
+              class="group/item"
+            >
+              <ProjectItem />
+            </li>
           </ul>
         </section>
+
+        <Footer class="py-20" />
       </div>
     </div>
   </div>
