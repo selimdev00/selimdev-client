@@ -11,22 +11,22 @@ module.exports = {
   theme: {
     container: {
       center: true,
-      padding: '1rem',
-
+      padding: "1rem",
     },
     extend: {
       colors: {
         primary: "#3282B8",
         dark: {
-          900: '#1B262C'
+          900: "#1B262C",
+          800: "#212e35",
         },
         blue: {
-          400: '#BBE1FA'
+          400: "#BBE1FA",
         },
         gray: {
-          300: '#ababab'
-        }
-      }
+          300: "#ababab",
+        },
+      },
     },
   },
   plugins: [],

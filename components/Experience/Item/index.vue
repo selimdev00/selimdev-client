@@ -1,5 +1,7 @@
 <template>
-  <li class="px-[2px] flex items-start gap-[20px] relative group">
+  <li
+    class="flex items-start gap-[20px] relative group cursor-default p-6 hover:bg-dark-800 bg-blend-color rounded-lg"
+  >
     <div class="h-[105%] absolute top-1 left-[-40px] gap-3">
       <div
         class="w-[20px] h-[20px] aspect-1/1 rotate-45 border border-primary rounded-[3px]"
@@ -13,17 +15,19 @@
     >
       <p>July 2019</p>
 
-      <div class="h-[1px] w-[24px] bg-white"></div>
+      <div class="h-[1px] w-[20px] bg-white"></div>
 
       <p>June 2019</p>
     </div>
 
     <div class="w-full flex flex-col gap-2">
       <div class="flex flex-col">
-        <div class="flex items-center gap-[8.5px]">
+        <div class="flex items-center gap-[8.5px] group-hover:text-primary">
           <h1 class="text-[12px] font-semibold">Frontend Engineer</h1>
 
-          <div class="w-[2px] h-[2px] rounded-full bg-white"></div>
+          <div
+            class="w-[2px] h-[2px] rounded-full bg-white group-hover:bg-primary"
+          ></div>
 
           <h1 class="text-[12px] font-semibold">IDE-AL Hyzmat</h1>
 

@@ -37,14 +37,16 @@ const eventHandler = ({ ...state }) => {
   position: absolute;
   background: repeating-linear-gradient(
     to right,
-    #0067dc 0%,
-    #1d9ce0 50%,
-    #36c4e4 100%
+    rgba(0, 103, 220, 0.2) 0%,
+    rgba(129, 156, 224, 0.2) 50%,
+    rgba(54, 196, 228, 0.2) 100%
   );
-  height: 300px;
-  width: 300px;
+  height: 350px;
+  width: 350px;
   top: 0;
   left: 0;
   filter: blur(110px);
+  pointer-events: none;
+  z-index: 30;
 }
 </style>

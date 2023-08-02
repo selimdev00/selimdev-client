@@ -33,13 +33,13 @@ export default defineNuxtComponent({
     <li
       v-for="(item, index) of nav"
       :key="`profile-nav-item-${index}`"
-      class="group flex items-center gap-2 opacity-75 transition-all duration-500 hover:opacity-100"
+      class="group opacity-75 transition-all duration-500 hover:opacity-100"
       :class="{ 'is-active !opacity-100': item.active }"
     >
-      <div
-        class="h-[1px] w-[40px] group-[.is-active]:w-[80px] bg-white transition-all duration-300"
-      ></div>
-      <nuxt-link :to="item.path">
+      <nuxt-link :to="item.path" class="flex items-center gap-2">
+        <div
+          class="h-[1px] w-[40px] group-[.is-active]:w-[80px] group-hover:w-[80px] bg-white transition-all duration-300"
+        ></div>
         {{ item.title }}
       </nuxt-link>
     </li>
