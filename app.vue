@@ -10,10 +10,23 @@ onBeforeMount(() => {
     document.documentElement.classList.remove("dark");
   }
 });
+
+const loading = ref<boolean>(true);
+onMounted(() => {
+  setTimeout(() => {
+    loading.value = false;
+  }, 1000);
+});
 </script>
 
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <div class="min-h-screen bg-dark-800">
+    <transition-fade>
+      <Loading v-if="loading" />
+    </transition-fade>
+
+    <NuxtLayout v-if="!loading">
+      <NuxtPage />
+    </NuxtLayout>
+  </div>
 </template>

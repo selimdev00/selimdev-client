@@ -1,6 +1,6 @@
 <template>
   <div
-    class="py-10 flex flex-col gap-[44px] sticky top-0 max-h-screen overflow-hidden"
+    class="py-10 flex flex-col gap-[44px] lg:sticky top-0 max-h-screen overflow-hidden"
   >
     <div class="flex flex-col gap-3">
       <div class="flex flex-col">
@@ -17,7 +17,7 @@
       </p>
     </div>
 
-    <div class="flex flex-col gap-[390px]">
+    <div class="flex flex-col lg:gap-[390px]">
       <ProfileNav />
 
       <ProfileSocials />

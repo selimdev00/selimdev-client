@@ -20,7 +20,7 @@ const sectionIntersectionHandler = (
 
 <template>
   <div class="container max-w-[1050px] tracking-normal">
-    <div class="grid grid-cols-[1fr_1.5fr] gap-[100px] items-start">
+    <div class="grid lg:grid-cols-[1fr_1.5fr] lg:gap-[100px] items-start">
       <Profile v-motion-fade />
 
       <div class="flex flex-col gap-[10px] py-10">

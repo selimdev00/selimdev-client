@@ -28,25 +28,20 @@ const eventHandler = ({ ...state }) => {
       <slot />
     </div>
 
-    <div ref="element" class="mouse-gradient"></div>
+    <div
+      ref="element"
+      class="mouse-gradient absolute w-[350px] h-[350px] top-0 left-0 blur-[110px] pointer-events-none z-30"
+    ></div>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .mouse-gradient {
-  position: absolute;
   background: repeating-linear-gradient(
     to right,
     rgba(0, 103, 220, 0.2) 0%,
     rgba(129, 156, 224, 0.2) 50%,
     rgba(54, 196, 228, 0.2) 100%
   );
-  height: 350px;
-  width: 350px;
-  top: 0;
-  left: 0;
-  filter: blur(110px);
-  pointer-events: none;
-  z-index: 30;
 }
 </style>
