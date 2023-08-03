@@ -21,7 +21,7 @@ onMounted(() => {
     <transition-fade>
       <div
         v-if="showGoToTopButton && !menuVisible"
-        class="h-14 w-14 border-2 border-primary bg-dark-900 flex items-center justify-center rounded-full active:bg-primary"
+        class="h-14 w-14 border-2 border-sky-400 bg--slate-950 flex items-center justify-center rounded-full active:bg-sky-400 cursor-pointer"
         @click="goToTop"
       >
         <Icon name="mdi:arrow-top" />
@@ -30,7 +30,7 @@ onMounted(() => {
 
     <div
       v-if="windowWidth < 1023"
-      class="h-14 w-14 border-2 border-primary bg-dark-900 flex items-center justify-center rounded-full active:bg-primary"
+      class="h-14 w-14 border-2 border-sky-400 bg--slate-950 flex items-center justify-center rounded-full active:bg-sky-400 cursor-pointer"
       @click="toggleMenu"
     >
       <transition-fade>
@@ -44,7 +44,7 @@ onMounted(() => {
     <Profile
       v-if="menuVisible"
       key="profile-menu"
-      class="!fixed !flex top-0 bottom-0 left-0 right-0 bg-dark-900 z-20 h-full p-4"
+      class="!fixed !flex top-0 bottom-0 left-0 right-0 bg--slate-950 z-20 h-full p-4"
     />
   </transition-fade>
 </template>

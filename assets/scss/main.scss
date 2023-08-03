@@ -5,10 +5,14 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
+  @apply scroll-smooth;
 }
 
 body {
   font-family: "Inter", sans-serif;
-  overflow-x: hidden;
+  @apply overflow-x-hidden;
+}
+
+.highlight {
+  @apply dark:text-sky-200 text-sky-600 opacity-75 hover:opacity-100 transition-all duration-300 cursor-default;
 }

@@ -21,7 +21,7 @@ const eventHandler = ({ ...state }) => {
 
 <template>
   <div
-    class="dark:bg-dark-900 dark:text-white min-h-screen overflow-hidden relative"
+    class="dark:bg-slate-950 bg-sky-50 dark:text-white min-h-screen relative"
     v-move="eventHandler"
   >
     <div class="relative z-10">

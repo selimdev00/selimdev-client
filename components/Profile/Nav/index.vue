@@ -23,7 +23,7 @@ onMounted(() => {
     <li
       v-for="(item, index) of nav"
       :key="`profile-nav-item-${index}`"
-      class="group opacity-75 transition-all duration-500 hover:opacity-100"
+      class="group opacity-50 transition-all duration-500 hover:opacity-100"
       :class="{ 'is-active !opacity-100': item.active }"
     >
       <nuxt-link
@@ -32,7 +32,7 @@ onMounted(() => {
         @click.native="toggleMenu"
       >
         <div
-          class="h-[1px] w-[40px] group-[.is-active]:w-[80px] group-hover:w-[80px] bg-white transition-all duration-300"
+          class="h-[1px] w-[40px] group-[.is-active]:w-[80px] group-hover:w-[80px] dark:bg-white bg-gray-700 transition-all duration-300"
         ></div>
         {{ item.title }}
       </nuxt-link>

@@ -1,15 +1,5 @@
 <script setup lang="ts">
-onBeforeMount(() => {
-  if (
-    localStorage.theme === "dark" ||
-    (!("theme" in localStorage) &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches)
-  ) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-});
+const { setDefaultMode } = useMode();
 
 const loading = ref<boolean>(true);
 onMounted(() => {
@@ -20,7 +10,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-dark-800">
+  <div class="min-h-screen dark:bg-slate-900 bg-sky-50">
     <transition-fade>
       <Loading v-if="loading" />
     </transition-fade>

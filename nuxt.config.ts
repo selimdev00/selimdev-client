@@ -17,10 +17,6 @@ export default defineNuxtConfig({
         file: "ru.js",
       },
       {
-        code: "tk",
-        file: "tk.js",
-      },
-      {
         code: "en",
         file: "en.js",
       },

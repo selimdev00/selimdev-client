@@ -1,23 +1,5 @@
 <script lang="ts" setup>
-interface Social {
-  icon: string;
-  path: string;
-}
-
-const socials = ref<Social[]>([
-  {
-    icon: "mdi:github",
-    path: "/some",
-  },
-  {
-    icon: "academicons:stackoverflow-square",
-    path: "/some",
-  },
-  {
-    icon: "mdi:linkedin",
-    path: "/some",
-  },
-]);
+const { socials } = useSocials();
 </script>
 
 <template>
@@ -27,7 +9,7 @@ const socials = ref<Social[]>([
       :key="`profile-socials-item-${index}`"
       class="group opacity-75 hover:opacity-100 transition-all duration-300 text-[25px]"
     >
-      <nuxt-link :to="social.path">
+      <nuxt-link :to="social.link" target="_blank">
         <Icon :name="social.icon" />
       </nuxt-link>
     </li>

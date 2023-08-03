@@ -1,22 +1,23 @@
 <script setup lang="ts">
 import { useIntersectionObserver } from "@vueuse/core";
 
-const target = ref(null);
+const experience = ref(null);
 
 const { setActive } = useNav();
 
 const route = useRoute();
 
 const { stop } = useIntersectionObserver(
-  target,
+  experience,
   ([{ isIntersecting }], observerElement) => {
     if (isIntersecting) setActive(route, "experiences");
-  }
+  },
+  { threshold: 0.5 }
 );
 </script>
 
 <template>
-  <section ref="target" id="experiences" class="pt-4 md:pb-32 pb-12">
+  <section ref="experience" id="experiences" class="pt-4 md:pb-32 pb-12">
     <ul class="flex flex-col md:gap-16 gap-8 group/list">
       <li
         v-for="i in 5"
