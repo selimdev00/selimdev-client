@@ -10,7 +10,7 @@ html {
 
 body {
   font-family: "Inter", sans-serif;
-  @apply overflow-x-hidden;
+  @apply overflow-x-hidden dark:bg-slate-950 bg-sky-50;
 }
 
 .highlight {

@@ -16,7 +16,11 @@ export const useMenu = () => {
     window.addEventListener("resize", (e) => {
       windowWidth.value = window.innerWidth;
 
-      if (windowWidth.value > 768) menuVisible.value = false;
+      if (windowWidth.value > 768) {
+        menuVisible.value = false;
+
+        document.body.classList.remove("overflow-hidden");
+      }
     });
   }
 
