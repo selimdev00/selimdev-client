@@ -18,7 +18,7 @@ const props = defineProps<ExperienceItemProps>();
       class="absolute top-0 left-0 w-full h-full z-10"
     ></a>
 
-    <div class="h-[105%] absolute top-7 left-[-40px] gap-3 md:block hidden">
+    <div class="h-[103%] absolute top-7 left-[-40px] gap-3 md:block hidden">
       <div
         class="w-[20px] h-[20px] aspect-1/1 rotate-45 border border-sky-400 rounded-[3px] group-hover/item:rotate-90 transition-all duration-300"
       ></div>

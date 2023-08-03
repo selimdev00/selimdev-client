@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   },
   modules: ["nuxt-icon", "@nuxtjs/i18n", "@morev/vue-transitions/nuxt"],
   i18n: {
+    baseUrl: "https://selimdev.vercel.app/",
     compilation: {
       strictMessage: false,
     },
@@ -27,7 +28,11 @@ export default defineNuxtConfig({
     ],
     lazy: false,
     defaultLocale: "en",
-
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: "i18n_redirected",
+      alwaysRedirect: true,
+    },
     strategy: "no_prefix",
   },
 });

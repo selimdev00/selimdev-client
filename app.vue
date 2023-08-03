@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { TransitionFade } from "@morev/vue-transitions";
+
 const { setDefaultMode } = useMode();
 
 const loading = ref<boolean>(true);
 onMounted(() => {
-  setTimeout(() => {
-    loading.value = false;
-  }, 1000);
+  loading.value = false;
 });
 </script>
 

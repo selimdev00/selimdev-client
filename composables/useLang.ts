@@ -22,7 +22,9 @@ const languages = ref<Language[]>([
 export const useLang = () => {
   const i18n = useI18n();
 
-  const locale = ref<string>(i18n.locale);
+  const cookieLocale = useCookieLocale();
+
+  const locale = ref<string>(cookieLocale.value);
 
   const set = async (code: string) => {
     await i18n.setLocale(code);
