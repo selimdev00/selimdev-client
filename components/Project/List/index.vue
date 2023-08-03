@@ -14,7 +14,7 @@ const { stop } = useIntersectionObserver(
   ([{ isIntersecting }], observerElement) => {
     if (isIntersecting) setActive(route, "projects");
   },
-  { threshold: 0.5 }
+  { threshold: 0.7 }
 );
 </script>
 

@@ -10,19 +10,19 @@ interface NavItem {
 const nav = ref<NavItem[]>([
   {
     id: "about",
-    title: "About",
+    title: "about",
     path: "/#about",
     active: false,
   },
   {
     id: "experiences",
-    title: "Experiences",
+    title: "experiences",
     path: "/#experiences",
     active: false,
   },
   {
     id: "projects",
-    title: "Projects",
+    title: "projects",
     path: "/#projects",
     active: false,
   },

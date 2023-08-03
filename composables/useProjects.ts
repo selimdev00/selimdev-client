@@ -18,16 +18,16 @@ export const useProjects = () => {
 
   const projects = ref<Project[]>([
     {
-      name: t("projects.legoGen.name"),
-      description: t("projects.legoGen.description"),
+      name: "projectItems.legoGen.name",
+      description: "projectItems.legoGen.description",
       tags: ["HTML", "CSS", "Javascript", "SCSS", "Vue 3", "Vite", "Typesript"],
       links: [
         {
-          name: "Github",
+          name: "github",
           url: "https://github.com/selimdev00/lego-gen",
         },
         {
-          name: "Preview",
+          name: "preview",
           url: "https://lego-gen.vercel.app/",
         },
       ],

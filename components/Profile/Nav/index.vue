@@ -34,7 +34,7 @@ onMounted(() => {
         <div
           class="h-[1px] w-[40px] group-[.is-active]:w-[80px] group-hover:w-[80px] dark:bg-white bg-gray-700 transition-all duration-300"
         ></div>
-        {{ item.title }}
+        {{ $t(item.title) }}
       </nuxt-link>
     </li>
   </ul>

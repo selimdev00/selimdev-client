@@ -1,7 +1,23 @@
+<script setup lang="ts">
+import { Experience } from "~/composables/useExperiences";
+
+interface ExperienceItemProps {
+  item: Experience;
+}
+
+const props = defineProps<ExperienceItemProps>();
+</script>
+
 <template>
   <div
     class="flex sm:flex-row flex-col items-start sm:gap-[20px] gap-1 relative cursor-default md:p-6 p-3 dark:hover:bg-slate-900 hover:bg-sky-100 rounded-lg hover:!opacity-100 group-hover/list:opacity-50 transition-all duration-300"
   >
+    <a
+      v-if="props.item.link"
+      :href="props.item.link"
+      class="absolute top-0 left-0 w-full h-full z-10"
+    ></a>
+
     <div class="h-[105%] absolute top-7 left-[-40px] gap-3 md:block hidden">
       <div
         class="w-[20px] h-[20px] aspect-1/1 rotate-45 border border-sky-400 rounded-[3px] group-hover/item:rotate-90 transition-all duration-300"
@@ -15,7 +31,14 @@
     <div
       class="md:w-[240px] py-[7px] flex md:flex-row sm:flex-col flex-row items-center gap-[10px] text-[10px] uppercase text-center"
     >
-      <p>July 2019</p>
+      <p>
+        {{
+          $DateTime
+            .fromISO(props.item.from)
+            .setLocale($i18n.locale)
+            .toFormat("LLL yyyy")
+        }}
+      </p>
 
       <div
         class="md:block hidden h-[1px] w-[20px] dark:bg-white bg-gray-700"
@@ -29,7 +52,14 @@
         <Icon name="mdi:arrow-right" />
       </div>
 
-      <p>June 2019</p>
+      <p>
+        {{
+          $DateTime
+            .fromISO(props.item.to)
+            .setLocale($i18n.locale)
+            .toFormat("LLL yyyy")
+        }}
+      </p>
     </div>
 
     <div class="w-full flex flex-col gap-2">
@@ -37,41 +67,41 @@
         <div
           class="flex items-center gap-[8.5px] dark:group-hover/item:text-sky-400 group-hover/item:text-sky-900 transition-all duration-300 flex-wrap"
         >
-          <h1 class="text-[12px] font-semibold">Frontend Engineer</h1>
+          <h1 class="text-[12px] font-semibold">
+            {{ $t(props.item.position) }}
+          </h1>
 
           <div
             class="w-[2px] h-[2px] rounded-full dark:bg-white bg-gray-700 group-hover/item:bg-sky-400"
           ></div>
 
-          <h1 class="text-[12px] font-semibold">IDE-AL Hyzmat</h1>
+          <h1 class="text-[12px] font-semibold">{{ $t(props.item.place) }}</h1>
 
-          <Icon name="gridicons:external" class="text-[12px]" />
+          <Icon
+            v-if="props.item.link"
+            name="gridicons:external"
+            class="text-[12px]"
+          />
         </div>
 
         <h1
           class="text-[12px] font-semibold dark:text-sky-200 text-sky-800 opacity-75"
         >
-          Frontend Engineer
+          {{ $t(props.item.subtitle) }}
         </h1>
       </div>
 
       <p class="text-[12px] dark:text-gray-400 text-gray-500 leading-[1.6]">
-        Deliver high-quality, robust production code for a diverse array of
-        projects for clients including Harvard Business School, Everytown for
-        Gun Safety, Pratt Institute, Koala Health, Vanderbilt University, The
-        Gun Safety, Pratt Institute, Koala Health, Vanderbilt University, The
+        {{ $t(props.item.description) }}
       </p>
 
       <div class="flex flex-wrap gap-2">
         <div
+          v-for="(tag, index) in props.item.tags"
+          :key="`tag-${index}-${tag}`"
           class="text-sky-400 font-semibold text-[10px] border border-sky-400 rounded-full px-2 py-1"
         >
-          <span>HTML</span>
-        </div>
-        <div
-          class="text-sky-400 font-semibold text-[10px] border border-sky-400 rounded-full px-2 py-1"
-        >
-          <span>CSS</span>
+          <span>{{ tag }}</span>
         </div>
       </div>
     </div>

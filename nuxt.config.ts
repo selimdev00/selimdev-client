@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   css: [{ src: "@/assets/scss/main.scss" }],
@@ -10,6 +11,9 @@ export default defineNuxtConfig({
   },
   modules: ["nuxt-icon", "@nuxtjs/i18n", "@morev/vue-transitions/nuxt"],
   i18n: {
+    compilation: {
+      strictMessage: false,
+    },
     langDir: "lang/",
     locales: [
       {
@@ -21,12 +25,9 @@ export default defineNuxtConfig({
         file: "en.js",
       },
     ],
-    lazy: true,
+    lazy: false,
     defaultLocale: "en",
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: "i18n_redirected",
-      alwaysRedirect: true,
-    },
+
+    strategy: "no_prefix",
   },
 });

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { Project } from "~/composables/useProjects";
-
 interface ProjectItemProps {
   item: Project;
 }
@@ -24,7 +22,7 @@ const props = defineProps<ProjectItemProps>();
         <div
           class="flex items-center gap-[7px] dark:group-hover/item:text-sky-400 group-hover/item:text-sky-900 transition duration-300"
         >
-          <h1 class="text-[12px] font-semibold">{{ props.item.name }}</h1>
+          <h1 class="text-[12px] font-semibold">{{ $t(props.item.name) }}</h1>
         </div>
 
         <div
@@ -38,12 +36,12 @@ const props = defineProps<ProjectItemProps>();
             target="_blank"
             class="highlight !cursor-pointer"
           >
-            {{ link.name }}
+            {{ $t(link.name) }}
           </nuxt-link>
         </div>
 
         <p class="text-[12px] dark:text-gray-400 text-gray-500">
-          {{ props.item.description }}
+          {{ $t(props.item.description) }}
         </p>
       </div>
 
