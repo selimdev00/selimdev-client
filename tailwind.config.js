@@ -8,6 +8,9 @@ module.exports = {
     "./nuxt.config.{js,ts}",
     "./app.vue",
   ],
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   theme: {
     container: {
       center: true,

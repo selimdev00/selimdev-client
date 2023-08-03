@@ -29,24 +29,20 @@ const nav = ref<NavItem[]>([
 ]);
 
 export const useNav = () => {
-  const router = useRouter();
-
   const setActive = async (
     route: RouteLocation,
     section: string = ""
   ): Promise<void> => {
-    nav.value.forEach((e) => (e.active = false));
-
     let index: number;
 
     section
       ? (index = nav.value.findIndex((e) => e.id === section))
       : (index = nav.value.findIndex((e) => e.path === route.fullPath));
 
-    if (index >= 0) {
-      const currentItem = nav.value[index];
+    if (index > -1) {
+      nav.value.forEach((e) => (e.active = false));
 
-      currentItem.active = true;
+      nav.value[index].active = true;
     }
   };
 

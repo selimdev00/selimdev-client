@@ -1,26 +1,13 @@
 <template>
   <div
-    class="py-10 flex flex-col gap-[44px] lg:sticky top-0 max-h-screen overflow-hidden"
+    class="py-10 lg:flex flex-col justify-between lg:sticky top-0 max-h-screen overflow-hidden hidden h-full"
   >
-    <div class="flex flex-col gap-3">
-      <div class="flex flex-col">
-        <h1 class="text-[40px] font-bold">Selim Ataballyev</h1>
+    <div class="flex flex-col gap-[44px]">
+      <ProfileInfo />
 
-        <p class="text-[20px] font-semibold leading-[1] opacity-75">
-          Full Stack Developer
-        </p>
-      </div>
-
-      <p class="dark:text-blue-400">
-        I build accessible, inclusive products and digital experiences for the
-        web and mobile.
-      </p>
-    </div>
-
-    <div class="flex flex-col lg:gap-[390px]">
       <ProfileNav />
-
-      <ProfileSocials />
     </div>
+
+    <ProfileSocials />
   </div>
 </template>

@@ -1,8 +1,26 @@
+<script setup lang="ts">
+import { useIntersectionObserver } from "@vueuse/core";
+
+const target = ref(null);
+
+const { setActive } = useNav();
+
+const route = useRoute();
+
+const { stop } = useIntersectionObserver(
+  target,
+  ([{ isIntersecting }], observerElement) => {
+    if (isIntersecting) setActive(route, "about");
+  }
+);
+</script>
+
 <template>
   <section
+    ref="target"
     id="about"
     data-section="about"
-    class="py-2 flex flex-col gap-[22px] leading-[26px] text-gray-300 pb-32"
+    class="py-2 flex flex-col gap-[22px] leading-[26px] text-gray-300 lg:pb-32 pb-6"
   >
     <p>
       Lorem ipsum dolor sit amet consectetur. Eu tortor facilisis blandit

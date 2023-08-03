@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-[100px_1fr] items-start gap-6 p-4 cursor-default hover:bg-dark-800 rounded-lg hover:!opacity-100 group-hover/list:opacity-50 transition-all duration-300"
+    class="grid sm:grid-cols-[100px_1fr] items-start gap-6 p-4 cursor-default hover:bg-dark-800 rounded-lg hover:!opacity-100 group-hover/list:opacity-50 transition-all duration-300"
   >
     <div class="w-[100px] h-[70px]">
       <img

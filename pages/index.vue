@@ -1,82 +1,26 @@
 <script lang="ts" setup>
 import { vIntersectionObserver } from "@vueuse/components";
-import { useNav } from "~/composables/useNav";
 
-const navSystem = useNav();
+const { setActive } = useNav();
 
 const route = useRoute();
-
-const sectionIntersectionHandler = (
-  entries: IntersectionObserverEntry[],
-  id: string
-) => {
-  entries.forEach(async (e) => {
-    if (e.isIntersecting) {
-      await navSystem.setActive(route, id);
-    }
-  });
-};
 </script>
 
 <template>
   <div class="container max-w-[1050px] tracking-normal">
-    <div class="grid lg:grid-cols-[1fr_1.5fr] lg:gap-[100px] items-start">
-      <Profile v-motion-fade />
+    <div class="grid lg:grid-cols-[1fr_1.5fr] lg:gap-[100px]">
+      <Profile key="profile" v-motion-fade-visible />
 
-      <div class="flex flex-col gap-[10px] py-10">
-        <About
-          v-motion-fade
-          id="about"
-          data-section="about"
-          v-intersection-observer="[
-            (entries) => sectionIntersectionHandler(entries, 'about'),
-            { threshold: 0.5 },
-          ]"
-        />
+      <div class="flex flex-col gap-[10px] md:py-10 py-6">
+        <ProfileInfo class="lg:hidden block md:py-10 py-4" />
 
-        <section
-          id="experiences"
-          data-section="experiences"
-          class="pt-4 pb-32"
-          v-intersection-observer="[
-            (entries) => sectionIntersectionHandler(entries, 'experiences'),
-            { threshold: 0.5 },
-          ]"
-        >
-          <ul class="flex flex-col gap-16 group/list">
-            <li
-              v-for="i in 5"
-              :key="`exp-${i}`"
-              v-motion-fade-visible
-              class="group/item"
-            >
-              <ExperienceItem />
-            </li>
-          </ul>
-        </section>
+        <About v-motion-fade-visible />
 
-        <section
-          id="projects"
-          data-section="projects"
-          class="pt-4"
-          v-intersection-observer="[
-            (entries) => sectionIntersectionHandler(entries, 'projects'),
-            { threshold: 0.5 },
-          ]"
-        >
-          <ul class="flex flex-col gap-[45px] group/list">
-            <li
-              v-for="i in 5"
-              :key="`pro-${i}`"
-              v-motion-fade-visible
-              class="group/item"
-            >
-              <ProjectItem />
-            </li>
-          </ul>
-        </section>
+        <ExperienceList />
 
-        <Footer class="py-20" />
+        <ProjectList />
+
+        <Footer />
       </div>
     </div>
   </div>
