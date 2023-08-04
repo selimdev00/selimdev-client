@@ -119,17 +119,17 @@ useHead({
         </template>
       </Head>
 
-      <!--      <Body>-->
-      <!--        <div class="min-h-screen dark:bg-slate-900 bg-sky-50">-->
-      <!--          <transition-fade>-->
-      <!--            <Loading v-if="loading" />-->
-      <!--          </transition-fade>-->
+      <Body>
+        <div class="min-h-screen dark:bg-slate-900 bg-sky-50">
+          <transition-fade>
+            <Loading v-if="loading" />
+          </transition-fade>
 
-      <!--          <NuxtLayout v-if="!loading">-->
-      <!--            <NuxtPage />-->
-      <!--          </NuxtLayout>-->
-      <!--        </div>-->
-      <!--      </Body>-->
+          <NuxtLayout v-if="!loading">
+            <!--                  <NuxtPage />-->
+          </NuxtLayout>
+        </div>
+      </Body>
     </Html>
   </client-only>
 </template>
