@@ -100,24 +100,24 @@ useHead({
       <!--      <SchemaOrgWebSite :name="$t('meta.title')" />-->
       <!--      <SchemaOrgWebPage />-->
 
-      <Head>
-        <Title>{{ $t("website.title") }} - {{ $t("website.subtitle") }}</Title>
-        <template v-for="link in head.link" :key="link.id">
-          <Link
-            :id="link.id"
-            :rel="link.rel"
-            :href="link.href"
-            :hreflang="link.hreflang"
-          />
-          <template v-for="meta in head.meta" :key="meta.id">
-            <Meta
-              :id="meta.id"
-              :property="meta.property"
-              :content="meta.content"
-            />
-          </template>
-        </template>
-      </Head>
+      <!--      <Head>-->
+      <!--        <Title>{{ $t("website.title") }} - {{ $t("website.subtitle") }}</Title>-->
+      <!--        <template v-for="link in head.link" :key="link.id">-->
+      <!--          <Link-->
+      <!--            :id="link.id"-->
+      <!--            :rel="link.rel"-->
+      <!--            :href="link.href"-->
+      <!--            :hreflang="link.hreflang"-->
+      <!--          />-->
+      <!--          <template v-for="meta in head.meta" :key="meta.id">-->
+      <!--            <Meta-->
+      <!--              :id="meta.id"-->
+      <!--              :property="meta.property"-->
+      <!--              :content="meta.content"-->
+      <!--            />-->
+      <!--          </template>-->
+      <!--        </template>-->
+      <!--      </Head>-->
 
       <Body>
         <div class="min-h-screen dark:bg-slate-900 bg-sky-50">
