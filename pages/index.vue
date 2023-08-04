@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
   <div class="container max-w-[1050px] tracking-normal">
     <client-only>

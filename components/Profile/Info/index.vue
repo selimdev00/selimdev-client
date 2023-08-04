@@ -7,9 +7,9 @@
         {{ $t("website.title") }}
       </h1>
 
-      <p class="text-[20px] font-semibold leading-[1] text-gray-400">
+      <h2 class="text-[20px] font-semibold leading-[1] text-gray-400">
         {{ $t("website.subtitle") }}
-      </p>
+      </h2>
     </div>
 
     <p class="dark:text-sky-200 text-sky-500">
