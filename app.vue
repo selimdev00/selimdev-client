@@ -124,9 +124,11 @@ useHead({
           <Loading v-if="loading" />
         </transition-fade>
 
-        <NuxtLayout v-if="!loading">
-          <NuxtPage />
-        </NuxtLayout>
+        <client-only>
+          <NuxtLayout v-if="!loading">
+            <NuxtPage />
+          </NuxtLayout>
+        </client-only>
       </div>
     </Body>
   </Html>

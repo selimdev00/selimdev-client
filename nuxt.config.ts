@@ -41,7 +41,7 @@ export default defineNuxtConfig({
     },
     strategy: "no_prefix",
   },
-  extends: ["nuxt-seo-kit"],
+  // extends: ["nuxt-seo-kit"],
   runtimeConfig: {
     public: {
       siteUrl:
