@@ -32,11 +32,19 @@ useHead({
       content: t("meta.title"),
     },
     {
+      property: "twitter:title",
+      content: t("meta.title"),
+    },
+    {
       property: "og:description",
       content: t("meta.description"),
     },
     {
       property: "description",
+      content: t("meta.description"),
+    },
+    {
+      property: "twitter:description",
       content: t("meta.description"),
     },
     {
@@ -61,6 +69,10 @@ useHead({
     },
     {
       property: "og:image",
+      content: "/screenshot.png",
+    },
+    {
+      property: "twitter:image",
       content: "/screenshot.png",
     },
     {
