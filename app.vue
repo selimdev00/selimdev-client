@@ -126,7 +126,7 @@ useHead({
           </transition-fade>
 
           <NuxtLayout v-if="!loading">
-            <!--                  <NuxtPage />-->
+            <NuxtPage />
           </NuxtLayout>
         </div>
       </Body>
