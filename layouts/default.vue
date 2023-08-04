@@ -20,21 +20,21 @@ const eventHandler = ({ ...state }) => {
 </script>
 
 <template>
-  <!--  <div-->
-  <!--    class="dark:bg-slate-950 bg-sky-50 dark:text-white min-h-screen relative"-->
-  <!--    v-move="eventHandler"-->
-  <!--  >-->
-  <!--    <div class="relative z-10">-->
-  <!--      <slot />-->
-  <!--    </div>-->
+  <div
+    class="dark:bg-slate-950 bg-sky-50 dark:text-white min-h-screen relative"
+    v-move="eventHandler"
+  >
+    <div class="relative z-10">
+      <slot />
+    </div>
 
-  <!--    <div-->
-  <!--      ref="element"-->
-  <!--      class="mouse-gradient absolute w-[350px] h-[350px] top-0 left-0 blur-[110px] pointer-events-none z-30 md:block hidden"-->
-  <!--    ></div>-->
+    <div
+      ref="element"
+      class="mouse-gradient absolute w-[350px] h-[350px] top-0 left-0 blur-[110px] pointer-events-none z-30 md:block hidden"
+    ></div>
 
-  <!--    <BottomPanel />-->
-  <!--  </div>-->
+    <BottomPanel />
+  </div>
 </template>
 
 <style lang="scss">
