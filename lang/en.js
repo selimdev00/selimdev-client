@@ -6,20 +6,21 @@ export default {
   },
   meta: {
     title:
-      "Selim Ataballyev | Top Full Stack Developer | Expert Web Solutions & Custom Software Development",
+      "Selim Ataballyev | Expert Web Solutions & Custom Software Development",
     description:
-      "Looking for a top-notch Full Stack Developer? I am skilled and experienced developer that offers expert web solutions and custom software development services to take your projects to new heights. Contact me today for a seamless online presence and innovative applications.",
+      "Looking for a top-notch Full Stack Developer? I am experienced developer that offers expert web solutions and custom software development services to take your projects to new heights. Contact me today!",
     author: "Selim Ataballyev",
     keywords:
       "Selim Ataballyev, Create Website, Full Stack Developer, Agile Development, Software Deployment, Web Security, Cross-Browser Compatibility, User Experience, Software Architecture, Web Performance, Technical Documentation, Software Prototyping, Database Design, Software Versioning, Software Debugging, Mobile App Optimization, UI/UX Testing, Web Accessibility, Backend Integration, Frontend Frameworks, Mobile-First Design, API Documentation, Software Maintenance, Code Review, Software Upgrades, Website Speed Optimization, Responsive Images, Error Handling, Automated Testing, Software Frameworks, Software Deployment, Web Hosting, Application Scalability, Website Migration, User Authentication, Web Content Management, Software Customization, CMS Integration, Software Prototyping, Web APIs, Website Monitoring, Responsive Email Templates, Search Functionality, Client Interaction, Software Troubleshooting, Web Standards Compliance, Software Support, Continuous Improvement, Code Quality, Code Reusability, Software Upgrades, Code Optimization, Time Management, Project Planning, Collaboration, Client Communication, Innovation, Web Development Trends, Industry Best Practices, Problem Solving, Creative Solutions, Technical Expertise, High-Performance Websites, Interactive Web Design.",
   },
-  about: "About",
+  about: "About me",
   experiences: "Experiences",
   projects: "Projects",
   lightMode: "Light mode",
   darkMode: "Dark mode",
   github: "Github",
   preview: "Preview",
+  contactMeNow: "Contact me now",
   footerContent: `
       <p class="text-sm md:py-15 py-10 dark:text-gray-400 text-gray-800">
     Loosely designed in

@@ -67,15 +67,15 @@ const props = defineProps<ExperienceItemProps>();
         <div
           class="flex items-center gap-[8.5px] dark:group-hover/item:text-sky-400 group-hover/item:text-sky-900 transition-all duration-300 flex-wrap"
         >
-          <h1 class="text-[12px] font-semibold">
+          <h2 class="text-[12px] font-semibold">
             {{ $t(props.item.position) }}
-          </h1>
+          </h2>
 
           <div
             class="w-[2px] h-[2px] rounded-full dark:bg-white bg-gray-700 group-hover/item:bg-sky-400"
           ></div>
 
-          <h1 class="text-[12px] font-semibold">{{ $t(props.item.place) }}</h1>
+          <h2 class="text-[12px] font-semibold">{{ $t(props.item.place) }}</h2>
 
           <Icon
             v-if="props.item.link"
@@ -84,11 +84,11 @@ const props = defineProps<ExperienceItemProps>();
           />
         </div>
 
-        <h1
+        <h3
           class="text-[12px] font-semibold dark:text-sky-200 text-sky-800 opacity-75"
         >
           {{ $t(props.item.subtitle) }}
-        </h1>
+        </h3>
       </div>
 
       <p class="text-[12px] dark:text-gray-400 text-gray-500 leading-[1.6]">

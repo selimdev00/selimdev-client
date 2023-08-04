@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Project } from "~/composables/useProjects";
+
 interface ProjectItemProps {
   item: Project;
 }
@@ -14,6 +16,7 @@ const props = defineProps<ProjectItemProps>();
       <img
         class="w-full h-full aspect-1.5/1 object-cover rounded-lg"
         :src="props.item.preview"
+        :alt="props.item.name"
       />
     </div>
 
@@ -22,7 +25,7 @@ const props = defineProps<ProjectItemProps>();
         <div
           class="flex items-center gap-[7px] dark:group-hover/item:text-sky-400 group-hover/item:text-sky-900 transition duration-300"
         >
-          <h1 class="text-[12px] font-semibold">{{ $t(props.item.name) }}</h1>
+          <h2 class="text-[12px] font-semibold">{{ $t(props.item.name) }}</h2>
         </div>
 
         <div

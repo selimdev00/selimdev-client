@@ -59,6 +59,18 @@ useHead({
       property: "revisit-after",
       content: "7 days",
     },
+    {
+      property: "og:image",
+      content: "/screenshot.png",
+    },
+    {
+      property: "og:image:url",
+      content: "/screenshot.png",
+    },
+    {
+      property: "og:image:alt",
+      content: "Website screenshot",
+    },
   ],
 });
 </script>
@@ -66,8 +78,6 @@ useHead({
 <template>
   <Html :lang="head.htmlAttrs.lang" :dir="head.htmlAttrs.dir">
     <SeoKit />
-
-    <OgImageScreenshot />
 
     <SchemaOrgPerson
       :name="$t('website.title')"

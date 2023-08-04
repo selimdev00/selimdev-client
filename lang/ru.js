@@ -4,7 +4,7 @@ export default {
     subtitle: "Разработчик Full Stack",
     description: "Преобразование идей в интуитивные веб и мобильные решения",
   },
-  about: "О нас",
+  about: "Обо мне",
   experiences: "Опыт",
   projects: "Проекты",
   lightMode: "Светлый режим",

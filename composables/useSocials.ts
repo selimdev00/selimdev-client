@@ -16,6 +16,16 @@ export const useSocials = () => {
       icon: "mdi:stackoverflow",
       link: "https://stackoverflow.com/users/14384258/selim",
     },
+    {
+      name: "Telegram",
+      icon: "mdi:telegram",
+      link: "https://t.me/selimdevv",
+    },
+    {
+      name: "Gmail",
+      icon: "mdi:gmail",
+      link: "mailto:selimdev00@gmail.com",
+    },
   ]);
 
   return { socials };
