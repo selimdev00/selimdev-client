@@ -59,14 +59,6 @@ useHead({
       property: "revisit-after",
       content: "7 days",
     },
-    {
-      property: "og:image",
-      content: `${runtimeConfig.siteUrl}/favicon-96x96.png`,
-    },
-    {
-      property: "og:image:url",
-      content: `${runtimeConfig.siteUrl}/favicon-96x96.png`,
-    },
   ],
 });
 </script>
