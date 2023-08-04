@@ -33,7 +33,7 @@ const eventHandler = ({ ...state }) => {
       class="mouse-gradient absolute w-[350px] h-[350px] top-0 left-0 blur-[110px] pointer-events-none z-30 md:block hidden"
     ></div>
 
-    <BottomPanel />
+    <!--    <BottomPanel />-->
   </div>
 </template>
 
