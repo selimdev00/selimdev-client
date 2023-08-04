@@ -32,7 +32,7 @@ export default defineNuxtConfig({
         iso: "en-EN",
       },
     ],
-    lazy: false,
+    lazy: true,
     defaultLocale: "en",
     detectBrowserLanguage: {
       useCookie: true,
@@ -52,10 +52,6 @@ export default defineNuxtConfig({
         "Looking for a top-notch Full Stack Developer? I am skilled and experienced developer that offers expert web solutions and custom software development services to take your projects to new heights. Contact me today for a seamless online presence and innovative applications.",
       language: "en-US",
       titleSeparator: "|",
-      trailingSlash: true,
     },
-  },
-  linkChecker: {
-    failOn404: true,
   },
 });
