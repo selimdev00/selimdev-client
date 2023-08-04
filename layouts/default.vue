@@ -25,7 +25,7 @@ const eventHandler = ({ ...state }) => {
     v-move="eventHandler"
   >
     <div class="relative z-10">
-      <slot />
+      <!--      <slot />-->
     </div>
 
     <div
