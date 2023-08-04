@@ -1,11 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  ssr: true,
   site: {
     url: "https://selimdev.vercel.app",
   },
-  devtools: { enabled: true },
   css: [{ src: "@/assets/scss/main.scss" }],
   postcss: {
     plugins: {
@@ -37,11 +35,10 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: "i18n_redirected",
-      alwaysRedirect: true,
     },
     strategy: "no_prefix",
   },
-  // extends: ["nuxt-seo-kit"],
+  extends: ["nuxt-seo-kit"],
   runtimeConfig: {
     public: {
       siteUrl:
