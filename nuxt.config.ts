@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
+  ssr: true,
   site: {
     url: "https://selimdev.vercel.app",
   },
