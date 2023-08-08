@@ -34,7 +34,7 @@ export const useExperiences = () => {
         "Nginx",
         "pm2",
       ],
-      from: "2019-07-08",
+      from: "2018-07-08",
       to: "2019-08-08",
     },
     {
