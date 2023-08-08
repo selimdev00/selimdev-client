@@ -109,6 +109,11 @@ export default {
       description:
         "Introducing my app that allows you to create your own unique avatar by customizing various elements such as hairstyles, eyebrows, facial features, clothing, and more!  User-friendly interface of app makes it easy for anyone to design their own avatar in minutes  (created within 24 hours as part of a test task)",
     },
+    pokemon: {
+      name: "Pokemon Website (React)",
+      description:
+        "Website-catalog with pokemons (Public Pokemon API), written in React + Redux (pet project)",
+    },
   },
   experienceItems: {
     ideal: {
@@ -123,7 +128,7 @@ export default {
       subtitle: "Web development",
       place: "Geek Space",
       description:
-        "As a frontend developer in Geek Space, I developed high loaded frontend web applications to provide list of services, like analytics, CRM (with several integrations) and websites for clients. I took a huge part on developing main service, CRM, that allowed to handle all our clients in one place.",
+        "As a frontend developer in Geek Space, I developed high loaded frontend web applications to provide list of services, like analytics, CRM (with several integrations) and websites for clients. I took a huge part on developing main service, CRM, that allowed to handle all our clients in one place. Hired and provided mentorship over +25 developers",
     },
     freelance: {
       position: "Full Stack Developer",

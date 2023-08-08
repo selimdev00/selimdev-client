@@ -20,7 +20,15 @@ export const useProjects = () => {
     {
       name: "projectItems.legoGen.name",
       description: "projectItems.legoGen.description",
-      tags: ["HTML", "CSS", "Javascript", "SCSS", "Vue 3", "Vite", "Typesript"],
+      tags: [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "SCSS",
+        "Vue 3",
+        "Vite",
+        "Typescript",
+      ],
       links: [
         {
           name: "github",
@@ -32,6 +40,31 @@ export const useProjects = () => {
         },
       ],
       preview: "/projects/lego-gen/preview.png",
+    },
+    {
+      name: "projectItems.pokemon.name",
+      description: "projectItems.pokemon.description",
+      tags: [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "React",
+        "Redux",
+        "Typescript",
+        "ky",
+        "Ant Design",
+      ],
+      links: [
+        {
+          name: "github",
+          url: "https://pokemon-selimdev.netlify.app/",
+        },
+        {
+          name: "preview",
+          url: "https://github.com/selimdev00/pokemon-app",
+        },
+      ],
+      preview: "/projects/pokemon/preview.png",
     },
   ]);
 
