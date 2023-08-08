@@ -133,5 +133,5 @@ export default {
         "As a full stack developer on freelance, I developed highly scalable mobile and web applications with teams from 5 to 35. Mostly, I worked with startups, to provide them the most efficient start at the beginning, providing business solutions like mobile apps, web applications, services like CRM (mostly), analytics and etc.",
     },
   },
-  now: "",
+  now: "Now",
 };
