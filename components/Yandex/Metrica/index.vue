@@ -11,8 +11,7 @@ onMounted(() => {
     (k.async = 1), (k.src = r), a.parentNode.insertBefore(k, a); })(window,
     document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
     ym(94541339, "init", { clickmap: true, trackLinks: true,
-    accurateTrackBounce: true, webvisor: true, });
-    `;
+    accurateTrackBounce: true, webvisor: true, }); `;
 
   if (!wrapper) return;
 

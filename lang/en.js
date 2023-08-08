@@ -71,45 +71,37 @@ export default {
   `,
   aboutContent: `    
     <p>
-      I am a highly skilled
+      I am a
       <span class="highlight">Full Stack Developer</span> proficient in a wide
-      array of cutting-edge technologies. With a focus on
-      <span class="highlight">frontend development</span>, I excel in building
+      array of cutting-edge technologies like <span class="highlight">HTML, CSS, Sass, Javascript, Vite.js, Vue.js, Nuxt.js, React Native, DivKit, Node.js, Nest.js, MongoDB, PostgreSQL, pm2, nginx, git</span>. 
+      </p>
+      
+      <p>
+      With a focus on
+      <span class="highlight">frontend development</span>, I build
       responsive and dynamic web applications using
       <span class="highlight">Vue.js</span>,
       <span class="highlight">Nuxt.js</span>,
       <span class="highlight">TailwindCSS</span>,
-      <span class="highlight"> Primevue</span>. My backend expertise lies in
+      <span class="highlight"> Primevue</span>, efficient backend in 
       <span class="highlight">Node.js</span> and
-      <span class="highlight">Nest.js</span>, allowing me to develop scalable
-      and efficient server-side applications, complemented by a strong
-      proficiency in database management.
+      <span class="highlight">Nest.js</span>. I develop scalable
+      and efficient web and mobile applications, boosting business opportunities average up to 500%.
     </p>
+    
     <p>
-      Additionally,
-      <span class="highlight"
-        >I am well-versed in configuring servers and deploying web
-        applications</span
-      >
+      I am well-versed in <span class="highlight">configuring servers and deploying web applications</span>
       using cloud based solutions and technologies like
       <span class="highlight">NGINX</span> and
-      <span class="highlight">pm2</span>. My repertoire extends beyond the web
-      realm, as I am also adept in crafting
-      <span class="highlight">native mobile applications</span> using
-      <span class="highlight">React Native</span> and an uncommon framework
-      called <span class="highlight">DivKit</span>.
+      <span class="highlight">pm2</span>. 
     </p>
     <p>
-      With a passion for tackling diverse projects and a constant drive to stay
-      updated with the latest trends, I possess the versatility and adaptability
-      necessary to
-      <span class="highlight">create exceptional digital solutions</span>. My
-      portfolio reflects a series of successful projects that showcase my
-      expertise in both <span class="highlight">web</span> and
-      <span class="highlight">mobile development</span>, demonstrating my
-      commitment to delivering high-quality work on every front.
+    My repertoire extends beyond the web
+      realm, as I also develop
+      <span class="highlight">native mobile applications</span> using
+      <span class="highlight">React Native</span> and framework
+      called <span class="highlight">DivKit</span>.
     </p>
-
     `,
   projectItems: {
     legoGen: {
@@ -124,14 +116,22 @@ export default {
       subtitle: "Web development",
       place: "IDE-AL Hyzmat",
       description:
-        "As a Full Stack Web Developer in IDE-AL, I played a crucial role in developing and maintaining web applications using a comprehensive tech stack. Throughout my tenure, I actively collaborated with cross-functional teams, translating business requirements into functional and user-friendly web applications. I contributed to the optimization of application performance, ensuring seamless user experiences. My experience with this diverse tech stack equipped me to tackle various challenges, adapt to new technologies, and deliver successful projects on time.",
+        "As a Full Stack Web Developer in IDE-AL, I played a crucial role in developing and maintaining web applications, using commonly Nuxt.js and Node.js. Throughout my tenure, I actively collaborated with cross-functional teams, translating business requirements into functional and user-friendly web applications, and boosting our clients' sales up to 200% every. I contributed to the optimization of application performance, ensuring seamless user experiences. My experience with this diverse tech stack equipped me to tackle various challenges, adapt to new technologies, and deliver successful projects on time. It was my first commercial experience.",
     },
     geekspace: {
       position: "Frontend Developer",
       subtitle: "Web development",
       place: "Geek Space",
       description:
-        "As a frontend developer in Geek Space, I have been passionate about pushing the boundaries of web design and development. My goal has always been to deliver visually appealing and highly functional websites that offer a seamless user experience. I pride myself on staying updated with the latest trends and best practices in frontend development, and my dedication to continuous learning enables me to contribute innovative solutions to any project. With a strong focus on creating responsive and performant interfaces, I strive to make a positive impact on every web project I embark upon.",
+        "As a frontend developer in Geek Space, I developed high loaded frontend web applications to provide list of services, like analytics, CRM (with several integrations) and websites for clients. I took a huge part on developing main service, CRM, that allowed to handle all our clients in one place.",
+    },
+    freelance: {
+      position: "Full Stack Developer",
+      subtitle: "Web & Mobile development",
+      place: "Freelancing",
+      description:
+        "As a full stack developer on freelance, I developed highly scalable mobile and web applications with teams from 5 to 35. Mostly, I worked with startups, to provide them the most efficient start at the beginning, providing business solutions like mobile apps, web applications, services like CRM (mostly), analytics and etc.",
     },
   },
+  now: "",
 };

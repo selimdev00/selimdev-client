@@ -46,6 +46,32 @@ export const useExperiences = () => {
       from: "2019-08-08",
       to: "2020-02-08",
     },
+    {
+      position: "experienceItems.freelance.position",
+      place: "experienceItems.freelance.place",
+      subtitle: "experienceItems.freelance.subtitle",
+      description: "experienceItems.freelance.description",
+      tags: [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "SCSS",
+        "Vue 3",
+        "Nuxt 3",
+        "TailwindCSS",
+        "PrimeVue",
+        "Node.js",
+        "Nest.js",
+        "Strapi",
+        "Nginx",
+        "pm2",
+        "React Native",
+        "DivKit",
+        "Figma",
+      ],
+      from: "2020-02-08",
+      to: "now",
+    },
   ]);
 
   return { experiences };

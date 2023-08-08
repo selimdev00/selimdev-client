@@ -54,10 +54,12 @@ const props = defineProps<ExperienceItemProps>();
 
       <p>
         {{
-          $DateTime
-            .fromISO(props.item.to)
-            .setLocale($i18n.locale)
-            .toFormat("LLL yyyy")
+          props.item.to === "now"
+            ? $t("now")
+            : $DateTime
+                .fromISO(props.item.to)
+                .setLocale($i18n.locale)
+                .toFormat("LLL yyyy")
         }}
       </p>
     </div>

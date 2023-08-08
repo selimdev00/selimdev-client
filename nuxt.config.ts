@@ -1,13 +1,3 @@
-import { fileURLToPath } from "node:url";
-
-const filesNeedToExclude = ["components/Yandex/Metrica"];
-
-const filesPathToExclude = filesNeedToExclude.map((src) => {
-  return fileURLToPath(new URL(src, import.meta.url));
-});
-
-console.log(filesPathToExclude);
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   site: {
@@ -59,15 +49,6 @@ export default defineNuxtConfig({
       language: "en-US",
       titleSeparator: "|",
       trailingSlash: true,
-    },
-  },
-  vite: {
-    build: {
-      rollupOptions: {
-        external: [
-          "D:/Selim/Projects/selimdev/client/components/Yandex/Metrica/index.vue",
-        ],
-      },
     },
   },
 });
