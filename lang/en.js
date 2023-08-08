@@ -139,4 +139,6 @@ export default {
     },
   },
   now: "Now",
+  CV: "CV",
+  seeCV: "See CV",
 };

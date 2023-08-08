@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 const { socials } = useSocials();
+
+const { isDark } = useMode();
 </script>
 
 <template>
@@ -21,6 +23,17 @@ const { socials } = useSocials();
       <p class="text-[12px] dark:text-gray-300 text-gray-700">
         selimdev00@gmail.com
       </p>
+    </div>
+
+    <div class="flex flex-col gap-1">
+      <p>{{ $t("CV") }}</p>
+      <a
+        :href="isDark ? `/cv/dark.pdf` : `/cv/light.pdf`"
+        target="_blank"
+        class="text-[12px] dark:text-gray-300 text-gray-700"
+      >
+        {{ $t("seeCV") }}
+      </a>
     </div>
   </div>
 </template>
