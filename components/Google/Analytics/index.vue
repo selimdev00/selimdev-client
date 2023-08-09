@@ -25,9 +25,5 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- Google tag (gtag.js) -->
-  <component is="script" async src=""></component>
-  <component is="script"> </component>
-
   <div id="google-anal"></div>
 </template>
