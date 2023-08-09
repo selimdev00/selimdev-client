@@ -57,11 +57,11 @@ export const useProjects = () => {
       links: [
         {
           name: "github",
-          url: "https://pokemon-selimdev.netlify.app/",
+          url: "https://github.com/selimdev00/pokemon-app",
         },
         {
           name: "preview",
-          url: "https://github.com/selimdev00/pokemon-app",
+          url: "https://pokemon-selimdev.netlify.app/",
         },
       ],
       preview: "/projects/pokemon/preview.png",
