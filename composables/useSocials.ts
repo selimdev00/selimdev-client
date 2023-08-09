@@ -26,6 +26,11 @@ export const useSocials = () => {
       icon: "mdi:gmail",
       link: "mailto:selimdev00@gmail.com",
     },
+    {
+      name: "Instagram",
+      icon: "mdi:instagram",
+      link: "https://www.instagram.com/selim_ius/",
+    },
   ]);
 
   return { socials };
