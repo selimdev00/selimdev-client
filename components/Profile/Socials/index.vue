@@ -21,7 +21,11 @@ const { isDark } = useMode();
     <div class="flex flex-col gap-1">
       <p>{{ $t("contactMeNow") }}</p>
       <p class="text-[12px] dark:text-gray-300 text-gray-700">
-        selimdev00@gmail.com
+        <a
+          href="mailto:selimdev00@gmail.com"
+          class="opacity-1 hover:opacity-75 transition-opacity"
+          >selimdev00@gmail.com</a
+        >
       </p>
     </div>
 
@@ -30,7 +34,7 @@ const { isDark } = useMode();
       <a
         :href="isDark ? `/cv/dark.pdf` : `/cv/light.pdf`"
         target="_blank"
-        class="text-[12px] dark:text-gray-300 text-gray-700"
+        class="text-[12px] dark:text-gray-300 text-gray-700 opacity-1 hover:opacity-75 transition-opacity"
       >
         {{ $t("seeCV") }}
       </a>
