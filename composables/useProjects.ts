@@ -66,6 +66,22 @@ export const useProjects = () => {
       ],
       preview: "/projects/pokemon/preview.png",
     },
+    {
+      name: "projectItems.fantagolia.name",
+      description: "projectItems.fantagolia.description",
+      tags: ["HTML", "CSS", "Javascript", "Vue 3", "Nuxt 3", "Tailwind CSS"],
+      links: [
+        {
+          name: "github",
+          url: "https://github.com/selimdev00/fantagolia",
+        },
+        {
+          name: "preview",
+          url: "https://fantagolia-9jfkjpy8x-richiedev666.vercel.app/",
+        },
+      ],
+      preview: "/projects/fantagolia/preview.png",
+    },
   ]);
 
   return { projects };

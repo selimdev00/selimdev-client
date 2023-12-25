@@ -114,6 +114,11 @@ export default {
       description:
         "Website-catalog with pokemons (Public Pokemon API), written in React + Redux (pet project)",
     },
+    fantagolia: {
+      name: "Entertainment website (Nuxt & Design concept)",
+      description:
+        "Elevate your web projects with this HTML, CSS, and JavaScript entertainment website design. Responsive, feature-rich, and seamlessly interactive 🚀🌐",
+    },
   },
   experienceItems: {
     ideal: {
