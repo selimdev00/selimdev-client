@@ -28,25 +28,12 @@ export default {
   aboutContent: `
     <p>
       Я 
-      <span class="highlight">разработчик full stack</span>, владеющим широким спектром передовых технологий, таких как <span class="highlight">HTML, CSS, Sass, Javascript, Vite.js, Vue.js, Nuxt.js, React Native, DivKit, Node.js, Nest.js, MongoDB, PostgreSQL, pm2, nginx, git</span>.
+      <span class="highlight">разработчик full stack</span>, владеющим широким спектром передовых технологий, таких как <span class="highlight">HTML, CSS, Sass, Javascript, Vite.js, Vue.js, Nuxt.js, React.js, Next.js, React Native, DivKit, Node.js, Nest.js, MongoDB, PostgreSQL, pm2, nginx, git</span>.
      </p>
-     <p>
-       С акцентом на разработке
-      <span class="highlight">frontend development</span>, я создаю отзывчивые и динамичные веб-приложения с использованием
-      <span class="highlight">Vue.js</span>,
-      <span class="highlight">Nuxt.js</span>,
-      <span class="highlight">TailwindCSS</span>,
-      <span class="highlight">Primevue</span>, эффективный backend на
-      <span class="highlight">Node.js</span> и
-      <span class="highlight">Nest.js</span>. Я разрабатываю <span class="highlight">масштабируемые и эффективные приложения</span>, повышая основные показатели предприятий до 500%.
+
+    <p><span class="highlight">Я занимаюсь настройкой серверов и развертыванием веб-приложений </span> с использованием облачных решений и технологий, таких как <span class="highlight">NGINX</span>,<span class="highlight">pm2</span> и <span class="highlight">docker</span>. 
     </p>
-    
-    <p><span class="highlight">Я занимаюсь настройкой серверов и развертыванием веб-приложений </span> с использованием облачных решений и технологий, таких как <span class="highlight">NGINX</span> и <span class="highlight">pm2</span>. 
-    </p>
-    
-    <p>
-    Мой репертуар выходит за пределы веб-мира, так как я могу разрабатывать <span class="highlight">нативные мобильные приложения</span> с использованием <span class="highlight">React Native</span> и фреймворка под названием <span class="highlight">DivKit</span>
-    </p>
+
 `,
   projectItems: {
     legoGen: {

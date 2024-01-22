@@ -54,34 +54,15 @@ export default {
     <p>
       I am a
       <span class="highlight">Full Stack Developer</span> proficient in a wide
-      array of cutting-edge technologies like <span class="highlight">HTML, CSS, Sass, Javascript, Vite.js, Vue.js, Nuxt.js, React Native, DivKit, Node.js, Nest.js, MongoDB, PostgreSQL, pm2, nginx, git</span>. 
+      array of cutting-edge technologies like <span class="highlight">HTML, CSS, Sass, Javascript, Vite.js, Vue.js, Nuxt.js, React.js, Next.js, React Native, DivKit, Node.js, Nest.js, MongoDB, PostgreSQL, pm2, nginx, git</span>. 
       </p>
       
-      <p>
-      With a focus on
-      <span class="highlight">frontend development</span>, I build
-      responsive and dynamic web applications using
-      <span class="highlight">Vue.js</span>,
-      <span class="highlight">Nuxt.js</span>,
-      <span class="highlight">TailwindCSS</span>,
-      <span class="highlight"> Primevue</span>, efficient backend in 
-      <span class="highlight">Node.js</span> and
-      <span class="highlight">Nest.js</span>. I develop scalable
-      and efficient web and mobile applications, boosting business opportunities average up to 500%.
-    </p>
-    
+
     <p>
       I am well-versed in <span class="highlight">configuring servers and deploying web applications</span>
       using cloud based solutions and technologies like
-      <span class="highlight">NGINX</span> and
-      <span class="highlight">pm2</span>. 
-    </p>
-    <p>
-    My repertoire extends beyond the web
-      realm, as I also develop
-      <span class="highlight">native mobile applications</span> using
-      <span class="highlight">React Native</span> and framework
-      called <span class="highlight">DivKit</span>.
+      <span class="highlight">NGINX</span>,
+      <span class="highlight">pm2</span> and <span class="highlight">docker</span>. 
     </p>
     `,
   projectItems: {
