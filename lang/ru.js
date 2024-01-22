@@ -22,7 +22,7 @@ export default {
   preview: "Просмотр",
   contactMeNow: "Свяжитесь со мной сейчас",
   footerContent: `<p class="text-sm md:py-15 py-10 dark:text-gray-400 text-gray-800">
-  Создан с некоторыми допущениями в <a class="highlight !cursor-pointer" href="https://www.figma.com/file/JVao8xifM43EBjJNKlGqmu/selimdev?type=design&node-id=8-329&mode=design&t=4f8ky0RuPKUo1F3Z-0" target="_blank">Figma</a> и написан в <a class="highlight !cursor-pointer" href="https://www.jetbrains.com/webstorm/" target="_blank">WebStorm</a> лично мной. Разработан с использованием <a class="highlight !cursor-pointer" href="https://nuxt.com/" target="_blank">Nuxt.js</a> и <a class="highlight !cursor-pointer" href="https://tailwindcss.com/" target="_blank">Tailwind CSS</a>, развернут на <a class="highlight !cursor-pointer" href="https://vercel.com/" target="_blank">Vercel</a>. Весь текст отображается шрифтом <a class="highlight !cursor-pointer" href="https://fonts.google.com/specimen/Inter" target="_blank">Inter</a>.
+   Разработан с использованием <span class="highlight"> Nuxt.js</span> и <span class="highlight" >Tailwind CSS</span>, развернут на <span class="highlight">Vercel</span>. Весь текст отображается шрифтом <span class="highlight">Inter</span>.
 </p>
 `,
   aboutContent: `
