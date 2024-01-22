@@ -9,7 +9,7 @@ const { set, locale, languages } = useLang();
     <div class="flex flex-col gap-[44px]">
       <ProfileInfo />
 
-      <ProfileNav />
+      <!--      <ProfileNav />-->
 
       <ProfileSocials />
     </div>

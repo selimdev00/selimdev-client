@@ -24,16 +24,20 @@ const eventHandler = ({ ...state }) => {
     class="dark:bg-slate-950 bg-sky-50 dark:text-white min-h-screen relative"
     v-move="eventHandler"
   >
-    <div class="relative z-10">
+    <div class="relative z-10 h-full">
       <slot />
     </div>
 
-    <div
-      ref="element"
-      class="mouse-gradient absolute w-[350px] h-[350px] top-0 left-0 blur-[110px] pointer-events-none z-30 md:block hidden"
-    ></div>
-
     <BottomPanel />
+
+    <div
+      class="absolute top-0 bottom-0 h-full w-full min-h-screen overflow-hidden"
+    >
+      <div
+        ref="element"
+        class="mouse-gradient absolute w-[350px] h-[350px] top-0 left-0 blur-[110px] pointer-events-none z-30 md:block hidden"
+      ></div>
+    </div>
   </div>
 </template>
 

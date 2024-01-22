@@ -11,6 +11,21 @@ html {
 body {
   font-family: "Inter", sans-serif;
   @apply overflow-x-hidden dark:bg-slate-950 bg-sky-50;
+
+  scrollbar-width: thin;
+  scrollbar-color: red blue;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply dark:bg-sky-200 bg-sky-600;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply dark:bg-slate-900 bg-sky-100;
+  }
 }
 
 .highlight {
