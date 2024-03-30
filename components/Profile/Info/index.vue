@@ -1,6 +1,11 @@
 <template>
   <div class="flex flex-col gap-3">
     <div class="flex flex-col">
+      <nuxt-img
+        src="/avatar.png"
+        class="rounded-full w-1/2 border-sky-500 dark:border-sky-200 border-4 mb-4 shadow-xl shadow-sky-200 dark:shadow-slate-800"
+      />
+
       <h1
         class="text-[40px] font-bold leading-[1] mb-4 text-gray-700 dark:text-white"
       >

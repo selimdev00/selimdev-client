@@ -30,15 +30,15 @@ const { isDark } = useMode();
       </p>
     </div>
 
-    <!--    <div class="flex flex-col gap-1">-->
-    <!--      <p>{{ $t("CV") }}</p>-->
-    <!--      <a-->
-    <!--        :href="isDark ? `/cv/dark.pdf` : `/cv/light.pdf`"-->
-    <!--        target="_blank"-->
-    <!--        class="text-[12px] dark:text-gray-300 text-gray-700 opacity-1 hover:opacity-75 transition-opacity"-->
-    <!--      >-->
-    <!--        {{ $t("seeCV") }}-->
-    <!--      </a>-->
-    <!--    </div>-->
+    <div class="flex flex-col gap-1">
+      <p>{{ $t("CV") }}</p>
+      <a
+        :href="isDark ? `/cv/dark.pdf` : `/cv/light.pdf`"
+        target="_blank"
+        class="text-[12px] dark:text-gray-300 text-gray-700 opacity-1 hover:opacity-75 transition-opacity"
+      >
+        {{ $t("seeCV") }}
+      </a>
+    </div>
   </div>
 </template>

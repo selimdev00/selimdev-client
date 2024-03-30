@@ -12,6 +12,11 @@
 
         <About v-motion-fade-visible />
 
+        <client-only>
+          <div class="lg:-my-20">
+            <Vue3Lottie animationLink="/lottie.json" />
+          </div>
+        </client-only>
         <!--        <ExperienceList />-->
 
         <!--        <ProjectList />-->

@@ -4,7 +4,7 @@ const { set, locale, languages } = useLang();
 
 <template>
   <div
-    class="pt-10 pb-16 sticky top-0 md:flex flex-col justify-between h-screen overflow-hidden hidden h-full"
+    class="pt-10 pb-16 sticky top-0 md:flex flex-col justify-between h-screen hidden h-full"
   >
     <div class="flex flex-col gap-[44px]">
       <ProfileInfo />

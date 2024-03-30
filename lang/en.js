@@ -20,7 +20,7 @@ export default {
   darkMode: "Dark mode",
   github: "Github",
   preview: "Preview",
-  contactMeNow: "Contact me now",
+  contactMeNow: "Contact me",
   footerContent: `
       <p class="text-sm md:py-15 py-10 dark:text-gray-400 text-gray-800">
     Built with

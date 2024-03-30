@@ -20,7 +20,7 @@ export default {
   darkMode: "Темный режим",
   github: "Гитхаб",
   preview: "Просмотр",
-  contactMeNow: "Свяжитесь со мной сейчас",
+  contactMeNow: "Связаться со мной",
   footerContent: `<p class="text-sm md:py-15 py-10 dark:text-gray-400 text-gray-800">
    Разработан с использованием <span class="highlight"> Nuxt.js</span> и <span class="highlight" >Tailwind CSS</span>, развернут на <span class="highlight">Vercel</span>. Весь текст отображается шрифтом <span class="highlight">Inter</span>.
 </p>

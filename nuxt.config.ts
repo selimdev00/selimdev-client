@@ -10,7 +10,12 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ["nuxt-icon", "@nuxtjs/i18n", "@morev/vue-transitions/nuxt"],
+  modules: [
+    "nuxt-icon",
+    "@nuxtjs/i18n",
+    "@morev/vue-transitions/nuxt",
+    "@nuxt/image",
+  ],
   i18n: {
     baseUrl: "https://selimdev.vercel.app",
     compilation: {
