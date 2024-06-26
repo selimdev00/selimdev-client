@@ -2,7 +2,9 @@
   <div class="flex flex-col gap-3">
     <div class="flex flex-col">
       <nuxt-img
-        src="/avatar.png"
+        width="225"
+        height="225"
+        src="/avatar.jpg"
         class="rounded-full w-1/2 border-sky-500 dark:border-sky-200 border-4 mb-4 shadow-xl shadow-sky-200 dark:shadow-slate-800"
       />
 
