@@ -4,8 +4,8 @@
       <nuxt-img
         width="225"
         height="225"
-        src="/avatar.jpg"
-        class="rounded-full w-1/2 border-sky-500 dark:border-sky-200 border-4 mb-4 shadow-xl shadow-sky-200 dark:shadow-slate-800"
+        src="/avatar-face.png"
+        class="rounded-full w-1/2 border-sky-500 dark:border-sky-200 border-4 mb-4 shadow-xl shadow-sky-200 dark:shadow-slate-800 max-w-[225px] max-h-[225px]"
       />
 
       <h1

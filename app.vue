@@ -91,14 +91,6 @@ useHead({
   <Html :lang="head.htmlAttrs.lang" :dir="head.htmlAttrs.dir">
     <SeoKit />
 
-    <SchemaOrgPerson
-      :name="$t('website.title')"
-      image="/favicon-96x96.png"
-      :same-as="['https://github.com/selimdev00']"
-    />
-    <SchemaOrgWebSite :name="$t('meta.title')" />
-    <SchemaOrgWebPage />
-
     <Head>
       <Title>{{ $t("website.title") }} - {{ $t("website.subtitle") }}</Title>
       <template v-for="link in head.link" :key="link.id">
