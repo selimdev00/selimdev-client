@@ -104,8 +104,30 @@ export default {
       description:
         "As a full stack developer on freelance, I developed highly scalable mobile and web applications with teams from 5 to 35. Mostly, I worked with startups, to provide them the most efficient start at the beginning, providing business solutions like mobile apps, web applications, services like CRM (mostly), analytics and etc.",
     },
+    sotnikov: {
+      position: "Full Stack Web Developer",
+      subtitle: "Web development",
+      place: "SOTNIKOV - Digital Studio",
+      description:
+        "As a Full Stack Web Developer at SOTNIKOV Digital Studio in Saratov, I was responsible for code refactoring, developing and maintaining the client-side of web applications, fixing bugs, and writing code.",
+    },
+    team3205: {
+      position: "Full Stack Developer",
+      subtitle: "Web development",
+      place: "3205.team",
+      description:
+        "As a Full Stack Developer at 3205.team in Moscow, I develop and maintain client-side web applications, handle server-side development and maintenance, refactor code, fix bugs, implement functionality and program logic according to technical specifications and architectural decisions, and develop user interfaces including interactive elements.",
+    },
   },
   now: "Now",
   CV: "CV",
   seeCV: "See CV",
+  yearsExperience: "years of experience",
+  technologies: "Technologies",
+  spokenLanguages: "Languages",
+  languageNames: {
+    russian: "Russian",
+    english: "English",
+    turkmen: "Turkmen",
+  },
 };
