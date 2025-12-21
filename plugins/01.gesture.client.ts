@@ -1,5 +1,7 @@
 import { GesturePlugin } from "@vueuse/gesture";
 
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(GesturePlugin);
+  if (typeof window !== "undefined") {
+    nuxtApp.vueApp.use(GesturePlugin);
+  }
 });
