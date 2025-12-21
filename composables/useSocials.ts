@@ -25,6 +25,16 @@ const socials = ref<Social[]>([
     icon: "mdi:gmail",
     link: "mailto:selimdev00@gmail.com",
   },
+  {
+    name: "Upwork",
+    icon: "simple-icons:upwork",
+    link: "https://www.upwork.com/freelancers/~0120bf1792a18108d4",
+  },
+  {
+    name: "hh.ru",
+    icon: "mdi:briefcase-account",
+    link: "https://hh.ru/resume/030344d5ff09a1652e0039ed1f5544506d4c6b",
+  },
 ]);
 
 export const useSocials = () => {
