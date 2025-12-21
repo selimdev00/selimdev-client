@@ -10,7 +10,8 @@ export interface Project {
   description: string;
   tags: string[];
   links: Link[];
-  preview: string;
+  images: string[];
+  date: string;
 }
 
 export const useProjects = () => {
@@ -39,7 +40,8 @@ export const useProjects = () => {
           url: "https://lego-gen.vercel.app/",
         },
       ],
-      preview: "/projects/lego-gen/preview.png",
+      images: ["/projects/lego-gen/preview.png"],
+      date: "2019-03-15",
     },
     {
       name: "projectItems.pokemon.name",
@@ -64,7 +66,8 @@ export const useProjects = () => {
           url: "https://pokemon-selimdev.netlify.app/",
         },
       ],
-      preview: "/projects/pokemon/preview.png",
+      images: ["/projects/pokemon/preview.png"],
+      date: "2018-11-20",
     },
     {
       name: "projectItems.fantagolia.name",
@@ -80,7 +83,8 @@ export const useProjects = () => {
           url: "https://fantagolia-9jfkjpy8x-richiedev666.vercel.app/",
         },
       ],
-      preview: "/projects/fantagolia/preview.png",
+      images: ["/projects/fantagolia/preview.png"],
+      date: "2018-06-10",
     },
   ]);
 
