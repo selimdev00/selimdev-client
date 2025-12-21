@@ -3,26 +3,35 @@
     <div
       class="grid lg:grid-cols-[1fr_1.5fr] lg:gap-[100px] items-start relative"
     >
-      <Profile key="profile" v-motion-fade-visible />
+      <Profile key="profile" />
 
       <div
         class="flex flex-col gap-[10px] md:py-10 py-6 justify-between h-full"
       >
         <ProfileInfo class="lg:hidden block md:py-10 py-4" />
 
-        <About v-motion-fade-visible />
+        <About />
+
+
+        <ExperienceList />
+
+        <ProjectList />
 
         <client-only>
-          <div class="lg:-my-20">
-            <Vue3Lottie animationLink="/lottie.json" />
+          <div class="lg:-my-30">
+            <Vue3Lottie animation-link="/lottie.json" />
           </div>
+          <template #fallback>
+            <div class="lg:-my-20 h-[300px] flex items-center justify-center">
+              <div class="w-48 h-48 rounded-full bg-sky-100 dark:bg-slate-800 animate-pulse"></div>
+            </div>
+          </template>
         </client-only>
-        <!--        <ExperienceList />-->
 
-        <!--        <ProjectList />-->
-
-        <Footer class="mt-20 mb-6" v-motion-fade-visible />
+        <Footer class="mt-20 mb-6" />
       </div>
     </div>
   </div>
 </template>
+<script setup lang="ts">
+</script>

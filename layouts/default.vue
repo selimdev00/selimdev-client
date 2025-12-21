@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useMotionProperties, useSpring } from "@vueuse/motion";
 
-const element = ref(null);
+const element = ref<HTMLElement | null>(null);
 
 const { motionProperties } = useMotionProperties(element, {
   cursor: "grab",
@@ -11,18 +11,19 @@ const { motionProperties } = useMotionProperties(element, {
 
 const { set } = useSpring(motionProperties);
 
-const eventHandler = ({ ...state }) => {
+const handleMouseMove = (event: MouseEvent) => {
+  if (!element.value) return;
   set({
-    x: state.event.pageX - element.value.clientHeight / 2,
-    y: state.event.pageY - element.value.clientWidth / 2,
+    x: event.pageX - element.value.clientHeight / 2,
+    y: event.pageY - element.value.clientWidth / 2,
   });
 };
 </script>
 
 <template>
   <div
-    class="dark:bg-slate-950 bg-sky-50 dark:text-white min-h-screen relative"
-    v-move="eventHandler"
+    class="dark:bg-slate-950 bg-white dark:text-white min-h-screen relative"
+    @mousemove="handleMouseMove"
   >
     <div class="relative z-10 h-full">
       <slot />
