@@ -1,7 +1,11 @@
+import { onMounted, onUnmounted, ref } from "vue";
+
 const menuVisible = ref<boolean>(false);
 const windowWidth = ref<number>(0);
 
 export const useMenu = () => {
+  let resizeHandler: (() => void) | null = null;
+
   const toggleMenu = (): void => {
     if (windowWidth.value > 1023) return;
 
@@ -10,10 +14,10 @@ export const useMenu = () => {
     document.body.classList.toggle("overflow-hidden");
   };
 
-  if (window) {
+  onMounted(() => {
     windowWidth.value = window.innerWidth;
 
-    window.addEventListener("resize", (e) => {
+    resizeHandler = () => {
       windowWidth.value = window.innerWidth;
 
       if (windowWidth.value > 768) {
@@ -21,8 +25,16 @@ export const useMenu = () => {
 
         document.body.classList.remove("overflow-hidden");
       }
-    });
-  }
+    };
+
+    window.addEventListener("resize", resizeHandler);
+  });
+
+  onUnmounted(() => {
+    if (resizeHandler) {
+      window.removeEventListener("resize", resizeHandler);
+    }
+  });
 
   return { menuVisible, toggleMenu, windowWidth };
 };

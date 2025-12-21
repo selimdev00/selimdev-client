@@ -22,8 +22,12 @@ const toggleItems = (): void => {
   active.value = !active.value;
 };
 
-onClickOutside(wrapper, (event) => {
-  closeItems();
+onMounted(() => {
+  if (wrapper.value) {
+    onClickOutside(wrapper, () => {
+      closeItems();
+    });
+  }
 });
 
 const props = defineProps<SelectProps>();
@@ -35,12 +39,14 @@ const setActiveItem = (item: any): void => {
   closeItems();
 };
 
-if (!props.modelValue) {
-  setActiveItem(props.items[0]);
-}
+onMounted(() => {
+  if (!props.modelValue && props.items?.length) {
+    setActiveItem(props.items[0]);
+  }
+});
 
 const activeItem = computed<any>(() => {
-  return props.items.find((e) => e[props.itemValue] === props.modelValue);
+  return props.items?.find((e) => e[props.itemValue] === props.modelValue);
 });
 </script>
 

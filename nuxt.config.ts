@@ -3,19 +3,26 @@ export default defineNuxtConfig({
   site: {
     url: "https://selimdev.vercel.app",
   },
+
   css: [{ src: "@/assets/scss/main.scss" }],
+
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
     },
   },
+
   modules: [
     "nuxt-icon",
     "@nuxtjs/i18n",
     "@morev/vue-transitions/nuxt",
     "@nuxt/image",
+    "@nuxtjs/robots",
+    "@nuxtjs/sitemap",
+    "nuxt-schema-org",
   ],
+
   i18n: {
     baseUrl: "https://selimdev.vercel.app",
     compilation: {
@@ -40,14 +47,19 @@ export default defineNuxtConfig({
       useCookie: true,
       cookieKey: "i18n_redirected",
     },
-    strategy: "no_prefix",
+    strategy: "prefix_except_default",
   },
+
+  image: {
+    quality: 80,
+    format: ["webp", "avif", "png"],
+  },
+
   runtimeConfig: {
     public: {
       siteUrl:
         process.env.NUXT_PUBLIC_SITE_URL || "https://selimdev.vercel.app",
-      siteName:
-        "Selim Ataballyev | Top Full Stack Developer | Expert Web Solutions & Custom Software Development",
+      siteName: "Selim Ataballyev | Full Stack Developer",
       siteDescription:
         "Looking for a top-notch Full Stack Developer? I am skilled and experienced developer that offers expert web solutions and custom software development services to take your projects to new heights. Contact me today for a seamless online presence and innovative applications.",
       language: "en-US",
@@ -55,4 +67,6 @@ export default defineNuxtConfig({
       trailingSlash: true,
     },
   },
+
+  compatibilityDate: "2025-12-22",
 });

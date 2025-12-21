@@ -1,17 +1,7 @@
 <script setup lang="ts">
-import { TransitionFade } from "@morev/vue-transitions";
-
 const { setDefaultMode } = useMode();
 
-const loading = ref<boolean>(true);
-onMounted(() => {
-  loading.value = false;
-});
-
 const { t } = useI18n();
-const title = computed<string>(
-  () => t("website.title") + " - " + t("website.subtitle")
-);
 
 const head = useLocaleHead({
   addDirAttribute: true,
@@ -19,7 +9,48 @@ const head = useLocaleHead({
   addSeoAttributes: true,
 });
 
-const runtimeConfig = useRuntimeConfig().public;
+// Structured Data (JSON-LD)
+useHead({
+  script: [
+    {
+      type: "application/ld+json",
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://selimdev.vercel.app/#website",
+            url: "https://selimdev.vercel.app",
+            name: "Selim Ataballyev Portfolio",
+            inLanguage: ["en-US", "ru-RU"],
+          },
+          {
+            "@type": "Person",
+            "@id": "https://selimdev.vercel.app/#person",
+            name: "Selim Ataballyev",
+            url: "https://selimdev.vercel.app",
+            image: "https://selimdev.vercel.app/avatar-face.png",
+            jobTitle: "Full Stack Developer",
+            email: "selimdev00@gmail.com",
+            sameAs: [
+              "https://github.com/selimdev00",
+              "https://stackoverflow.com/users/14384258/selim",
+              "https://t.me/selimdevv",
+              "https://www.upwork.com/freelancers/~0120bf1792a18108d4",
+            ],
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://selimdev.vercel.app/#profilepage",
+            url: "https://selimdev.vercel.app",
+            name: "Selim Ataballyev - Full Stack Developer",
+            mainEntity: { "@id": "https://selimdev.vercel.app/#person" },
+          },
+        ],
+      }),
+    },
+  ],
+});
 
 useHead({
   meta: [
@@ -40,7 +71,7 @@ useHead({
       content: t("meta.description"),
     },
     {
-      property: "description",
+      name: "description",
       content: t("meta.description"),
     },
     {
@@ -48,36 +79,36 @@ useHead({
       content: t("meta.description"),
     },
     {
-      property: "keywords",
+      name: "keywords",
       content: t("meta.keywords"),
     },
     {
-      property: "author",
+      name: "author",
       content: t("meta.author"),
     },
     {
-      property: "distribution",
+      name: "distribution",
       content: "global",
     },
     {
-      property: "robots",
+      name: "robots",
       content: "index,follow",
     },
     {
-      property: "revisit-after",
+      name: "revisit-after",
       content: "7 days",
     },
     {
       property: "og:image",
-      content: "/screenshot.png",
+      content: "https://selimdev.vercel.app/screenshot.png",
     },
     {
       property: "twitter:image",
-      content: "/screenshot.png",
+      content: "https://selimdev.vercel.app/screenshot.png",
     },
     {
       property: "og:image:url",
-      content: "/screenshot.png",
+      content: "https://selimdev.vercel.app/screenshot.png",
     },
     {
       property: "og:image:alt",
@@ -89,8 +120,6 @@ useHead({
 
 <template>
   <Html :lang="head.htmlAttrs.lang" :dir="head.htmlAttrs.dir">
-    <SeoKit />
-
     <Head>
       <Title>{{ $t("website.title") }} - {{ $t("website.subtitle") }}</Title>
       <template v-for="link in head.link" :key="link.id">
@@ -111,16 +140,10 @@ useHead({
     </Head>
 
     <Body>
-      <div class="min-h-screen dark:bg-slate-900 bg-sky-50">
-        <transition-fade>
-          <Loading v-if="loading" />
-        </transition-fade>
-
-        <client-only>
-          <NuxtLayout v-if="!loading">
-            <NuxtPage />
-          </NuxtLayout>
-        </client-only>
+      <div class="min-h-screen dark:bg-slate-900 bg-white">
+        <NuxtLayout>
+          <NuxtPage />
+        </NuxtLayout>
       </div>
     </Body>
   </Html>
