@@ -28,7 +28,7 @@ const socials = ref<Social[]>([
   {
     name: "Upwork",
     icon: "simple-icons:upwork",
-    link: "https://www.upwork.com/freelancers/~0120bf1792a18108d4",
+    link: "https://www.upwork.com/freelancers/selimdev",
   },
   {
     name: "hh.ru",
