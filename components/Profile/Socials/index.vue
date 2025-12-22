@@ -2,6 +2,10 @@
 const { socials } = useSocials();
 
 const { isDark } = useMode();
+
+const printPage = () => {
+  window.print();
+};
 </script>
 
 <template>
@@ -20,7 +24,9 @@ const { isDark } = useMode();
 
     <div class="flex flex-col gap-0.5">
       <p class="text-[13px] font-semibold">{{ $t("contactMeNow") }}</p>
-      <div class="flex gap-2 items-center text-[11px] dark:text-gray-300 text-gray-700">
+      <div
+        class="flex gap-2 items-center text-[11px] dark:text-gray-300 text-gray-700"
+      >
         <a
           href="mailto:selimdev00@gmail.com"
           class="opacity-1 hover:opacity-75 transition-opacity"
@@ -40,7 +46,9 @@ const { isDark } = useMode();
 
     <div class="flex flex-col gap-0.5">
       <p class="text-[13px] font-semibold">{{ $t("CV") }}</p>
-      <div class="flex gap-2 items-center text-[11px] dark:text-gray-300 text-gray-700">
+      <div
+        class="flex gap-2 items-center text-[11px] dark:text-gray-300 text-gray-700"
+      >
         <a
           :href="isDark ? `/cv/dark.pdf` : `/cv/light.pdf`"
           target="_blank"
@@ -56,6 +64,13 @@ const { isDark } = useMode();
         >
           PDF
         </a>
+        <span class="dark:text-gray-500 text-gray-400 no-print">|</span>
+        <button
+          class="opacity-1 hover:opacity-75 transition-opacity cursor-pointer no-print"
+          @click="printPage"
+        >
+          {{ $t("print") }}
+        </button>
       </div>
     </div>
   </div>

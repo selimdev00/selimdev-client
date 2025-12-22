@@ -122,6 +122,7 @@ export default {
   now: "Now",
   CV: "CV",
   seeCV: "See CV",
+  print: "Print",
   yearsExperience: "years of experience",
   technologies: "Technologies",
   spokenLanguages: "Languages",

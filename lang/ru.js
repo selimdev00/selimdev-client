@@ -92,6 +92,7 @@ export default {
   now: "Сейчас",
   CV: "Резюме",
   seeCV: "Посмотреть резюме",
+  print: "Печать",
   yearsExperience: "лет опыта",
   technologies: "Технологии",
   spokenLanguages: "Языки",

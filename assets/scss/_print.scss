@@ -1,0 +1,108 @@
+@media print {
+  @page {
+    margin: 1.5cm;
+    size: A4;
+  }
+
+  * {
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #1a1a1a !important;
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .dark,
+  .dark * {
+    background-color: transparent !important;
+    color: #1a1a1a !important;
+  }
+
+  // Hide non-printable elements
+  .no-print,
+  .fixed,
+  .mouse-gradient,
+  footer,
+  [class*="BottomPanel"],
+  [class*="ImageViewer"],
+  [class*="Mode"],
+  [class*="Footer"],
+  [class*="Socials"] ul,
+  [class*="ProjectItem"] img,
+  [class*="ExperienceItem"] .absolute,
+  [name="gridicons:external"] {
+    display: none !important;
+  }
+
+  .grid {
+    display: block !important;
+  }
+  .container {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  [class*="Profile"]:not([class*="ProfileInfo"]) {
+    position: relative !important;
+  }
+
+  // Typography
+  a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+  .highlight,
+  .border-sky-400,
+  [class*="text-sky"] {
+    color: #0284c7 !important;
+  }
+  .highlight {
+    font-weight: 600 !important;
+  }
+  .border-sky-400 {
+    border-color: #0284c7 !important;
+    background: transparent !important;
+  }
+  [class*="text-gray"] {
+    color: #4a4a4a !important;
+  }
+
+  // Page breaks
+  [class*="ExperienceItem"],
+  [class*="ProjectItem"] {
+    break-inside: avoid !important;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid !important;
+  }
+
+  // Header
+  [class*="Info"] h1 {
+    font-size: 18pt !important;
+    font-weight: 700 !important;
+  }
+  [class*="Info"] h2 {
+    font-size: 14pt !important;
+    color: #0284c7 !important;
+  }
+  [class*="Info"] img {
+    width: 60px !important;
+    height: 60px !important;
+  }
+
+  .rounded-full,
+  .rounded-lg {
+    border-radius: 4px !important;
+  }
+}
