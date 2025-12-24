@@ -119,6 +119,14 @@ export default {
         "As a Full Stack Developer at 3205.team in Moscow, I develop and maintain client-side web applications, handle server-side development and maintenance, refactor code, fix bugs, implement functionality and program logic according to technical specifications and architectural decisions, and develop user interfaces including interactive elements.",
     },
   },
+  education: "Education",
+  educationItems: {
+    school4: {
+      institution: "School №4",
+      field: "Computer Science",
+      degree: "Secondary Education",
+    },
+  },
   now: "Now",
   CV: "CV",
   seeCV: "See CV",

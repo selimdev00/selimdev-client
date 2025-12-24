@@ -21,6 +21,12 @@ const nav = ref<NavItem[]>([
     active: false,
   },
   {
+    id: "education",
+    title: "education",
+    path: "/#education",
+    active: false,
+  },
+  {
     id: "projects",
     title: "projects",
     path: "/#projects",
@@ -31,7 +37,7 @@ const nav = ref<NavItem[]>([
 export const useNav = () => {
   const setActive = async (
     route: RouteLocation,
-    section: string = ""
+    section: string = "",
   ): Promise<void> => {
     let index: number;
 

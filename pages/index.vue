@@ -14,6 +14,8 @@
 
         <ExperienceList />
 
+        <EducationList />
+
         <ProjectList />
 
         <!-- <client-only>
