@@ -91,7 +91,7 @@ const en: Translations = {
       subtitle: "Web development",
       place: "3205.team",
       description:
-        "As a Full Stack Developer at 3205.team in Moscow, I develop and maintain client-side web applications, handle server-side development and maintenance, refactor code, fix bugs, implement functionality and program logic according to technical specifications and architectural decisions, and develop user interfaces including interactive elements.",
+        "As a Full Stack Developer at 3205.team in Moscow, I built and maintained client-side web applications, handled server-side development and maintenance, refactored code, shipped functionality and program logic to spec, and built interactive UI from architectural decisions.",
     },
   },
   education: "Education",

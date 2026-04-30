@@ -35,6 +35,6 @@ export const experiences: Experience[] = [
     positionKey: "team3205",
     tags: ["TypeScript", "Nuxt", "Next", "Nest"],
     from: "2023-07-01",
-    to: "now",
+    to: "2026-04-30",
   },
 ];
