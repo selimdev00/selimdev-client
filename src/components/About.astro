@@ -1,0 +1,16 @@
+---
+import type { Translations } from "../i18n/types";
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+---
+
+<section
+  id="about"
+  data-section="about"
+  class="py-2 flex flex-col gap-[22px] md:text-[14px] text-[15px] leading-[1.7] dark:text-gray-400 text-gray-600"
+  set:html={t.aboutContent}
+></section>

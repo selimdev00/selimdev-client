@@ -1,0 +1,31 @@
+---
+import { education } from "../../data/education";
+import Item from "./Item.astro";
+import FadeIn from "../FadeIn.astro";
+import type { Translations } from "../../i18n/types";
+import type { Locale } from "../../lib/site";
+
+interface Props {
+  t: Translations;
+  locale: Locale;
+}
+
+const { t, locale } = Astro.props;
+---
+
+<section id="education" class="pt-4 md:pb-32 pb-12">
+  <h2
+    class="text-sm font-semibold uppercase tracking-widest dark:text-sky-400 text-sky-600 mb-8"
+  >
+    {t.education}
+  </h2>
+  <ul class="flex flex-col md:gap-16 gap-8 group/list">
+    {
+      education.map((item) => (
+        <FadeIn as="li" class="group/item">
+          <Item item={item} t={t} locale={locale} />
+        </FadeIn>
+      ))
+    }
+  </ul>
+</section>

@@ -1,0 +1,61 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Sidebar from "../components/Profile/Sidebar.astro";
+import MobileSidebar from "../components/MobileSidebar.astro";
+import Info from "../components/Profile/Info.astro";
+import About from "../components/About.astro";
+import ExperienceList from "../components/Experience/List.astro";
+import EducationList from "../components/Education/List.astro";
+import ProjectList from "../components/Project/List.astro";
+import Footer from "../components/Footer.astro";
+import CursorGradient from "../components/islands/CursorGradient.tsx";
+import BottomPanel from "../components/islands/BottomPanel.tsx";
+import type { Translations } from "../i18n/types";
+import type { Locale } from "../lib/site";
+
+interface Props {
+  t: Translations;
+  locale: Locale;
+}
+
+const { t, locale } = Astro.props;
+---
+
+<BaseLayout t={t} locale={locale}>
+  <div class="relative min-h-screen">
+    <div class="container max-w-[1050px] tracking-normal relative z-10">
+      <div
+        class="grid lg:grid-cols-[1fr_1.5fr] lg:gap-[100px] items-start relative"
+      >
+        <Sidebar t={t} locale={locale} variant="desktop" />
+
+        <div
+          class="flex flex-col gap-[10px] md:py-10 py-6 justify-between h-full"
+        >
+          <Info t={t} class="lg:hidden block md:py-10 py-4" />
+
+          <About t={t} />
+          <ExperienceList t={t} locale={locale} />
+          <EducationList t={t} locale={locale} />
+          <ProjectList t={t} locale={locale} />
+
+          <Footer t={t} class="mt-20 mb-6" />
+        </div>
+      </div>
+    </div>
+
+    <CursorGradient client:idle />
+  </div>
+
+  <MobileSidebar t={t} locale={locale} />
+  <BottomPanel
+    client:load
+    menuLabel="Menu"
+    closeLabel="Close"
+    topLabel="Back to top"
+  />
+
+  <script>
+    import "../scripts/fade-on-scroll";
+  </script>
+</BaseLayout>

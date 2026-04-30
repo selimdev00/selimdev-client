@@ -1,0 +1,40 @@
+---
+import { site } from "../lib/site";
+
+const graph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": `${site.url}/#website`,
+      url: site.url,
+      name: "Selim Ataballyev Portfolio",
+      inLanguage: ["en-US", "ru-RU"],
+    },
+    {
+      "@type": "Person",
+      "@id": `${site.url}/#person`,
+      name: site.ownerName,
+      url: site.url,
+      image: `${site.url}/avatar-face.png`,
+      jobTitle: "Full-Stack Engineer",
+      email: site.ownerEmail,
+      sameAs: [
+        site.githubUrl,
+        site.stackOverflowUrl,
+        site.telegramUrl,
+        site.upworkUrl,
+      ],
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": `${site.url}/#profilepage`,
+      url: site.url,
+      name: "Selim Ataballyev - Full-Stack Engineer",
+      mainEntity: { "@id": `${site.url}/#person` },
+    },
+  ],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(graph)} is:inline />

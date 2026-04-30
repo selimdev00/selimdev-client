@@ -1,0 +1,80 @@
+---
+import type { Project } from "../../data/projects";
+import type { Translations } from "../../i18n/types";
+import type { Locale } from "../../lib/site";
+import { formatMonthYear } from "../../lib/format";
+import ImageViewer from "../islands/ImageViewer.tsx";
+
+interface Props {
+  item: Project;
+  t: Translations;
+  locale: Locale;
+}
+
+const { item, t, locale } = Astro.props;
+const data = t.projectItems[item.nameKey];
+const dateLabel = formatMonthYear(item.date, locale);
+const linkLabels: Record<"github" | "preview", string> = {
+  github: t.github,
+  preview: t.preview,
+};
+---
+
+<div
+  class="flex flex-col gap-6 p-4 cursor-default dark:hover:bg-slate-900 hover:bg-sky-100 rounded-lg hover:!opacity-100 group-hover/list:opacity-50 transition-colors duration-300"
+>
+  <div class="flex flex-wrap gap-2">
+    {
+      item.images.map((image) => (
+        <ImageViewer client:visible src={image} alt={data.name} />
+      ))
+    }
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <p class="text-[12px] uppercase dark:text-gray-400 text-gray-500">
+      {dateLabel}
+    </p>
+
+    <div class="flex flex-col gap-1">
+      <div
+        class="flex items-center gap-[7px] dark:group-hover/item:text-sky-400 group-hover/item:text-sky-900 transition-colors duration-300"
+      >
+        <h2 class="text-[14px] font-semibold">{data.name}</h2>
+      </div>
+
+      {
+        item.links.length > 0 && (
+          <div class="text-[13px] flex flex-wrap gap-2">
+            {item.links.map((link) => (
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener"
+                class="highlight"
+              >
+                {linkLabels[link.name]}
+              </a>
+            ))}
+          </div>
+        )
+      }
+
+      <p
+        class="md:text-[14px] text-[15px] dark:text-gray-400 text-gray-500 leading-[1.6]"
+      >
+        {data.description}
+      </p>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      {
+        item.tags.map((tag) => (
+          <div class="text-sky-400 font-semibold text-[11px] border border-sky-400 rounded-full px-2 py-1">
+            <span>{tag}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

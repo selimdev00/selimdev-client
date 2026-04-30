@@ -1,0 +1,12 @@
+---
+import type { Translations } from "../i18n/types";
+
+interface Props {
+  t: Translations;
+  class?: string;
+}
+
+const { t, class: className = "" } = Astro.props;
+---
+
+<footer class={className} set:html={t.footerContent}></footer>

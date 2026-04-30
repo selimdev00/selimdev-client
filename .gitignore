@@ -1,9 +1,6 @@
-# Nuxt dev/build outputs
-.output
-.nuxt
-.nitro
-.cache
+# Build outputs
 dist
+.astro
 
 # Node dependencies
 node_modules
@@ -11,17 +8,20 @@ node_modules
 # Logs
 logs
 *.log
+npm-debug.log*
 
 # Misc
 .DS_Store
 .fleet
 .idea
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
 
 # Local env files
 .env
 .env.*
 !.env.example
-.playwright-mcp
 
 # Agent / tooling files
 CLAUDE.md

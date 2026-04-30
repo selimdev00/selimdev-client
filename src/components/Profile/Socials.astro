@@ -1,0 +1,91 @@
+---
+import { Icon } from "astro-icon/components";
+import { socials } from "../../data/socials";
+import { site } from "../../lib/site";
+import type { Translations } from "../../i18n/types";
+
+interface Props {
+  t: Translations;
+}
+
+const { t } = Astro.props;
+---
+
+<div class="flex flex-col gap-3">
+  <ul class="flex gap-2">
+    {
+      socials.map((social) => (
+        <li class="group opacity-75 hover:opacity-100 transition-opacity duration-300 text-[20px]">
+          <a
+            href={social.link}
+            target="_blank"
+            rel="noopener"
+            aria-label={social.name}
+          >
+            <Icon name={social.icon} />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="flex flex-col gap-1">
+    <p
+      class="text-[12px] uppercase tracking-wider dark:text-gray-400 text-gray-500"
+    >
+      {t.contactMeNow}
+    </p>
+    <a
+      href={`mailto:${site.ownerEmail}`}
+      class="text-[13px] dark:text-gray-200 text-gray-800 hover:text-sky-600 dark:hover:text-sky-200 transition-colors"
+    >
+      {site.ownerEmail}
+    </a>
+  </div>
+
+  <div class="flex flex-col gap-1">
+    <p
+      class="text-[12px] uppercase tracking-wider dark:text-gray-400 text-gray-500"
+    >
+      {t.CV}
+    </p>
+    <div
+      class="flex gap-3 items-center text-[13px] dark:text-gray-200 text-gray-800"
+    >
+      <a
+        href="/cv/light.pdf"
+        target="_blank"
+        rel="noopener"
+        class="hover:text-sky-600 dark:hover:text-sky-200 transition-colors cv-light"
+      >
+        {t.seeCV}
+      </a>
+      <a
+        href="/hh.pdf"
+        target="_blank"
+        rel="noopener"
+        class="hover:text-sky-600 dark:hover:text-sky-200 transition-colors"
+      >
+        PDF
+      </a>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  // Swap CV link target based on current theme.
+  (function () {
+    function updateCv() {
+      var dark = document.documentElement.classList.contains("dark");
+      document.querySelectorAll(".cv-light").forEach(function (el) {
+        el.setAttribute("href", dark ? "/cv/dark.pdf" : "/cv/light.pdf");
+      });
+    }
+    updateCv();
+    document.addEventListener("theme-change", updateCv);
+    new MutationObserver(updateCv).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  })();
+</script>

@@ -1,0 +1,37 @@
+---
+import Info from "./Info.astro";
+import Socials from "./Socials.astro";
+import Languages from "./Languages.astro";
+import Technologies from "./Technologies.astro";
+import LangSwitcher from "./LangSwitcher.astro";
+import ThemeToggle from "../islands/ThemeToggle.tsx";
+import type { Translations } from "../../i18n/types";
+import type { Locale } from "../../lib/site";
+
+interface Props {
+  t: Translations;
+  locale: Locale;
+  variant?: "desktop" | "mobile";
+}
+
+const { t, locale, variant = "desktop" } = Astro.props;
+
+const wrapperClass =
+  variant === "desktop"
+    ? "pt-10 pb-16 sticky top-0 lg:flex flex-col justify-between h-screen hidden"
+    : "flex flex-col justify-between h-full p-4 pt-10 pb-24 overflow-y-auto";
+---
+
+<aside class:list={[wrapperClass]}>
+  <div class="flex flex-col gap-5 overflow-y-auto pr-2">
+    <Info t={t} />
+    <Socials t={t} />
+    <Languages t={t} />
+    <Technologies t={t} />
+  </div>
+
+  <div class="flex flex-col items-center gap-4 p-4 lg:pb-0 pb-12">
+    <ThemeToggle client:load label={t.darkMode} />
+    <LangSwitcher current={locale} />
+  </div>
+</aside>
