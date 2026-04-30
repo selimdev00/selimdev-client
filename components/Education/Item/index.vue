@@ -12,12 +12,6 @@ const props = defineProps<EducationItemProps>();
   <div
     class="flex sm:flex-row flex-col items-start sm:gap-[20px] gap-1 relative cursor-default md:p-6 p-3 dark:hover:bg-slate-900 hover:bg-sky-100 rounded-lg hover:!opacity-100 group-hover/list:opacity-50 transition-all duration-300"
   >
-    <a
-      v-if="props.item.link"
-      :href="props.item.link"
-      class="absolute top-0 left-0 w-full h-full z-10"
-    ></a>
-
     <div class="h-[103%] absolute top-7 left-[-40px] gap-3 md:block hidden">
       <div
         class="w-[20px] h-[20px] aspect-1/1 rotate-45 border border-sky-400 rounded-[3px] group-hover/item:rotate-90 transition-all duration-300"
@@ -78,7 +72,16 @@ const props = defineProps<EducationItemProps>();
           ></div>
 
           <h2 class="text-[14px] font-semibold">
-            {{ $t(props.item.institution) }}
+            <a
+              v-if="props.item.link"
+              :href="props.item.link"
+              target="_blank"
+              rel="noopener"
+              class="before:content-[''] before:absolute before:inset-0"
+            >
+              {{ $t(props.item.institution) }}
+            </a>
+            <template v-else>{{ $t(props.item.institution) }}</template>
           </h2>
 
           <Icon

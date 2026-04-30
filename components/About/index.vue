@@ -21,7 +21,7 @@ const { stop } = useIntersectionObserver(
     ref="about"
     id="about"
     data-section="about"
-    class="py-2 flex flex-col gap-[22px] leading-[26px] dark:text-gray-400 text-gray-600"
+    class="py-2 flex flex-col gap-[22px] md:text-[14px] text-[15px] leading-[1.7] dark:text-gray-400 text-gray-600"
     v-html="$t('aboutContent')"
   ></section>
 </template>

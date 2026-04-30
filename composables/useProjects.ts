@@ -21,15 +21,7 @@ export const useProjects = () => {
     {
       name: "projectItems.legoGen.name",
       description: "projectItems.legoGen.description",
-      tags: [
-        "HTML",
-        "CSS",
-        "Javascript",
-        "SCSS",
-        "Vue 3",
-        "Vite",
-        "Typescript",
-      ],
+      tags: ["Vue 3", "Vite", "TypeScript"],
       links: [
         {
           name: "github",
@@ -46,16 +38,7 @@ export const useProjects = () => {
     {
       name: "projectItems.pokemon.name",
       description: "projectItems.pokemon.description",
-      tags: [
-        "HTML",
-        "CSS",
-        "Javascript",
-        "React",
-        "Redux",
-        "Typescript",
-        "ky",
-        "Ant Design",
-      ],
+      tags: ["React", "Redux", "TypeScript", "Ant Design"],
       links: [
         {
           name: "github",
@@ -72,7 +55,7 @@ export const useProjects = () => {
     {
       name: "projectItems.fantagolia.name",
       description: "projectItems.fantagolia.description",
-      tags: ["HTML", "CSS", "Javascript", "Vue 3", "Nuxt 3", "Tailwind CSS"],
+      tags: ["Nuxt 3", "Tailwind"],
       links: [
         {
           name: "github",

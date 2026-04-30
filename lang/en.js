@@ -1,17 +1,18 @@
 export default {
   website: {
     title: "Selim Ataballyev",
-    subtitle: "Full Stack Developer",
-    description: "Transforming Ideas into Intuitive Web and Mobile Solutions",
+    subtitle: "Full-Stack Engineer",
+    description:
+      "I ship production apps in Vue, Nuxt, Next, React Native, and Node for startups, agencies, and product teams.",
   },
   meta: {
     title:
-      "Selim Ataballyev | Expert Web Solutions & Custom Software Development",
+      "Selim Ataballyev - Full-Stack Engineer (Vue, Nuxt, Node, React Native)",
     description:
-      "Looking for a top-notch Full Stack Developer? I am experienced developer that offers expert web solutions and custom software development services to take your projects to new heights. Contact me today!",
+      "Full-stack engineer with 7+ years building production apps in Vue, Nuxt, Next.js, React Native, and Node. Available for senior contract and full-time roles. Message on Telegram.",
     author: "Selim Ataballyev",
     keywords:
-      "Selim Ataballyev, Create Website, Full Stack Developer, Agile Development, Software Deployment, Web Security, Cross-Browser Compatibility, User Experience, Software Architecture, Web Performance, Technical Documentation, Software Prototyping, Database Design, Software Versioning, Software Debugging, Mobile App Optimization, UI/UX Testing, Web Accessibility, Backend Integration, Frontend Frameworks, Mobile-First Design, API Documentation, Software Maintenance, Code Review, Software Upgrades, Website Speed Optimization, Responsive Images, Error Handling, Automated Testing, Software Frameworks, Software Deployment, Web Hosting, Application Scalability, Website Migration, User Authentication, Web Content Management, Software Customization, CMS Integration, Software Prototyping, Web APIs, Website Monitoring, Responsive Email Templates, Search Functionality, Client Interaction, Software Troubleshooting, Web Standards Compliance, Software Support, Continuous Improvement, Code Quality, Code Reusability, Software Upgrades, Code Optimization, Time Management, Project Planning, Collaboration, Client Communication, Innovation, Web Development Trends, Industry Best Practices, Problem Solving, Creative Solutions, Technical Expertise, High-Performance Websites, Interactive Web Design.",
+      "Selim Ataballyev, full-stack engineer, full-stack developer, Vue, Nuxt, Next.js, React Native, Node.js, Nest.js, freelance, contract, senior developer",
   },
   about: "About me",
   experiences: "Experiences",
@@ -21,48 +22,20 @@ export default {
   github: "Github",
   preview: "Preview",
   contactMeNow: "Contact me",
+  primaryCta: "Message me on Telegram",
+  secondaryCta: "See projects on GitHub",
   footerContent: `
-      <p class="text-sm md:py-15 py-10 dark:text-gray-400 text-gray-800">
-    Built with
-    
-    <span
-      class="highlight"
-
-      >Nuxt.js</span
-    >
-    and
-    <span
-      class="highlight"
-
-      >Tailwind CSS</span
-    >, deployed with
-    <span
-      class="highlight"
-
-      >Vercel</span
-    >. All text is set in the
-    <span
-      class="highlight"
-
-      >Inter</span
-    >
-    typeface.
-  </p>
-
+    <p class="text-[12px] md:py-15 py-10 dark:text-gray-500 text-gray-500">
+      Hand-coded in <span class="highlight">Nuxt</span> and <span class="highlight">Tailwind</span>. The site is the resume.
+    </p>
   `,
-  aboutContent: `    
+  aboutContent: `
     <p>
-      I am a
-      <span class="highlight">Full Stack Developer</span> proficient in a wide
-      array of cutting-edge technologies like <span class="highlight">HTML, CSS, Sass, Javascript, Vite.js, Vue.js, Nuxt.js, React.js, Next.js, React Native, DivKit, Node.js, Nest.js, MongoDB, PostgreSQL, pm2, nginx, git</span>. 
-      </p>
-      
+      I work end-to-end on web and mobile products with small senior teams. Most projects start as a blank Figma file and ship to production: framework choice, database schema, API contract, deployment, and the long tail of polish. <span class="highlight">Vue 2/3, Nuxt 2/3, Next.js, and React Native</span> on the front; <span class="highlight">Node, Nest, Postgres, and Mongo</span> on the back; <span class="highlight">Docker, Nginx, and pm2</span> for the deploy.
+    </p>
 
     <p>
-      I am well-versed in <span class="highlight">configuring servers and deploying web applications</span>
-      using cloud based solutions and technologies like
-      <span class="highlight">NGINX</span>,
-      <span class="highlight">pm2</span> and <span class="highlight">docker</span>. 
+      I prefer projects with a short brief and a high bar. I read carefully, push back when something is wrong, and write code the next engineer can change without rereading mine. Most useful in the first 90 days of a product, when scope is still negotiable.
     </p>
     `,
   projectItems: {

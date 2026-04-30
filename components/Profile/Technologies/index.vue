@@ -30,7 +30,7 @@ const technologies = [
       <span
         v-for="tech in technologies"
         :key="tech"
-        class="text-sky-500 dark:text-sky-400 font-medium text-[10px] border border-sky-400 rounded-full px-1.5 py-0.5"
+        class="text-sky-500 dark:text-sky-400 font-medium text-[11px] border border-sky-400 rounded-full px-2 py-0.5"
       >
         {{ tech }}
       </span>

@@ -22,3 +22,7 @@ logs
 .env.*
 !.env.example
 .playwright-mcp
+
+# Agent / tooling files
+CLAUDE.md
+.claude/

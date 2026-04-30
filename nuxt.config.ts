@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   site: {
-    url: "https://selimdev.vercel.app",
+    url: "https://selim.services",
   },
 
   css: [{ src: "@/assets/scss/main.scss" }],
@@ -24,7 +24,7 @@ export default defineNuxtConfig({
   ],
 
   i18n: {
-    baseUrl: "https://selimdev.vercel.app",
+    baseUrl: "https://selim.services",
     compilation: {
       strictMessage: false,
     },
@@ -58,13 +58,20 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteUrl:
-        process.env.NUXT_PUBLIC_SITE_URL || "https://selimdev.vercel.app",
-      siteName: "Selim Ataballyev | Full Stack Developer",
+        process.env.NUXT_PUBLIC_SITE_URL || "https://selim.services",
+      siteName: "Selim Ataballyev - Full-Stack Engineer",
       siteDescription:
-        "Looking for a top-notch Full Stack Developer? I am skilled and experienced developer that offers expert web solutions and custom software development services to take your projects to new heights. Contact me today for a seamless online presence and innovative applications.",
+        "Full-stack engineer with 7+ years building production apps in Vue, Nuxt, Next.js, React Native, and Node. Available for senior contract and full-time roles.",
       language: "en-US",
-      titleSeparator: "|",
+      titleSeparator: "-",
       trailingSlash: true,
+    },
+  },
+
+  nitro: {
+    prerender: {
+      crawlLinks: true,
+      routes: ["/", "/ru", "/sitemap.xml", "/robots.txt"],
     },
   },
 

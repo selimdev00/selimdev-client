@@ -21,9 +21,9 @@ const props = defineProps<ProjectItemProps>();
       >
         <div class="w-[100px] h-[70px]">
           <img
-            class="w-full h-full aspect-1.5/1 object-cover rounded-lg hover:opacity-80 transition-opacity"
+            class="w-full h-full aspect-[3/2] object-cover rounded-lg hover:opacity-80 transition-opacity"
             :src="image"
-            :alt="props.item.name"
+            :alt="$t(props.item.name)"
           />
         </div>
       </ImageViewer>
@@ -61,7 +61,7 @@ const props = defineProps<ProjectItemProps>();
           </nuxt-link>
         </div>
 
-        <p class="text-[14px] dark:text-gray-400 text-gray-500 leading-[1.6]">
+        <p class="md:text-[14px] text-[15px] dark:text-gray-400 text-gray-500 leading-[1.6]">
           {{ $t(props.item.description) }}
         </p>
       </div>

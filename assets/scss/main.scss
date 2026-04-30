@@ -43,6 +43,31 @@ body {
   }
 }
 
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid #0284c7;
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+.dark :focus-visible {
+  outline-color: #7dd3fc;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 .highlight {
-  @apply dark:text-sky-200 text-sky-600 opacity-75 hover:opacity-100 transition-all duration-300 cursor-default;
+  @apply dark:text-sky-200 text-sky-600 opacity-75 hover:opacity-100 transition-opacity duration-300;
 }

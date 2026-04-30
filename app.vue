@@ -19,17 +19,17 @@ useHead({
         "@graph": [
           {
             "@type": "WebSite",
-            "@id": "https://selimdev.vercel.app/#website",
-            url: "https://selimdev.vercel.app",
+            "@id": "https://selim.services/#website",
+            url: "https://selim.services",
             name: "Selim Ataballyev Portfolio",
             inLanguage: ["en-US", "ru-RU"],
           },
           {
             "@type": "Person",
-            "@id": "https://selimdev.vercel.app/#person",
+            "@id": "https://selim.services/#person",
             name: "Selim Ataballyev",
-            url: "https://selimdev.vercel.app",
-            image: "https://selimdev.vercel.app/avatar-face.png",
+            url: "https://selim.services",
+            image: "https://selim.services/avatar-face.png",
             jobTitle: "Full Stack Developer",
             email: "selimdev00@gmail.com",
             sameAs: [
@@ -41,10 +41,10 @@ useHead({
           },
           {
             "@type": "ProfilePage",
-            "@id": "https://selimdev.vercel.app/#profilepage",
-            url: "https://selimdev.vercel.app",
+            "@id": "https://selim.services/#profilepage",
+            url: "https://selim.services",
             name: "Selim Ataballyev - Full Stack Developer",
-            mainEntity: { "@id": "https://selimdev.vercel.app/#person" },
+            mainEntity: { "@id": "https://selim.services/#person" },
           },
         ],
       }),
@@ -100,15 +100,15 @@ useHead({
     },
     {
       property: "og:image",
-      content: "https://selimdev.vercel.app/screenshot.png",
+      content: "https://selim.services/screenshot.png",
     },
     {
       property: "twitter:image",
-      content: "https://selimdev.vercel.app/screenshot.png",
+      content: "https://selim.services/screenshot.png",
     },
     {
       property: "og:image:url",
-      content: "https://selimdev.vercel.app/screenshot.png",
+      content: "https://selim.services/screenshot.png",
     },
     {
       property: "og:image:alt",

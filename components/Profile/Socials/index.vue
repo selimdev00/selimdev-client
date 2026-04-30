@@ -2,10 +2,6 @@
 const { socials } = useSocials();
 
 const { isDark } = useMode();
-
-const printPage = () => {
-  window.print();
-};
 </script>
 
 <template>
@@ -14,63 +10,48 @@ const printPage = () => {
       <li
         v-for="(social, index) in socials"
         :key="`profile-socials-item-${index}`"
-        class="group opacity-75 hover:opacity-100 transition-all duration-300 text-[20px]"
+        class="group opacity-75 hover:opacity-100 transition-opacity duration-300 text-[20px]"
       >
-        <nuxt-link :to="social.link" target="_blank">
+        <nuxt-link
+          :to="social.link"
+          target="_blank"
+          rel="noopener"
+          :aria-label="social.name"
+        >
           <Icon :name="social.icon" />
         </nuxt-link>
       </li>
     </ul>
 
-    <div class="flex flex-col gap-0.5">
-      <p class="text-[13px] font-semibold">{{ $t("contactMeNow") }}</p>
-      <div
-        class="flex gap-2 items-center text-[11px] dark:text-gray-300 text-gray-700"
+    <div class="flex flex-col gap-1">
+      <p class="text-[12px] uppercase tracking-wider dark:text-gray-400 text-gray-500">{{ $t("contactMeNow") }}</p>
+      <a
+        href="mailto:selimdev00@gmail.com"
+        class="text-[13px] dark:text-gray-200 text-gray-800 hover:text-sky-600 dark:hover:text-sky-200 transition-colors"
       >
-        <a
-          href="mailto:selimdev00@gmail.com"
-          class="opacity-1 hover:opacity-75 transition-opacity"
-        >
-          selimdev00@gmail.com
-        </a>
-        <span class="dark:text-gray-500 text-gray-400">|</span>
-        <a
-          href="https://t.me/selimdevv"
-          target="_blank"
-          class="opacity-1 hover:opacity-75 transition-opacity"
-        >
-          Telegram
-        </a>
-      </div>
+        selimdev00@gmail.com
+      </a>
     </div>
 
-    <div class="flex flex-col gap-0.5">
-      <p class="text-[13px] font-semibold">{{ $t("CV") }}</p>
-      <div
-        class="flex gap-2 items-center text-[11px] dark:text-gray-300 text-gray-700"
-      >
+    <div class="flex flex-col gap-1">
+      <p class="text-[12px] uppercase tracking-wider dark:text-gray-400 text-gray-500">{{ $t("CV") }}</p>
+      <div class="flex gap-3 items-center text-[13px] dark:text-gray-200 text-gray-800">
         <a
           :href="isDark ? `/cv/dark.pdf` : `/cv/light.pdf`"
           target="_blank"
-          class="opacity-1 hover:opacity-75 transition-opacity"
+          rel="noopener"
+          class="hover:text-sky-600 dark:hover:text-sky-200 transition-colors"
         >
           {{ $t("seeCV") }}
         </a>
-        <span class="dark:text-gray-500 text-gray-400">|</span>
         <a
           href="/hh.pdf"
           target="_blank"
-          class="opacity-1 hover:opacity-75 transition-opacity"
+          rel="noopener"
+          class="hover:text-sky-600 dark:hover:text-sky-200 transition-colors"
         >
           PDF
         </a>
-        <span class="dark:text-gray-500 text-gray-400 no-print">|</span>
-        <button
-          class="opacity-1 hover:opacity-75 transition-opacity cursor-pointer no-print"
-          @click="printPage"
-        >
-          {{ $t("print") }}
-        </button>
       </div>
     </div>
   </div>

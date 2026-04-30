@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useMotionProperties, useSpring } from "@vueuse/motion";
+import { usePreferredReducedMotion } from "@vueuse/core";
 
 const element = ref<HTMLElement | null>(null);
+
+const reducedMotion = usePreferredReducedMotion();
 
 const { motionProperties } = useMotionProperties(element, {
   cursor: "grab",
@@ -13,6 +16,7 @@ const { set } = useSpring(motionProperties);
 
 const handleMouseMove = (event: MouseEvent) => {
   if (!element.value) return;
+  if (reducedMotion.value === "reduce") return;
   set({
     x: event.pageX - element.value.clientHeight / 2,
     y: event.pageY - element.value.clientWidth / 2,
@@ -32,7 +36,9 @@ const handleMouseMove = (event: MouseEvent) => {
     <BottomPanel />
 
     <div
+      v-if="reducedMotion !== 'reduce'"
       class="absolute top-0 bottom-0 h-full w-full min-h-screen overflow-hidden"
+      aria-hidden="true"
     >
       <div
         ref="element"
