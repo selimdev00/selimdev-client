@@ -1,9 +1,15 @@
 # Build outputs
 dist
 .astro
+.nuxt
+.output
 
 # Node dependencies
 node_modules
+bun.lock
+
+# Tooling sessions
+.playwright-mcp
 
 # Logs
 logs

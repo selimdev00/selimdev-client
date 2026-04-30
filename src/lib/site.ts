@@ -31,3 +31,31 @@ export function totalExperienceYears(reference: Date = new Date()): number {
     (1000 * 60 * 60 * 24 * 365.25);
   return Math.floor(years);
 }
+
+export const PRIMARY_TECHS = [
+  "TypeScript",
+  "Vue",
+  "Nuxt",
+  "Next.js",
+  "React Native",
+  "Node",
+  "Nest",
+  "Postgres",
+] as const;
+
+export const SECONDARY_TECHS = [
+  "React",
+  "Redis",
+  "Tailwind",
+  "Docker",
+  "Cloudflare",
+  "Nginx",
+] as const;
+
+export const AI_TOOLS = [
+  "Claude Code",
+  "Anthropic SDK",
+  "MCP",
+  "Cursor",
+  "OpenAI SDK",
+] as const;

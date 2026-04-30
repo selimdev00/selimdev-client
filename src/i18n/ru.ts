@@ -5,7 +5,7 @@ const ru: Translations = {
     title: "Селим Атабаллыев",
     subtitle: "Full-Stack инженер",
     description:
-      "Делаю production-приложения на Vue, Nuxt, Next, React Native и Node для стартапов, агентств и продуктовых команд.",
+      "Веду web- и mobile-продукты от пустого Figma до прода - фронт, бэк, схема БД, деплой. Удалённо со стартапами, агентствами и продуктовыми командами в EU, US и СНГ.",
   },
   meta: {
     title:
@@ -16,47 +16,34 @@ const ru: Translations = {
     keywords:
       "Селим Атабаллыев, full-stack инженер, full-stack разработчик, Vue, Nuxt, Next.js, React Native, Node.js, Nest.js, фриланс, контракт, senior разработчик",
   },
-  about: "Обо мне",
-  experiences: "Опыт",
-  projects: "Проекты",
-  lightMode: "Светлый режим",
-  darkMode: "Темный режим",
-  github: "Гитхаб",
-  preview: "Просмотр",
-  contactMeNow: "Связаться со мной",
+  about: "О себе",
+  experiences: "Работа",
+  lightMode: "Светлая",
+  darkMode: "Тёмная",
+  contactMeNow: "Контакты",
   primaryCta: "Написать в Telegram",
-  secondaryCta: "Проекты на GitHub",
+  githubCta: "GitHub",
+  available: "Открыт к senior-контрактам или full-time",
+  skipToContent: "К контенту",
+  backToTop: "Наверх",
   footerContent: `
-    <p class="text-[12px] md:py-15 py-10 dark:text-gray-500 text-gray-500">
-      Сверстано вручную на <span class="highlight">Astro</span> и <span class="highlight">Tailwind</span>. Сайт - это резюме.
+    <p class="text-[12px] dark:text-gray-500 text-gray-500">
+      Свёрстано вручную на <span class="highlight">Astro</span> и <span class="highlight">Tailwind</span>. Сайт - это резюме.
     </p>
   `,
   aboutContent: `
     <p>
-      Работаю end-to-end над web- и mobile-продуктами в небольших сильных командах. Большинство проектов начинается с пустого Figma-файла и доходит до прода: выбор стека, схема БД, контракт API, деплой и долгая полировка. <span class="highlight">Vue 2/3, Nuxt 2/3, Next.js и React Native</span> на фронте; <span class="highlight">Node, Nest, Postgres и Mongo</span> на бэке; <span class="highlight">Docker, Nginx и pm2</span> в деплое.
+      Работаю end-to-end над web- и mobile-продуктами в небольших сильных командах. Большинство проектов начинается с пустого Figma-файла и доходит до прода: выбор стека, схема БД, контракт API, деплой и долгая полировка. <span class="highlight">Vue 2/3, Nuxt 2/3, Next.js и React Native</span> на фронте; <span class="highlight">Node, Nest, Postgres и Redis</span> на бэке; <span class="highlight">Docker, Cloudflare, Nginx и pm2</span> в деплое.
+    </p>
+
+    <p>
+      Каждый день работаю в паре с <span class="highlight">Claude Code</span> и <span class="highlight">Cursor</span> на <span class="highlight">Anthropic и OpenAI SDK</span>, обращаюсь с AI-выводом как с черновиком джуна - ревью, тесты, чистка перед мерджем. Модель пишет быстрее, решение что ехать в прод остаётся за мной.
     </p>
 
     <p>
       Беру проекты с коротким брифом и высокой планкой. Читаю ТЗ внимательно, аргументированно спорю, когда вижу ошибку, и пишу код, который следующий инженер сможет менять, не перечитывая мой. Максимально полезен в первые 90 дней продукта, пока скоуп ещё обсуждаем.
     </p>
   `,
-  projectItems: {
-    legoGen: {
-      name: "Генератор персонажей Лего",
-      description:
-        "Представляю вам моё приложение, которое позволяет вам создавать уникальный аватар, настраивая различные элементы, такие как прически, брови, черты лица, одежда и многое другое! Мой удобный пользовательский интерфейс делает процесс создания аватара простым для всех и займет всего несколько минут (создан в течении сутки в рамках тестового задания)",
-    },
-    pokemon: {
-      name: "Сайт покемонов (React)",
-      description:
-        "Сайт-каталог с покемонами (Public Pokemon API), написанный на React + Redux",
-    },
-    fantagolia: {
-      name: "Развлекательный веб-сайт (Nuxt и концепция дизайна)",
-      description:
-        "Поднимите свои веб-проекты с этим дизайном развлекательного веб-сайта на HTML, CSS и JavaScript. Адаптивный, насыщенный функциями и плавно интерактивный 🚀🌐",
-    },
-  },
   experienceItems: {
     ideal: {
       position: "Разработчик Full Stack",
@@ -94,20 +81,20 @@ const ru: Translations = {
         "Как Full-Stack разработчик в 3205.team в Москве, занимался разработкой и поддержкой клиентской и серверной частей веб-приложений, рефакторингом кода, исправлением багов, реализацией функциональности и программной логики в соответствии с ТЗ и архитектурными решениями, разработкой интерактивных пользовательских интерфейсов.",
     },
   },
-  education: "Образование",
-  educationItems: {
-    school4: {
-      institution: "Школа №4",
-      field: "Информатика",
-      degree: "Среднее образование",
-    },
-  },
   now: "Сейчас",
   CV: "Резюме",
   seeCV: "Посмотреть резюме",
   print: "Печать",
   yearsExperience: "лет опыта",
-  technologies: "Технологии",
+  proof: {
+    yearsLabel: "лет в коде",
+    projectsValue: "20+",
+    projectsLabel: "проектов в проде",
+    sinceValue: "2018",
+    sinceLabel: "коммерческий опыт с",
+  },
+  technologies: "Стек",
+  aiWorkflowLabel: "AI",
   spokenLanguages: "Языки",
   languageNames: {
     russian: "Русский",

@@ -1,0 +1,24 @@
+---
+import ThemeToggle from "./islands/ThemeToggle.tsx";
+import LangSwitcher from "./TopBar/LangSwitcher.astro";
+import type { Locale } from "../lib/site";
+import type { Translations } from "../i18n/types";
+
+interface Props {
+  t: Translations;
+  locale: Locale;
+}
+
+const { t, locale } = Astro.props;
+---
+
+<div
+  class="absolute top-4 right-4 md:top-6 md:right-8 z-20 flex items-center gap-3 no-print"
+>
+  <LangSwitcher current={locale} />
+  <ThemeToggle
+    client:load
+    lightLabel={t.lightMode}
+    darkLabel={t.darkMode}
+  />
+</div>

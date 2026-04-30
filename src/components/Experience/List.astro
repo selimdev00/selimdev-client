@@ -1,7 +1,7 @@
 ---
 import { experiences } from "../../data/experiences";
 import Item from "./Item.astro";
-import FadeIn from "../FadeIn.astro";
+import SectionHeading from "../SectionHeading.astro";
 import type { Translations } from "../../i18n/types";
 import type { Locale } from "../../lib/site";
 
@@ -11,21 +11,30 @@ interface Props {
 }
 
 const { t, locale } = Astro.props;
+const reversed = [...experiences].reverse();
 ---
 
-<section id="experiences" class="pt-4 md:pb-32 pb-12">
-  <h2
-    class="text-sm font-semibold uppercase tracking-widest dark:text-sky-400 text-sky-600 mb-8"
+<section
+  id="experiences"
+  class="py-12 md:py-16 scroll-mt-12"
+  data-fade-on-scroll
+>
+  <SectionHeading label={t.experiences} />
+
+  <ol
+    class="mt-10 relative md:pl-7 group/list flex flex-col gap-10 md:gap-14"
+    data-experience-list
   >
-    {t.experiences}
-  </h2>
-  <ul class="flex flex-col md:gap-16 gap-8 group/list">
+    <span
+      class="hidden md:block absolute left-1 top-2 bottom-2 w-px rail-line"
+      aria-hidden="true"></span>
+
     {
-      experiences.map((item) => (
-        <FadeIn as="li" class="group/item">
+      reversed.map((item) => (
+        <li class="experience-item text-sky-700 dark:text-sky-300">
           <Item item={item} t={t} locale={locale} />
-        </FadeIn>
+        </li>
       ))
     }
-  </ul>
+  </ol>
 </section>

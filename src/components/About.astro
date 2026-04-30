@@ -1,5 +1,6 @@
 ---
 import type { Translations } from "../i18n/types";
+import SectionHeading from "./SectionHeading.astro";
 
 interface Props {
   t: Translations;
@@ -11,6 +12,14 @@ const { t } = Astro.props;
 <section
   id="about"
   data-section="about"
-  class="py-2 flex flex-col gap-[22px] md:text-[14px] text-[15px] leading-[1.7] dark:text-gray-400 text-gray-600"
-  set:html={t.aboutContent}
-></section>
+  class="py-12 md:py-16 scroll-mt-12"
+  data-fade-on-scroll
+>
+  <SectionHeading label={t.about} />
+
+  <div
+    class="flex flex-col gap-5 mt-8 md:text-[16px] text-[15px] leading-[1.7] dark:text-gray-400 text-gray-600 max-w-[65ch]"
+    set:html={t.aboutContent}
+  >
+  </div>
+</section>

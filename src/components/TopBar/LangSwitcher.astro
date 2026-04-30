@@ -1,0 +1,41 @@
+---
+import type { Locale } from "../../lib/site";
+
+interface Props {
+  current: Locale;
+}
+
+const { current } = Astro.props;
+
+const items: { code: Locale; label: string; href: string }[] = [
+  { code: "en", label: "EN", href: "/" },
+  { code: "ru", label: "RU", href: "/ru/" },
+];
+---
+
+<div
+  class="inline-flex items-center rounded-md border border-gray-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/60 backdrop-blur-sm overflow-hidden text-[12px] font-semibold"
+  role="group"
+  aria-label="Language"
+>
+  {
+    items.map((item) => {
+      const active = item.code === current;
+      return (
+        <a
+          href={item.href}
+          class:list={[
+            "px-2.5 py-1.5 transition-colors duration-300",
+            active
+              ? "bg-sky-700 dark:bg-sky-300 text-white dark:text-slate-950"
+              : "text-gray-600 dark:text-gray-400 hover:text-sky-700 dark:hover:text-sky-200",
+          ]}
+          aria-current={active ? "true" : undefined}
+          aria-label={item.code === "en" ? "English" : "Русский"}
+        >
+          {item.label}
+        </a>
+      );
+    })
+  }
+</div>

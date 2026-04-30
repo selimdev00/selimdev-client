@@ -1,4 +1,9 @@
 ---
+import { Icon } from "astro-icon/components";
+import { socials } from "../data/socials";
+import { spokenLanguages } from "../data/spoken-languages";
+import { site } from "../lib/site";
+import SectionHeading from "./SectionHeading.astro";
 import type { Translations } from "../i18n/types";
 
 interface Props {
@@ -9,4 +14,111 @@ interface Props {
 const { t, class: className = "" } = Astro.props;
 ---
 
-<footer class={className} set:html={t.footerContent}></footer>
+<footer
+  id="contact"
+  class:list={[
+    "mt-16 md:mt-24 pt-12 pb-16 border-t border-gray-200 dark:border-slate-800 scroll-mt-12",
+    className,
+  ]}
+  data-fade-on-scroll
+>
+  <SectionHeading label={t.contactMeNow} />
+
+  <div class="mt-8 grid gap-8 md:grid-cols-[1.2fr_1fr]">
+    <div class="flex flex-col gap-4">
+      <a
+        href={site.telegramUrl}
+        target="_blank"
+        rel="noopener"
+        class="group inline-flex items-center gap-3 self-start rounded-md bg-sky-700 dark:bg-sky-300 px-4 py-2.5 text-[14px] font-semibold text-white dark:text-slate-950 hover:bg-sky-800 dark:hover:bg-sky-200 transition-colors duration-300"
+      >
+        <Icon name="mdi:telegram" class="text-[16px]" />
+        <span>{t.primaryCta}</span>
+        <Icon
+          name="mdi:arrow-right"
+          class="text-[14px] transition-transform duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:translate-x-0.5"
+        />
+      </a>
+
+      <a
+        href={`mailto:${site.ownerEmail}`}
+        class="text-[14px] text-gray-700 dark:text-gray-300 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300 self-start"
+      >
+        {site.ownerEmail}
+      </a>
+
+      <ul class="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2 text-[18px]">
+        {
+          socials.map((social) => (
+            <li>
+              <a
+                href={social.link}
+                target="_blank"
+                rel="noopener"
+                aria-label={social.name}
+                class="inline-flex items-center text-gray-500 dark:text-gray-500 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300"
+              >
+                <Icon name={social.icon} />
+              </a>
+            </li>
+          ))
+        }
+        <li class="flex items-center gap-3 text-[13px]">
+          <span class="text-gray-300 dark:text-gray-700" aria-hidden="true">·</span>
+          <a
+            href="/cv/light.pdf"
+            target="_blank"
+            rel="noopener"
+            class="cv-light text-gray-700 dark:text-gray-300 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300"
+          >
+            {t.seeCV}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <p
+        class="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-500 dark:text-gray-500"
+      >
+        {t.spokenLanguages}
+      </p>
+      <ul class="flex flex-col gap-1.5 text-[14px]">
+        {
+          spokenLanguages.map((lang) => (
+            <li class="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+              <Icon
+                name={lang.icon}
+                class="text-[14px]"
+                aria-hidden="true"
+              />
+              <span>{t.languageNames[lang.nameKey]}</span>
+              <span class="text-gray-400 dark:text-gray-600 text-[12px]">
+                {lang.level}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="mt-12" set:html={t.footerContent}></div>
+</footer>
+
+<script is:inline>
+  (function () {
+    function updateCv() {
+      var dark = document.documentElement.classList.contains("dark");
+      document.querySelectorAll(".cv-light").forEach(function (el) {
+        el.setAttribute("href", dark ? "/cv/dark.pdf" : "/cv/light.pdf");
+      });
+    }
+    updateCv();
+    document.addEventListener("theme-change", updateCv);
+    new MutationObserver(updateCv).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  })();
+</script>

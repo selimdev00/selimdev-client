@@ -12,17 +12,16 @@ export interface Translations {
   };
   about: string;
   experiences: string;
-  projects: string;
   lightMode: string;
   darkMode: string;
-  github: string;
-  preview: string;
   contactMeNow: string;
   primaryCta: string;
-  secondaryCta: string;
+  githubCta: string;
+  available: string;
+  skipToContent: string;
+  backToTop: string;
   footerContent: string;
   aboutContent: string;
-  projectItems: Record<string, { name: string; description: string }>;
   experienceItems: Record<
     string,
     {
@@ -32,17 +31,20 @@ export interface Translations {
       description: string;
     }
   >;
-  education: string;
-  educationItems: Record<
-    string,
-    { institution: string; field: string; degree: string }
-  >;
   now: string;
   CV: string;
   seeCV: string;
   print: string;
   yearsExperience: string;
+  proof: {
+    yearsLabel: string;
+    projectsValue: string;
+    projectsLabel: string;
+    sinceValue: string;
+    sinceLabel: string;
+  };
   technologies: string;
+  aiWorkflowLabel: string;
   spokenLanguages: string;
   languageNames: { russian: string; english: string; turkmen: string };
 }

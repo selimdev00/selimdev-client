@@ -5,7 +5,7 @@ const en: Translations = {
     title: "Selim Ataballyev",
     subtitle: "Full-Stack Engineer",
     description:
-      "I ship production apps in Vue, Nuxt, Next, React Native, and Node for startups, agencies, and product teams.",
+      "I take web and mobile products from blank Figma to production - frontend, backend, schema, deploy. Working remotely with startups, agencies, and product teams across EU, US, and CIS.",
   },
   meta: {
     title:
@@ -16,47 +16,34 @@ const en: Translations = {
     keywords:
       "Selim Ataballyev, full-stack engineer, full-stack developer, Vue, Nuxt, Next.js, React Native, Node.js, Nest.js, freelance, contract, senior developer",
   },
-  about: "About me",
-  experiences: "Experiences",
-  projects: "Projects",
-  lightMode: "Light mode",
-  darkMode: "Dark mode",
-  github: "Github",
-  preview: "Preview",
-  contactMeNow: "Contact me",
-  primaryCta: "Message me on Telegram",
-  secondaryCta: "See projects on GitHub",
+  about: "About",
+  experiences: "Work",
+  lightMode: "Light",
+  darkMode: "Dark",
+  contactMeNow: "Contact",
+  primaryCta: "Message on Telegram",
+  githubCta: "GitHub",
+  available: "Available for senior contract or full-time",
+  skipToContent: "Skip to content",
+  backToTop: "Back to top",
   footerContent: `
-    <p class="text-[12px] md:py-15 py-10 dark:text-gray-500 text-gray-500">
+    <p class="text-[12px] dark:text-gray-500 text-gray-500">
       Hand-coded in <span class="highlight">Astro</span> and <span class="highlight">Tailwind</span>. The site is the resume.
     </p>
   `,
   aboutContent: `
     <p>
-      I work end-to-end on web and mobile products with small senior teams. Most projects start as a blank Figma file and ship to production: framework choice, database schema, API contract, deployment, and the long tail of polish. <span class="highlight">Vue 2/3, Nuxt 2/3, Next.js, and React Native</span> on the front; <span class="highlight">Node, Nest, Postgres, and Mongo</span> on the back; <span class="highlight">Docker, Nginx, and pm2</span> for the deploy.
+      I work end-to-end on web and mobile products with small senior teams. Most projects start as a blank Figma file and ship to production: framework choice, database schema, API contract, deployment, and the long tail of polish. <span class="highlight">Vue 2/3, Nuxt 2/3, Next.js, and React Native</span> on the front; <span class="highlight">Node, Nest, Postgres, and Redis</span> on the back; <span class="highlight">Docker, Cloudflare, Nginx, and pm2</span> for the deploy.
+    </p>
+
+    <p>
+      Day-to-day I pair <span class="highlight">Claude Code</span> and <span class="highlight">Cursor</span> with the <span class="highlight">Anthropic and OpenAI SDKs</span>, and treat any AI output as a junior dev's draft - reviewed, tested, and cleaned before it reaches main. The model writes faster; the judgment about what to ship is still mine.
     </p>
 
     <p>
       I prefer projects with a short brief and a high bar. I read carefully, push back when something is wrong, and write code the next engineer can change without rereading mine. Most useful in the first 90 days of a product, when scope is still negotiable.
     </p>
   `,
-  projectItems: {
-    legoGen: {
-      name: "Lego Character Generator",
-      description:
-        "Introducing my app that allows you to create your own unique avatar by customizing various elements such as hairstyles, eyebrows, facial features, clothing, and more!  User-friendly interface of app makes it easy for anyone to design their own avatar in minutes  (created within 24 hours as part of a test task)",
-    },
-    pokemon: {
-      name: "Pokemon Website (React)",
-      description:
-        "Website-catalog with pokemons (Public Pokemon API), written in React + Redux (pet project)",
-    },
-    fantagolia: {
-      name: "Entertainment website (Nuxt & Design concept)",
-      description:
-        "Elevate your web projects with this HTML, CSS, and JavaScript entertainment website design. Responsive, feature-rich, and seamlessly interactive 🚀🌐",
-    },
-  },
   experienceItems: {
     ideal: {
       position: "Full Stack Developer",
@@ -94,20 +81,20 @@ const en: Translations = {
         "As a Full Stack Developer at 3205.team in Moscow, I built and maintained client-side web applications, handled server-side development and maintenance, refactored code, shipped functionality and program logic to spec, and built interactive UI from architectural decisions.",
     },
   },
-  education: "Education",
-  educationItems: {
-    school4: {
-      institution: "School №4",
-      field: "Computer Science",
-      degree: "Secondary Education",
-    },
-  },
   now: "Now",
   CV: "CV",
   seeCV: "See CV",
   print: "Print",
-  yearsExperience: "years of experience",
-  technologies: "Technologies",
+  yearsExperience: "years building",
+  proof: {
+    yearsLabel: "years building",
+    projectsValue: "20+",
+    projectsLabel: "projects shipped",
+    sinceValue: "2018",
+    sinceLabel: "commercial since",
+  },
+  technologies: "Stack",
+  aiWorkflowLabel: "AI",
   spokenLanguages: "Languages",
   languageNames: {
     russian: "Russian",
