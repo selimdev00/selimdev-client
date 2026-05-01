@@ -17,7 +17,7 @@ const { t, locale } = Astro.props;
 >
   <LangSwitcher current={locale} />
   <ThemeToggle
-    client:load
+    client:idle
     lightLabel={t.lightMode}
     darkLabel={t.darkMode}
   />

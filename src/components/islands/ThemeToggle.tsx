@@ -85,7 +85,7 @@ export default function ThemeToggle({ lightLabel, darkLabel }: Props) {
       onClick={toggle}
       aria-pressed={checked}
       aria-label={label}
-      class="inline-flex h-7 w-7 items-center justify-center rounded-md border border-gray-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/60 backdrop-blur-sm text-gray-600 dark:text-gray-300 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300"
+      class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-950 text-gray-600 dark:text-gray-300 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300"
     >
       {checked ? (
         <svg

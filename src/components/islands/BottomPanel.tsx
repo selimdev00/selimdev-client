@@ -25,7 +25,7 @@ export default function BottomPanel({ topLabel }: Props) {
       type="button"
       onClick={goTop}
       aria-label={topLabel}
-      class="fixed bottom-5 right-5 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/80 backdrop-blur-sm text-gray-700 dark:text-gray-200 shadow-sm hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300 no-print"
+      class="fixed bottom-5 right-5 z-40 inline-flex h-11 w-11 items-center justify-center rounded-full border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-950 text-gray-700 dark:text-gray-200 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300 no-print"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

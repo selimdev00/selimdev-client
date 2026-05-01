@@ -8,7 +8,6 @@ export interface Translations {
     title: string;
     description: string;
     author: string;
-    keywords: string;
   };
   about: string;
   experiences: string;
@@ -36,15 +35,11 @@ export interface Translations {
   seeCV: string;
   print: string;
   yearsExperience: string;
-  proof: {
-    yearsLabel: string;
-    projectsValue: string;
-    projectsLabel: string;
-    sinceValue: string;
-    sinceLabel: string;
-  };
   technologies: string;
   aiWorkflowLabel: string;
+  techLead: string;
+  techGroups: { frontend: string; backend: string; infra: string; ai: string };
+  techMeta: { frontend: string; backend: string; infra: string; ai: string };
   spokenLanguages: string;
   languageNames: { russian: string; english: string; turkmen: string };
 }

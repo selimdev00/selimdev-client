@@ -116,9 +116,5 @@ const { t, class: className = "" } = Astro.props;
     }
     updateCv();
     document.addEventListener("theme-change", updateCv);
-    new MutationObserver(updateCv).observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
   })();
 </script>

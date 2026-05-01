@@ -2,7 +2,6 @@
 import { Icon } from "astro-icon/components";
 import { site, totalExperienceYears } from "../../lib/site";
 import type { Translations } from "../../i18n/types";
-import ProofStrip from "./ProofStrip.tsx";
 
 interface Props {
   t: Translations;
@@ -24,13 +23,9 @@ const years = totalExperienceYears();
       class="rounded-full w-14 h-14 ring-1 ring-sky-600/30 dark:ring-sky-300/30"
     />
     <span class="flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.12em] text-sky-700 dark:text-sky-200">
-      <span class="relative flex h-2 w-2">
-        <span
-          class="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-500 opacity-60"
-          aria-hidden="true"></span>
-        <span
-          class="relative inline-flex h-2 w-2 rounded-full bg-sky-600 dark:bg-sky-300"></span>
-      </span>
+      <span
+        class="inline-block h-1.5 w-1.5 rounded-full bg-sky-600 dark:bg-sky-300"
+        aria-hidden="true"></span>
       {t.available}
     </span>
   </div>
@@ -85,17 +80,4 @@ const years = totalExperienceYears();
       />
     </a>
   </div>
-
-  <ProofStrip
-    client:visible
-    items={[
-      { value: `${years}+`, label: t.proof.yearsLabel },
-      { value: t.proof.projectsValue, label: t.proof.projectsLabel },
-      {
-        value: t.proof.sinceValue,
-        label: t.proof.sinceLabel,
-        animate: false,
-      },
-    ]}
-  />
 </section>

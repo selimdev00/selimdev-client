@@ -8,13 +8,10 @@ const en: Translations = {
       "I take web and mobile products from blank Figma to production - frontend, backend, schema, deploy. Working remotely with startups, agencies, and product teams across EU, US, and CIS.",
   },
   meta: {
-    title:
-      "Selim Ataballyev - Full-Stack Engineer (Vue, Nuxt, Node, React Native)",
+    title: "Selim Ataballyev - Full-Stack Engineer",
     description:
       "Full-stack engineer with 7+ years building production apps in Vue, Nuxt, Next.js, React Native, and Node. Available for senior contract and full-time roles. Message on Telegram.",
     author: "Selim Ataballyev",
-    keywords:
-      "Selim Ataballyev, full-stack engineer, full-stack developer, Vue, Nuxt, Next.js, React Native, Node.js, Nest.js, freelance, contract, senior developer",
   },
   about: "About",
   experiences: "Work",
@@ -86,15 +83,22 @@ const en: Translations = {
   seeCV: "See CV",
   print: "Print",
   yearsExperience: "years building",
-  proof: {
-    yearsLabel: "years building",
-    projectsValue: "20+",
-    projectsLabel: "projects shipped",
-    sinceValue: "2018",
-    sinceLabel: "commercial since",
-  },
   technologies: "Stack",
   aiWorkflowLabel: "AI",
+  techLead:
+    "Eight years building product on TypeScript: Vue and Nuxt up front, Node and Nest behind, Postgres at the bottom. Shipping with an AI-augmented workflow.",
+  techGroups: {
+    frontend: "Frontend",
+    backend: "Backend",
+    infra: "Infra",
+    ai: "AI workflow",
+  },
+  techMeta: {
+    frontend: "8+ yrs in production",
+    backend: "Production APIs since 2019",
+    infra: "Self-hosted to managed",
+    ai: "Daily, since 2024",
+  },
   spokenLanguages: "Languages",
   languageNames: {
     russian: "Russian",

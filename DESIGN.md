@@ -13,12 +13,12 @@ colors:
   surface-deeper: "#1e293b"
   paper-white: "#ffffff"
   paper-night: "#020617"
-  accent-day: "#0284c7"
-  accent-day-soft: "#0ea5e9"
+  accent-day: "#0369a1"
+  accent-day-soft: "#0284c7"
   accent-day-quiet: "#38bdf8"
   accent-day-deep: "#075985"
-  accent-night: "#bae6fd"
-  accent-night-soft: "#7dd3fc"
+  accent-night: "#7dd3fc"
+  accent-night-soft: "#bae6fd"
   accent-night-line: "#38bdf8"
   border-night: "#ffffff"
   divider-day: "#374151"
@@ -102,7 +102,7 @@ components:
 
 The site reads like a senior engineer's commit message: short, technical, confident, and zero performative language. Density is editorial - close to print resume rhythm rather than landing-page grandstanding. There is no hero illustration, no animated word swap, no "I build delightful experiences" pitch. The avatar, the name, the years of experience, and the next-step links sit one above the other in a quiet column. The reader scans, not reads.
 
-Atmosphere is daylight-clear at default (white paper, ink text, a single sky accent) and slate-night at dark mode (`#020617` floor, sky-200 accent). Both modes share the same restraint - the only thing that changes is the room's light, never the furniture. A diffused sky gradient follows the cursor on desktop as the one allowed flourish; it never auto-animates and never appears on touch.
+Atmosphere is daylight-clear at default (white paper, ink text, a single sky accent) and slate-night at dark mode (`#020617` floor, sky-300 accent). Both modes share the same restraint - the only thing that changes is the room's light, never the furniture. A diffused sky gradient follows the cursor on desktop as the one allowed flourish; it never auto-animates and never appears on touch.
 
 The system explicitly rejects the conventions PRODUCT.md names: passionate-dev hero copy, neon-on-black influencer aesthetic, dribbble pastel illustration, personal-brand-coach CTAs, and "modern minimal" that is empty rather than precise.
 
@@ -118,12 +118,13 @@ The system explicitly rejects the conventions PRODUCT.md names: passionate-dev h
 A single sky-blue hue family carries every accent across both themes. Neutrals are warm-cool grays in the day theme and Tailwind `slate` in the night theme. Saturated color is rationed - chips, links, scrollbars, and the focus indicator share the same accent so the eye learns one signal.
 
 ### Primary
-- **Sky Day** (`#0284c7`): The daylight accent. Used for primary interactive text, scrollbar thumb, and the accent number for years of experience.
-- **Sky Night** (`#bae6fd`): The dark-mode accent. Replaces Sky Day verbatim - link, accent number, hover lift.
+- **Sky Day** (`#0369a1`, Tailwind `sky-700`): The daylight accent. Used for primary interactive text, link copy, the accent number for years of experience, and the primary CTA fill. Chosen one step darker than `sky-600` so 14px body links clear WCAG AA on white without bumping size or weight.
+- **Sky Night** (`#7dd3fc`, Tailwind `sky-300`): The dark-mode accent. Replaces Sky Day verbatim - link, accent number, hover lift. Bright enough on `#020617` to read at 14px without losing the cool register.
 
 ### Secondary
-- **Sky Line** (`#38bdf8`): A single line-weight color for tag chip borders, the experience-timeline diamond, and the floating-button outline. Lives at the accent-day-quiet token.
-- **Sky Deep** (`#075985`): Reserved for hovered link/title states in day mode where Sky Day reads too soft on a tinted background.
+- **Sky Line** (`#38bdf8`, Tailwind `sky-400`): A single line-weight color for the experience-rail line, focus-visible outline, and decorative dividers. Lives at the accent-day-quiet token.
+- **Sky Soft Day** (`#0284c7`, Tailwind `sky-600`): Reserved for the scrollbar thumb and the cursor-gradient radial source - places where the accent can run a step lighter without losing legibility.
+- **Sky Soft Night** (`#bae6fd`, Tailwind `sky-200`): Reserved for hovered link/title states in night mode where Sky Night reads too quiet against a tinted card.
 
 ### Neutral
 - **Paper White** (`#ffffff`): Day-mode background.
@@ -187,12 +188,13 @@ No other element in the system carries a shadow. Floating action buttons, modals
 
 ### Buttons
 
-The system has almost no buttons. The two it owns:
+The system rations buttons. It owns three shapes:
 
-- **Floating circle (Go-to-top, Menu toggle)**: `56x56` circle, `1px` `#38bdf8` border, fill of `#ffffff` (day) or `#020617` (night). Active state fills with `#38bdf8`. Used in the bottom-right `BottomPanel` only.
-- **Inline link button (Print)**: A bare `<button>` styled as a link - shares the link-highlight class and behaves as text.
+- **Primary CTA (Telegram)**: rectangular pill (`rounded-md` 8px), Sky Day fill in light mode, Sky Night fill in dark mode, white / slate-950 text. Used exactly twice on the page - hero and footer - so the next-step action is unmissable without becoming decoration. Hover deepens the fill one step (Sky Soft / Sky Soft Night).
+- **Back-to-top (Go-to-top)**: `44x44` circle, `1px` neutral border, fill of `#ffffff` (day) or `#020617` (night), no shadow, no backdrop-blur. Lives in the bottom-right `BottomPanel`. Borders carry the floater - frosted glass is forbidden here as everywhere.
+- **TopBar controls (Theme, Language)**: `36x36` square (theme) / `~38px` tall pill (lang), `1px` neutral border, solid fill (no backdrop-blur), single-accent active state for Lang.
 
-There is no primary CTA button anywhere. Every action that would normally be a button is a link instead - email, Telegram, GitHub, CV download, language switch, theme toggle. This is intentional and follows the "calm precision over decoration" principle.
+Every other action is a plain link - email, GitHub, CV download, social icons. Two CTAs per page is the budget. Adding a third on the same surface is a failure of nerve.
 
 ### Chips (Tag Pills)
 
@@ -217,25 +219,19 @@ Used on every project and experience card to enumerate stack. Density limit: rou
 
 ### Inputs
 
-The system has one input - the language `Select` in the profile sidebar. Style:
-- Border: `1px solid` neutral (gray-500 day / white night).
-- Radius: `12px`.
-- Padding: `8px 16px`.
-- Focus: native browser focus only. No custom ring.
-
-Forms do not exist on this site by design.
+Forms do not exist on this site by design. There is no input-styling vocabulary to maintain.
 
 ### Navigation
 
-The profile sidebar on desktop functions as the primary nav (avatar > info > socials > languages > technologies > theme + locale). On mobile, it collapses into a full-screen overlay launched from the bottom-right floating button. The transition is a `TransitionFade` (opacity-only).
+The TopBar in the upper-right is the only persistent nav and carries exactly two controls: language switcher (EN/RU) and theme toggle. There is no in-page anchor nav - the editorial single-column layout is short enough to scan, and the site treats "scroll to next section" as the default interaction. The bottom-right `BottomPanel` shows a back-to-top control once the visitor has scrolled past 600px.
 
-### Signature Component: Experience Timeline Marker
+### Signature Component: Experience Rail
 
-A `20x20` square rotated `45deg` (a diamond), `1px` Sky Line border, sitting in the gutter to the left of each experience card. On hover, it rotates to `90deg` (a square). A `1px` vertical line connects the marker to the next item. Hidden below the `md` breakpoint. This is the only timeline-style element in the system and the only piece that uses geometric rotation.
+A `1px` vertical line at `var(--rail-line)` runs the full height of the experience list at 4px from the left of each card on desktop. Each item carries a `9x9` accent-tinted dot at 25% opacity that scales from `0.7` to `1.0` and goes opaque on hover or focus-within. Hidden below the `md` breakpoint, where items become a flat stack. This is the only timeline-style element in the system.
 
 ### Signature Component: Cursor Gradient
 
-A `350x350` blurred (`110px`) layer behind the page content, following the cursor with a spring (`@vueuse/motion`). Background: a horizontal gradient from `rgba(0, 103, 220, 0.2)` to `rgba(54, 196, 228, 0.2)`. Hidden below `md`. `pointer-events: none`. Z-index sits between the page background and content. Must respect `prefers-reduced-motion` (currently does not - flagged for harden pass).
+A `480x480` blurred (`140px`) layer behind the page content, following the cursor with a custom spring lerp (`stiffness: 0.06`). Background: two stacked radial gradients in sky tones, day-mode `rgba(2, 132, 199, 0.18)` + `rgba(56, 189, 248, 0.14)`, night-mode `rgba(56, 189, 248, 0.16)` + `rgba(186, 230, 253, 0.10)`. Hidden below `md`. `pointer-events: none`. Z-index `0` (between page background and content). Respects `prefers-reduced-motion` by short-circuiting the rAF loop entirely - on those clients the layer never mounts and never paints.
 
 ## 6. Do's and Don'ts
 

@@ -8,13 +8,10 @@ const ru: Translations = {
       "Веду web- и mobile-продукты от пустого Figma до прода - фронт, бэк, схема БД, деплой. Удалённо со стартапами, агентствами и продуктовыми командами в EU, US и СНГ.",
   },
   meta: {
-    title:
-      "Селим Атабаллыев - Full-Stack инженер (Vue, Nuxt, Node, React Native)",
+    title: "Селим Атабаллыев - Full-Stack инженер",
     description:
       "Full-stack инженер, 7+ лет строю production-приложения на Vue, Nuxt, Next.js, React Native и Node. Доступен для senior-контрактов и full-time. Напиши в Telegram.",
     author: "Селим Атабаллыев",
-    keywords:
-      "Селим Атабаллыев, full-stack инженер, full-stack разработчик, Vue, Nuxt, Next.js, React Native, Node.js, Nest.js, фриланс, контракт, senior разработчик",
   },
   about: "О себе",
   experiences: "Работа",
@@ -86,15 +83,22 @@ const ru: Translations = {
   seeCV: "Посмотреть резюме",
   print: "Печать",
   yearsExperience: "лет опыта",
-  proof: {
-    yearsLabel: "лет в коде",
-    projectsValue: "20+",
-    projectsLabel: "проектов в проде",
-    sinceValue: "2018",
-    sinceLabel: "коммерческий опыт с",
-  },
   technologies: "Стек",
   aiWorkflowLabel: "AI",
+  techLead:
+    "Восемь лет строю продукты на TypeScript: Vue и Nuxt спереди, Node и Nest сзади, Postgres в основе. Доставляю с AI-augmented workflow.",
+  techGroups: {
+    frontend: "Frontend",
+    backend: "Backend",
+    infra: "Инфра",
+    ai: "AI-стек",
+  },
+  techMeta: {
+    frontend: "8+ лет в продакшене",
+    backend: "API в проде с 2019",
+    infra: "От self-hosted до managed",
+    ai: "Ежедневно, с 2024",
+  },
   spokenLanguages: "Языки",
   languageNames: {
     russian: "Русский",
