@@ -86,16 +86,18 @@ const ru: Translations = {
   technologies: "Стек",
   aiWorkflowLabel: "AI",
   techLead:
-    "Восемь лет строю продукты на TypeScript: Vue и Nuxt спереди, Node и Nest сзади, Postgres в основе. Доставляю с AI-augmented workflow.",
+    "Восемь лет строю продукты на TypeScript: Vue и Nuxt спереди, Node и PHP сзади, Postgres и Redis в основе. Доставляю за Cloudflare и Nginx, с AI-augmented workflow.",
   techGroups: {
     frontend: "Frontend",
     backend: "Backend",
+    data: "Данные",
     infra: "Инфра",
     ai: "AI-стек",
   },
   techMeta: {
-    frontend: "8+ лет в продакшене",
-    backend: "API в проде с 2019",
+    frontend: "В 50+ проектах",
+    backend: "Node и PHP API в проде",
+    data: "Postgres и Redis ежедневно",
     infra: "От self-hosted до managed",
     ai: "Ежедневно, с 2024",
   },

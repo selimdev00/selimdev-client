@@ -38,8 +38,20 @@ export interface Translations {
   technologies: string;
   aiWorkflowLabel: string;
   techLead: string;
-  techGroups: { frontend: string; backend: string; infra: string; ai: string };
-  techMeta: { frontend: string; backend: string; infra: string; ai: string };
+  techGroups: {
+    frontend: string;
+    backend: string;
+    data: string;
+    infra: string;
+    ai: string;
+  };
+  techMeta: {
+    frontend: string;
+    backend: string;
+    data: string;
+    infra: string;
+    ai: string;
+  };
   spokenLanguages: string;
   languageNames: { russian: string; english: string; turkmen: string };
 }

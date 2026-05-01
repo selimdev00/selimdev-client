@@ -86,16 +86,18 @@ const en: Translations = {
   technologies: "Stack",
   aiWorkflowLabel: "AI",
   techLead:
-    "Eight years building product on TypeScript: Vue and Nuxt up front, Node and Nest behind, Postgres at the bottom. Shipping with an AI-augmented workflow.",
+    "Eight years building product on TypeScript: Vue and Nuxt up front, Node and PHP behind, Postgres and Redis at the bottom. Shipping behind Cloudflare and Nginx, with an AI-augmented workflow.",
   techGroups: {
     frontend: "Frontend",
     backend: "Backend",
+    data: "Data",
     infra: "Infra",
     ai: "AI workflow",
   },
   techMeta: {
-    frontend: "8+ yrs in production",
-    backend: "Production APIs since 2019",
+    frontend: "Used across 50+ projects",
+    backend: "Node and PHP APIs in production",
+    data: "Postgres + Redis daily",
     infra: "Self-hosted to managed",
     ai: "Daily, since 2024",
   },

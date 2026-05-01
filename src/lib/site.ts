@@ -33,7 +33,7 @@ export function totalExperienceYears(reference: Date = new Date()): number {
 }
 
 export type TechItem = { name: string; icon: string };
-export type TechGroupKey = "frontend" | "backend" | "infra" | "ai";
+export type TechGroupKey = "frontend" | "backend" | "data" | "infra" | "ai";
 export type TechGroup = {
   key: TechGroupKey;
   items: readonly TechItem[];
@@ -47,7 +47,9 @@ export const TECH_GROUPS: readonly TechGroup[] = [
       { name: "Vue", icon: "simple-icons:vuedotjs" },
       { name: "Nuxt", icon: "simple-icons:nuxt" },
       { name: "Next.js", icon: "simple-icons:nextdotjs" },
-      { name: "React Native", icon: "simple-icons:react" },
+      { name: "React", icon: "simple-icons:react" },
+      { name: "Astro", icon: "simple-icons:astro" },
+      { name: "Preact", icon: "simple-icons:preact" },
       { name: "Tailwind", icon: "simple-icons:tailwindcss" },
     ],
   },
@@ -55,9 +57,19 @@ export const TECH_GROUPS: readonly TechGroup[] = [
     key: "backend",
     items: [
       { name: "Node", icon: "simple-icons:nodedotjs" },
+      { name: "Express", icon: "simple-icons:express" },
       { name: "Nest", icon: "simple-icons:nestjs" },
+      { name: "Hono", icon: "simple-icons:hono" },
+      { name: "Laravel", icon: "simple-icons:laravel" },
+    ],
+  },
+  {
+    key: "data",
+    items: [
       { name: "Postgres", icon: "simple-icons:postgresql" },
       { name: "Redis", icon: "simple-icons:redis" },
+      { name: "Prisma", icon: "simple-icons:prisma" },
+      { name: "Drizzle", icon: "simple-icons:drizzle" },
     ],
   },
   {
@@ -66,15 +78,15 @@ export const TECH_GROUPS: readonly TechGroup[] = [
       { name: "Docker", icon: "simple-icons:docker" },
       { name: "Cloudflare", icon: "simple-icons:cloudflare" },
       { name: "Nginx", icon: "simple-icons:nginx" },
+      { name: "GitHub Actions", icon: "simple-icons:githubactions" },
     ],
   },
   {
     key: "ai",
     items: [
       { name: "Claude Code", icon: "simple-icons:claude" },
-      { name: "Anthropic SDK", icon: "simple-icons:anthropic" },
-      { name: "MCP", icon: "simple-icons:modelcontextprotocol" },
       { name: "Cursor", icon: "simple-icons:cursor" },
+      { name: "MCP", icon: "simple-icons:modelcontextprotocol" },
       { name: "OpenAI SDK", icon: "simple-icons:openai" },
     ],
   },
