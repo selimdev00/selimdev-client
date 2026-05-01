@@ -1,0 +1,432 @@
+---
+import { experiences } from "../../data/experiences";
+import { spokenLanguages } from "../../data/spoken-languages";
+import { TECH_GROUPS } from "../../lib/site";
+import { site } from "../../lib/site";
+import type { Translations } from "../../i18n/types";
+import type { Locale } from "../../lib/site";
+
+interface Props {
+  t: Translations;
+  locale: Locale;
+  theme: "light" | "dark";
+}
+
+const { t, locale, theme } = Astro.props;
+
+const cvSummaries: Record<
+  Locale,
+  Record<string, string>
+> = {
+  en: {
+    ideal:
+      "First commercial role - shipped Nuxt + Node web apps, lifted client sales up to 200%.",
+    geekspace:
+      "Built the in-house CRM behind every client engagement; hired and mentored 25+ engineers.",
+    freelance:
+      "End-to-end web and mobile delivery for startups; teams of 5-35, scope from MVP to scale.",
+    sotnikov:
+      "Owned client-side delivery and refactors across the studio's web product portfolio.",
+    team3205:
+      "Full-stack delivery across web apps - server, client, refactors, interactive UI to spec.",
+  },
+  ru: {
+    ideal:
+      "Первая коммерческая роль - Nuxt + Node, прирост продаж клиентов до 200%.",
+    geekspace:
+      "Построил внутренний CRM, через который шли все клиенты; нанял и менторил 25+ инженеров.",
+    freelance:
+      "End-to-end web и mobile для стартапов, команды 5-35, от MVP до масштабирования.",
+    sotnikov:
+      "Вёл клиентскую часть и рефакторинги по портфелю продуктов студии.",
+    team3205:
+      "Full-stack доставка web-приложений - сервер, клиент, рефакторинги, интерактивный UI по ТЗ.",
+  },
+};
+
+const monthFormatter = new Intl.DateTimeFormat(
+  locale === "ru" ? "ru-RU" : "en-US",
+  { month: "short", year: "numeric" },
+);
+
+function formatDate(value: string): string {
+  if (value === "now") return t.now;
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return value;
+  const formatted = monthFormatter
+    .format(d)
+    .replace(/\sг\.?$/i, "")
+    .replace(/\.$/, "");
+  return formatted.charAt(0).toUpperCase() + formatted.slice(1);
+}
+
+const localizeLevel = (level: string): string => {
+  if (locale !== "ru") return level;
+  if (/^native$/i.test(level)) return "Родной";
+  return level;
+};
+
+const today = new Date();
+const sortedExperiences = [...experiences].sort((a, b) => {
+  const aEnd = a.to === "now" ? today : new Date(a.to);
+  const bEnd = b.to === "now" ? today : new Date(b.to);
+  return bEnd.getTime() - aEnd.getTime();
+});
+
+const contactLine = [
+  { label: site.ownerEmail, href: `mailto:${site.ownerEmail}` },
+  { label: "t.me/selimdevv", href: site.telegramUrl },
+  { label: "github.com/selimdev00", href: site.githubUrl },
+  { label: "selim.services", href: site.url },
+];
+
+const isDark = theme === "dark";
+---
+
+<article class:list={["cv", { "cv--dark": isDark, "cv--light": !isDark }]}>
+  <header class="cv__header">
+    <div class="cv__heading">
+      <h1 class="cv__name">{t.website.title}</h1>
+      <p class="cv__title">{t.website.subtitle}</p>
+    </div>
+    <ul class="cv__contact">
+      {
+        contactLine.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </header>
+
+  <section class="cv__section">
+    <p class="cv__pitch">{t.website.description}</p>
+  </section>
+
+  <section class="cv__section">
+    <h2 class="cv__section-label">{t.technologies}</h2>
+    <ul class="cv__stack">
+      {
+        TECH_GROUPS.map((group) => (
+          <li class="cv__stack-row">
+            <div class="cv__stack-head">
+              <span class="cv__stack-label">{t.techGroups[group.key]}</span>
+              <span class="cv__stack-meta">{t.techMeta[group.key]}</span>
+            </div>
+            <p class="cv__stack-items">
+              {group.items.map((tech) => tech.name).join(", ")}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="cv__section">
+    <h2 class="cv__section-label">{t.experiences}</h2>
+    <ul class="cv__experience">
+      {
+        sortedExperiences.map((exp) => {
+          const item = t.experienceItems[exp.positionKey];
+          if (!item) return null;
+          return (
+            <li class="cv__experience-item">
+              <div class="cv__experience-head">
+                <div class="cv__experience-headline">
+                  <span class="cv__experience-place">{item.place}</span>
+                  <span class="cv__experience-divider" aria-hidden="true">
+                    /
+                  </span>
+                  <span class="cv__experience-position">{item.position}</span>
+                </div>
+                <span class="cv__experience-dates">
+                  {formatDate(exp.from)} - {formatDate(exp.to)}
+                </span>
+              </div>
+              <p class="cv__experience-description">
+                {cvSummaries[locale][exp.positionKey] ?? item.description}
+              </p>
+              <p class="cv__experience-tags">{exp.tags.join(" · ")}</p>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+
+  <section class="cv__section cv__section--languages">
+    <h2 class="cv__section-label">{t.spokenLanguages}</h2>
+    <p class="cv__languages">
+      {
+        spokenLanguages
+          .map(
+            (lang) =>
+              `${t.languageNames[lang.nameKey]} (${localizeLevel(lang.level)})`,
+          )
+          .join("  ·  ")
+      }
+    </p>
+  </section>
+</article>
+
+<style>
+  .cv {
+    --bg: #ffffff;
+    --fg: #1f2937;
+    --muted: #6b7280;
+    --quiet: #9ca3af;
+    --accent: #0369a1;
+    --divider: #e5e7eb;
+
+    background: var(--bg);
+    color: var(--fg);
+    font-family:
+      "Inter Variable",
+      "Inter",
+      system-ui,
+      sans-serif;
+    font-feature-settings:
+      "ss01" on,
+      "cv11" on;
+    font-size: 9pt;
+    line-height: 1.4;
+    padding: 1.2cm 1.4cm;
+    max-width: 18.4cm;
+    margin: 0 auto;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .cv--dark {
+    --bg: #020617;
+    --fg: #ffffff;
+    --muted: #d1d5db;
+    --quiet: #9ca3af;
+    --accent: #7dd3fc;
+    --divider: #1e293b;
+  }
+
+  .cv__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-bottom: 8pt;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .cv__heading {
+    display: flex;
+    flex-direction: column;
+    gap: 1pt;
+  }
+
+  .cv__name {
+    font-size: 16pt;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .cv__title {
+    font-size: 10pt;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .cv__contact {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1pt;
+    text-align: right;
+    font-size: 8.5pt;
+    color: var(--muted);
+  }
+
+  .cv__contact a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .cv__section {
+    margin-top: 10pt;
+  }
+
+  .cv__section-label {
+    font-size: 7.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    margin: 0 0 4pt;
+  }
+
+  .cv__pitch {
+    font-size: 9.5pt;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 75ch;
+  }
+
+  .cv__stack {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4pt;
+  }
+
+  .cv__stack-row {
+    display: grid;
+    grid-template-columns: 4.4cm 1fr;
+    gap: 0.5cm;
+    align-items: baseline;
+  }
+
+  .cv__stack-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cv__stack-label {
+    font-size: 9pt;
+    font-weight: 600;
+    color: var(--fg);
+  }
+
+  .cv__stack-meta {
+    font-size: 7.5pt;
+    color: var(--quiet);
+  }
+
+  .cv__stack-items {
+    margin: 0;
+    font-size: 9pt;
+    color: var(--muted);
+  }
+
+  .cv__experience {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6pt;
+  }
+
+  .cv__experience-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.4cm;
+  }
+
+  .cv__experience-headline {
+    display: flex;
+    align-items: baseline;
+    gap: 5pt;
+    flex-wrap: wrap;
+  }
+
+  .cv__experience-place {
+    font-size: 9.5pt;
+    font-weight: 600;
+    color: var(--fg);
+  }
+
+  .cv__experience-divider {
+    color: var(--quiet);
+    font-size: 8pt;
+  }
+
+  .cv__experience-position {
+    font-size: 9pt;
+    color: var(--muted);
+  }
+
+  .cv__experience-dates {
+    font-size: 7.5pt;
+    color: var(--quiet);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .cv__experience-description {
+    margin: 1pt 0 0;
+    font-size: 9pt;
+    color: var(--muted);
+    line-height: 1.45;
+    max-width: 80ch;
+  }
+
+  .cv__experience-tags {
+    margin: 1pt 0 0;
+    font-size: 8pt;
+    color: var(--quiet);
+    letter-spacing: 0.02em;
+  }
+
+  .cv__section--languages {
+    margin-top: 8pt;
+  }
+
+  .cv__languages {
+    margin: 0;
+    font-size: 9pt;
+    color: var(--muted);
+  }
+
+  @media print {
+    .cv,
+    .cv * {
+      background-color: transparent !important;
+    }
+
+    .cv {
+      background: var(--bg) !important;
+      color: var(--fg) !important;
+    }
+
+    .cv .cv__title,
+    .cv .cv__section-label {
+      color: var(--accent) !important;
+    }
+
+    .cv .cv__name,
+    .cv .cv__experience-place,
+    .cv .cv__stack-label {
+      color: var(--fg) !important;
+    }
+
+    .cv .cv__pitch,
+    .cv .cv__experience-description,
+    .cv .cv__stack-items,
+    .cv .cv__contact,
+    .cv .cv__languages,
+    .cv .cv__experience-position {
+      color: var(--muted) !important;
+    }
+
+    .cv .cv__stack-meta,
+    .cv .cv__experience-dates,
+    .cv .cv__experience-tags,
+    .cv .cv__experience-divider {
+      color: var(--quiet) !important;
+    }
+
+    .cv a {
+      color: inherit !important;
+      text-decoration: none !important;
+      font-weight: inherit !important;
+    }
+  }
+</style>

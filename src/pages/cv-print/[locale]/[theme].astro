@@ -1,0 +1,67 @@
+---
+import "../../../styles/global.css";
+import CvDocument from "../../../components/cv/CvDocument.astro";
+import en from "../../../i18n/en";
+import ru from "../../../i18n/ru";
+import type { Locale } from "../../../lib/site";
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  const locales: Locale[] = ["en", "ru"];
+  const themes = ["light", "dark"] as const;
+  return locales.flatMap((locale) =>
+    themes.map((theme) => ({ params: { locale, theme } })),
+  );
+}
+
+const { locale, theme } = Astro.params as {
+  locale: Locale;
+  theme: "light" | "dark";
+};
+
+const t = locale === "ru" ? ru : en;
+const htmlLang = locale === "ru" ? "ru-RU" : "en-US";
+const isDark = theme === "dark";
+const bodyClass = isDark
+  ? "cv-print-body cv-print-body--dark"
+  : "cv-print-body";
+---
+
+<!doctype html>
+<html lang={htmlLang} class:list={[isDark ? "dark" : "", "cv-print-html", { "cv-print-html--dark": isDark }]}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>{t.website.title} - {t.website.subtitle} ({theme})</title>
+  </head>
+  <body class={bodyClass}>
+    <CvDocument t={t} locale={locale} theme={theme} />
+
+    <style is:global>
+      html.cv-print-html,
+      html.cv-print-html body.cv-print-body {
+        background: #ffffff;
+        margin: 0;
+        padding: 0;
+        min-height: 100%;
+      }
+
+      html.cv-print-html--dark,
+      html.cv-print-html--dark body.cv-print-body--dark {
+        background: #020617;
+      }
+
+      html.cv-print-html,
+      html.cv-print-html body.cv-print-body {
+        height: 100%;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+    </style>
+  </body>
+</html>

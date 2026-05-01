@@ -17,6 +17,7 @@ export default defineConfig({
   integrations: [
     preact({ compat: false }),
     sitemap({
+      filter: (page) => !page.includes("/cv-print/"),
       i18n: {
         defaultLocale: "en",
         locales: {
@@ -64,6 +65,7 @@ export default defineConfig({
           "docker",
           "cloudflare",
           "nginx",
+          "pm2",
           "githubactions",
           "claude",
           "modelcontextprotocol",

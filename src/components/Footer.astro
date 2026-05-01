@@ -12,6 +12,9 @@ interface Props {
 }
 
 const { t, class: className = "" } = Astro.props;
+const isRu = Astro.currentLocale === "ru";
+const cvLightHref = isRu ? "/cv/light.ru.pdf" : "/cv/light.pdf";
+const cvDarkHref = isRu ? "/cv/dark.ru.pdf" : "/cv/dark.pdf";
 ---
 
 <footer
@@ -66,10 +69,12 @@ const { t, class: className = "" } = Astro.props;
         <li class="flex items-center gap-3 text-[13px]">
           <span class="text-gray-300 dark:text-gray-700" aria-hidden="true">·</span>
           <a
-            href="/cv/light.pdf"
+            href={cvLightHref}
+            data-cv-light={cvLightHref}
+            data-cv-dark={cvDarkHref}
             target="_blank"
             rel="noopener"
-            class="cv-light text-gray-700 dark:text-gray-300 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300"
+            class="cv-link text-gray-700 dark:text-gray-300 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300"
           >
             {t.seeCV}
           </a>
@@ -110,8 +115,11 @@ const { t, class: className = "" } = Astro.props;
   (function () {
     function updateCv() {
       var dark = document.documentElement.classList.contains("dark");
-      document.querySelectorAll(".cv-light").forEach(function (el) {
-        el.setAttribute("href", dark ? "/cv/dark.pdf" : "/cv/light.pdf");
+      document.querySelectorAll(".cv-link").forEach(function (el) {
+        var lightHref = el.getAttribute("data-cv-light");
+        var darkHref = el.getAttribute("data-cv-dark");
+        if (!lightHref || !darkHref) return;
+        el.setAttribute("href", dark ? darkHref : lightHref);
       });
     }
     updateCv();
