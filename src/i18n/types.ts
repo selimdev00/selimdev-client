@@ -55,4 +55,8 @@ export interface Translations {
   };
   spokenLanguages: string;
   languageNames: { russian: string; english: string; turkmen: string };
+  faq: {
+    label: string;
+    items: { q: string; a: string }[];
+  };
 }

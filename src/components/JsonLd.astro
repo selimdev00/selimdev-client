@@ -1,40 +1,70 @@
 ---
 import { site } from "../lib/site";
+import type { Translations } from "../i18n/types";
 
-const graph = {
+interface Props {
+  t?: Translations;
+  locale?: "en" | "ru";
+}
+
+const { t, locale = "en" } = Astro.props;
+
+const pageUrl = locale === "ru" ? `${site.url}/ru/` : `${site.url}/`;
+const inLanguage = locale === "ru" ? "ru-RU" : "en-US";
+
+const graph: Record<string, unknown>[] = [
+  {
+    "@type": "WebSite",
+    "@id": `${site.url}/#website`,
+    url: site.url,
+    name: "Selim Ataballyev Portfolio",
+    inLanguage: ["en-US", "ru-RU"],
+  },
+  {
+    "@type": "Person",
+    "@id": `${site.url}/#person`,
+    name: site.ownerName,
+    url: site.url,
+    image: `${site.url}/avatar-face.png`,
+    jobTitle: "Full-Stack Engineer",
+    email: site.ownerEmail,
+    sameAs: [
+      site.githubUrl,
+      site.stackOverflowUrl,
+      site.telegramUrl,
+      site.upworkUrl,
+    ],
+  },
+  {
+    "@type": "ProfilePage",
+    "@id": `${pageUrl}#profilepage`,
+    url: pageUrl,
+    name: "Selim Ataballyev - Full-Stack Engineer",
+    inLanguage,
+    mainEntity: { "@id": `${site.url}/#person` },
+  },
+];
+
+if (t) {
+  graph.push({
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    inLanguage,
+    mainEntity: t.faq.items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  });
+}
+
+const ld = {
   "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": `${site.url}/#website`,
-      url: site.url,
-      name: "Selim Ataballyev Portfolio",
-      inLanguage: ["en-US", "ru-RU"],
-    },
-    {
-      "@type": "Person",
-      "@id": `${site.url}/#person`,
-      name: site.ownerName,
-      url: site.url,
-      image: `${site.url}/avatar-face.png`,
-      jobTitle: "Full-Stack Engineer",
-      email: site.ownerEmail,
-      sameAs: [
-        site.githubUrl,
-        site.stackOverflowUrl,
-        site.telegramUrl,
-        site.upworkUrl,
-      ],
-    },
-    {
-      "@type": "ProfilePage",
-      "@id": `${site.url}/#profilepage`,
-      url: site.url,
-      name: "Selim Ataballyev - Full-Stack Engineer",
-      mainEntity: { "@id": `${site.url}/#person` },
-    },
-  ],
+  "@graph": graph,
 };
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(graph)} is:inline />
+<script type="application/ld+json" set:html={JSON.stringify(ld)} is:inline />

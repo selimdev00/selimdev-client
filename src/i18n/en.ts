@@ -108,6 +108,35 @@ const en: Translations = {
     english: "English",
     turkmen: "Turkmen",
   },
+  faq: {
+    label: "FAQ",
+    items: [
+      {
+        q: "Available right now?",
+        a: "Yes, taking senior contract or full-time work. Drop a line on Telegram.",
+      },
+      {
+        q: "How do you work?",
+        a: "Remote, async-first. Comfortable across EU, US, and CIS time zones. English working, Russian native.",
+      },
+      {
+        q: "What is the stack?",
+        a: "TypeScript end-to-end. Vue, Nuxt, Next.js, React, Astro on the front; Node, Nest, Hono on the back; Postgres and Redis for state; Docker, Cloudflare, and GitHub Actions in delivery.",
+      },
+      {
+        q: "Where do you fit best?",
+        a: "Greenfield products where the stack is still negotiable, or mid-project work that needs an unblocking refactor. Less interesting: untyped JavaScript-only codebases and rewrites without a product owner.",
+      },
+      {
+        q: "Rate and engagement?",
+        a: "Day rate or monthly retainer for ongoing work. Fixed scope for time-boxed pieces. Specifics over Telegram.",
+      },
+      {
+        q: "NDA and proof?",
+        a: "NDA on standard terms. Public proofs and shipping history at github.com/selimdev00 and the 100+ project audit on the blog.",
+      },
+    ],
+  },
 };
 
 export default en;

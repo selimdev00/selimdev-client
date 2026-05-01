@@ -53,10 +53,10 @@ const canonical = locale === "ru" ? `${site.url}/ru/` : `${site.url}/`;
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 
     <ThemeInit />
-    <JsonLd />
+    <JsonLd t={t} locale={locale} />
     <Analytics />
   </head>
-  <body class="dark:bg-slate-950 bg-white dark:text-white min-h-screen">
+  <body class="dark:text-white min-h-screen">
     <slot />
   </body>
 </html>
