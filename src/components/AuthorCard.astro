@@ -1,0 +1,86 @@
+---
+import { site, totalExperienceYears } from "../lib/site";
+
+interface Props {
+  variant?: "intro" | "outro";
+}
+
+const { variant = "intro" } = Astro.props;
+const years = totalExperienceYears();
+
+const bio =
+  variant === "outro"
+    ? "I take web and mobile products from blank Figma to production. Available for senior contract or full-time work."
+    : "Notes from a full-stack engineer shipping web and mobile products. Currently taking senior contract or full-time work.";
+---
+
+<aside
+  class="flex items-start gap-4 md:gap-5"
+  aria-label={variant === "outro" ? "About the author" : "About"}
+>
+  <a
+    href="/"
+    class="relative shrink-0 overflow-hidden rounded-md w-14 h-[72px] md:w-16 md:h-[84px] ring-1 ring-sky-700/15 dark:ring-sky-300/15 transition-[outline] duration-300"
+    aria-label={`Visit ${site.ownerName}'s portfolio`}
+  >
+    <picture>
+      <source type="image/webp" srcset="/avatar-face.webp" />
+      <img
+        src="/avatar-face.png"
+        alt={`${site.ownerName} portrait`}
+        loading="lazy"
+        decoding="async"
+        class="absolute inset-0 w-full h-full object-cover scale-[2.1] origin-top -translate-y-6"
+        style="object-position: 50% 0%;"
+      />
+    </picture>
+  </a>
+
+  <div class="min-w-0 flex flex-col gap-1.5">
+    <p class="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 text-[14px]">
+      <a
+        href="/"
+        class="font-semibold text-gray-900 dark:text-white hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300"
+      >
+        {site.ownerName}
+      </a>
+      <span class="text-gray-500 dark:text-gray-500">
+        Full-Stack Engineer
+        <span class="text-gray-300 dark:text-gray-700 mx-1" aria-hidden="true">·</span>
+        <span class="proof-value text-sky-700 dark:text-sky-300">{years}+</span>
+        <span> years</span>
+      </span>
+    </p>
+    <p
+      class="text-[13.5px] leading-[1.55] text-gray-600 dark:text-gray-400 max-w-[60ch]"
+    >
+      {bio}
+    </p>
+    <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px]">
+      <a
+        href={site.telegramUrl}
+        target="_blank"
+        rel="noopener"
+        class="text-gray-700 dark:text-gray-300 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300"
+      >
+        Telegram
+      </a>
+      <span class="text-gray-300 dark:text-gray-700" aria-hidden="true">·</span>
+      <a
+        href={site.githubUrl}
+        target="_blank"
+        rel="noopener"
+        class="text-gray-700 dark:text-gray-300 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300"
+      >
+        GitHub
+      </a>
+      <span class="text-gray-300 dark:text-gray-700" aria-hidden="true">·</span>
+      <a
+        href="/"
+        class="text-gray-700 dark:text-gray-300 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300"
+      >
+        selim.services
+      </a>
+    </p>
+  </div>
+</aside>
