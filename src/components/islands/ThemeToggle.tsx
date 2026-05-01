@@ -5,10 +5,6 @@ interface Props {
   darkLabel: string;
 }
 
-interface DocumentWithViewTransition extends Document {
-  startViewTransition?: (cb: () => void) => { ready: Promise<void> };
-}
-
 export default function ThemeToggle({ lightLabel, darkLabel }: Props) {
   const [isDark, setIsDark] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -41,8 +37,7 @@ export default function ThemeToggle({ lightLabel, darkLabel }: Props) {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const doc = document as DocumentWithViewTransition;
-    if (reduce || typeof doc.startViewTransition !== "function") {
+    if (reduce || typeof document.startViewTransition !== "function") {
       applyTheme(next);
       return;
     }
@@ -56,7 +51,7 @@ export default function ThemeToggle({ lightLabel, darkLabel }: Props) {
       Math.max(cy, window.innerHeight - cy),
     );
 
-    const transition = doc.startViewTransition(() => applyTheme(next));
+    const transition = document.startViewTransition(() => applyTheme(next));
 
     transition.ready.then(() => {
       document.documentElement.animate(

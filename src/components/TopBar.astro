@@ -13,11 +13,11 @@ const { t, locale } = Astro.props;
 ---
 
 <div
-  class="absolute top-4 right-4 md:top-6 md:right-8 z-20 flex items-center gap-3 no-print"
+  class="fixed top-4 right-4 md:top-6 md:right-8 z-30 flex items-center gap-3 no-print"
 >
   <LangSwitcher current={locale} />
   <ThemeToggle
-    client:idle
+    client:load
     lightLabel={t.lightMode}
     darkLabel={t.darkMode}
   />
