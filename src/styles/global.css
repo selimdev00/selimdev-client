@@ -12,9 +12,11 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #ffffff;
 }
 
 html.dark {
+  background-color: #020617;
   --rail-line: rgba(186, 230, 253, 0.22);
 }
 
@@ -27,7 +29,8 @@ body {
   font-feature-settings:
     "ss01" on,
     "cv11" on;
-  @apply overflow-x-hidden dark:bg-slate-950 bg-white;
+  background: transparent;
+  @apply overflow-x-hidden;
 }
 
 * {
@@ -165,30 +168,52 @@ body {
 }
 
 .mouse-gradient {
+  --mx: 50%;
+  --my: 35%;
   background:
     radial-gradient(
-      circle at 30% 50%,
-      rgba(2, 132, 199, 0.18) 0%,
-      rgba(2, 132, 199, 0) 60%
+      circle at var(--mx) var(--my),
+      rgba(2, 132, 199, 0.18),
+      rgba(2, 132, 199, 0) 80%
     ),
     radial-gradient(
-      circle at 70% 50%,
-      rgba(56, 189, 248, 0.14) 0%,
-      rgba(56, 189, 248, 0) 60%
+      ellipse 100% 80% at 50% 0%,
+      rgba(56, 189, 248, 0.06),
+      rgba(56, 189, 248, 0) 100%
+    ),
+    radial-gradient(
+      ellipse 100% 80% at 50% 100%,
+      rgba(2, 132, 199, 0.08),
+      rgba(2, 132, 199, 0) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(2, 132, 199, 0.04) 0%,
+      rgba(56, 189, 248, 0.04) 100%
     );
 }
 
 .dark .mouse-gradient {
   background:
     radial-gradient(
-      circle at 30% 50%,
-      rgba(56, 189, 248, 0.16) 0%,
-      rgba(56, 189, 248, 0) 60%
+      circle at var(--mx) var(--my),
+      rgba(56, 189, 248, 0.16),
+      rgba(56, 189, 248, 0) 80%
     ),
     radial-gradient(
-      circle at 70% 50%,
-      rgba(186, 230, 253, 0.1) 0%,
-      rgba(186, 230, 253, 0) 60%
+      ellipse 100% 80% at 50% 0%,
+      rgba(56, 189, 248, 0.06),
+      rgba(56, 189, 248, 0) 100%
+    ),
+    radial-gradient(
+      ellipse 100% 80% at 50% 100%,
+      rgba(125, 211, 252, 0.05),
+      rgba(125, 211, 252, 0) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(56, 189, 248, 0.04) 0%,
+      rgba(186, 230, 253, 0.03) 100%
     );
 }
 

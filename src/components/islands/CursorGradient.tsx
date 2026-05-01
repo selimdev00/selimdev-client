@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "preact/hooks";
 
-const SIZE = 480;
-const STIFFNESS = 0.06;
+const STIFFNESS = 0.08;
 
 export default function CursorGradient() {
   const elRef = useRef<HTMLDivElement | null>(null);
@@ -10,25 +9,34 @@ export default function CursorGradient() {
     if (typeof window === "undefined") return;
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
 
-    const target = { x: window.innerWidth / 2, y: 0 };
-    const current = { x: window.innerWidth / 2, y: 0 };
+    const target = { x: 50, y: 35 };
+    const current = { x: 50, y: 35 };
     let raf = 0;
     let active = true;
 
+    const setVars = () => {
+      const el = elRef.current;
+      if (!el) return;
+      el.style.setProperty("--mx", `${current.x}%`);
+      el.style.setProperty("--my", `${current.y}%`);
+    };
+
+    setVars();
+
+    if (reduce) {
+      return;
+    }
+
     const onMove = (event: MouseEvent) => {
-      target.x = event.clientX - SIZE / 2;
-      target.y = event.clientY - SIZE / 2;
+      target.x = (event.clientX / window.innerWidth) * 100;
+      target.y = (event.clientY / window.innerHeight) * 100;
     };
 
     const tick = () => {
       current.x += (target.x - current.x) * STIFFNESS;
       current.y += (target.y - current.y) * STIFFNESS;
-      const el = elRef.current;
-      if (el) {
-        el.style.transform = `translate3d(${current.x}px, ${current.y}px, 0)`;
-      }
+      setVars();
       if (active) raf = requestAnimationFrame(tick);
     };
 
@@ -61,8 +69,7 @@ export default function CursorGradient() {
     >
       <div
         ref={elRef}
-        class="mouse-gradient pointer-events-none absolute top-0 left-0 hidden md:block will-change-transform"
-        style={`width:${SIZE}px;height:${SIZE}px;filter:blur(140px);opacity:0.85;`}
+        class="mouse-gradient pointer-events-none absolute inset-0 hidden md:block"
       />
     </div>
   );
