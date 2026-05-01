@@ -12,42 +12,53 @@ const years = totalExperienceYears();
 ---
 
 <section id="top" class="pt-12 pb-16 md:pt-20 md:pb-24">
-  <div class="flex items-center gap-4 mb-10">
-    <img
-      src="/avatar-face.png"
-      alt={`${site.ownerName} portrait`}
-      width="56"
-      height="56"
-      loading="eager"
-      decoding="async"
-      class="rounded-full w-14 h-14 ring-1 ring-sky-600/30 dark:ring-sky-300/30"
-    />
-    <span class="flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.12em] text-sky-700 dark:text-sky-200">
-      <span
-        class="inline-block h-1.5 w-1.5 rounded-full bg-sky-600 dark:bg-sky-300"
-        aria-hidden="true"></span>
-      {t.available}
-    </span>
+  <div class="flex items-start gap-5 md:gap-6">
+    <div
+      class="relative shrink-0 overflow-hidden rounded-md w-24 h-32 md:w-28 md:h-36 ring-1 ring-sky-700/15 dark:ring-sky-300/15"
+    >
+      <picture>
+        <source type="image/webp" srcset="/avatar-face.webp" />
+        <img
+          src="/avatar-face.png"
+          alt={`${site.ownerName} portrait`}
+          width="112"
+          height="149"
+          loading="eager"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover scale-[2.1] origin-top -translate-y-8"
+          style="object-position: 50% 0%;"
+        />
+      </picture>
+    </div>
+
+    <div class="min-w-0 flex flex-col gap-3">
+      <h1
+        class="font-bold leading-[0.95] tracking-tight text-gray-900 dark:text-white"
+        style="font-size: clamp(36px, 7.5vw, 60px);"
+      >
+        {t.website.title}
+      </h1>
+
+      <p
+        class="text-[16px] md:text-[17px] font-medium text-gray-700 dark:text-gray-300"
+      >
+        {t.website.subtitle}
+        <span class="text-gray-400 dark:text-gray-600 mx-2" aria-hidden="true">·</span>
+        <span class="text-sky-700 dark:text-sky-300 proof-value">{years}+</span>
+        <span class="text-gray-500 dark:text-gray-500"> {t.yearsExperience}</span>
+      </p>
+
+      <span class="inline-flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.12em] text-sky-700 dark:text-sky-200">
+        <span
+          class="inline-block h-1.5 w-1.5 rounded-full bg-sky-600 dark:bg-sky-300"
+          aria-hidden="true"></span>
+        {t.available}
+      </span>
+    </div>
   </div>
 
-  <h1
-    class="font-bold leading-[0.95] tracking-tight text-gray-900 dark:text-white"
-    style="font-size: clamp(40px, 8vw, 64px);"
-  >
-    {t.website.title}
-  </h1>
-
   <p
-    class="mt-3 text-[16px] md:text-[17px] font-medium text-gray-700 dark:text-gray-300"
-  >
-    {t.website.subtitle}
-    <span class="text-gray-400 dark:text-gray-600 mx-2" aria-hidden="true">·</span>
-    <span class="text-sky-700 dark:text-sky-300 proof-value">{years}+</span>
-    <span class="text-gray-500 dark:text-gray-500"> {t.yearsExperience}</span>
-  </p>
-
-  <p
-    class="mt-6 max-w-[58ch] text-[16px] md:text-[17px] leading-[1.65] text-gray-600 dark:text-gray-400"
+    class="mt-10 max-w-[58ch] text-[16px] md:text-[17px] leading-[1.65] text-gray-600 dark:text-gray-400"
   >
     {t.website.description}
   </p>

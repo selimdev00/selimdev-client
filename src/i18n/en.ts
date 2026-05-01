@@ -30,7 +30,7 @@ const en: Translations = {
   `,
   aboutContent: `
     <p>
-      I work end-to-end on web and mobile products with small senior teams. Most projects start as a blank Figma file and ship to production: framework choice, database schema, API contract, deployment, and the long tail of polish. <span class="highlight">Vue 2/3, Nuxt 2/3, Next.js, and React Native</span> on the front; <span class="highlight">Node, Nest, Postgres, and Redis</span> on the back; <span class="highlight">Docker, Cloudflare, Nginx, and pm2</span> for the deploy.
+      I work end-to-end on web and mobile products with small senior teams. Most projects start as a blank Figma file and ship to production: framework choice, database schema, API contract, deployment, and the long tail of polish.
     </p>
 
     <p>

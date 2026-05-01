@@ -30,7 +30,7 @@ const ru: Translations = {
   `,
   aboutContent: `
     <p>
-      Работаю end-to-end над web- и mobile-продуктами в небольших сильных командах. Большинство проектов начинается с пустого Figma-файла и доходит до прода: выбор стека, схема БД, контракт API, деплой и долгая полировка. <span class="highlight">Vue 2/3, Nuxt 2/3, Next.js и React Native</span> на фронте; <span class="highlight">Node, Nest, Postgres и Redis</span> на бэке; <span class="highlight">Docker, Cloudflare, Nginx и pm2</span> в деплое.
+      Работаю end-to-end над web- и mobile-продуктами в небольших сильных командах. Большинство проектов начинается с пустого Figma-файла и доходит до прода: выбор стека, схема БД, контракт API, деплой и долгая полировка.
     </p>
 
     <p>
