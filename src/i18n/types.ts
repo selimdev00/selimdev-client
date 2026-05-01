@@ -34,6 +34,7 @@ export interface Translations {
   CV: string;
   seeCV: string;
   print: string;
+  writing: string;
   yearsExperience: string;
   technologies: string;
   aiWorkflowLabel: string;

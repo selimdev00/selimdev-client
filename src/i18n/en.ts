@@ -82,6 +82,7 @@ const en: Translations = {
   CV: "CV",
   seeCV: "See CV",
   print: "Print",
+  writing: "Writing",
   yearsExperience: "years building",
   technologies: "Stack",
   aiWorkflowLabel: "AI",

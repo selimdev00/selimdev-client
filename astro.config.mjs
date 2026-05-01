@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import preact from "@astrojs/preact";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
+import mdx from "@astrojs/mdx";
 import icon from "astro-icon";
 
 export default defineConfig({
@@ -16,6 +17,7 @@ export default defineConfig({
   },
   integrations: [
     preact({ compat: false }),
+    mdx(),
     sitemap({
       filter: (page) => !page.includes("/cv-print/"),
       i18n: {

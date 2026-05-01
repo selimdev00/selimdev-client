@@ -1,0 +1,71 @@
+---
+import "../styles/global.css";
+import ThemeInit from "../components/ThemeInit.astro";
+import Analytics from "../components/Analytics.astro";
+import TopBar from "../components/TopBar.astro";
+import { site } from "../lib/site";
+import en from "../i18n/en";
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+}
+
+const { title, description, canonical = `${site.url}/blog/` } = Astro.props;
+const fullTitle = `${title} - ${site.ownerName}`;
+---
+
+<!doctype html>
+<html lang="en-US" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={site.ownerName} />
+    <meta name="robots" content="index,follow" />
+
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${site.url}${site.ogImage}`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${site.url}${site.ogImage}`} />
+
+    <link rel="canonical" href={canonical} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`${site.ownerName} - Writing`}
+      href={`${site.url}/rss.xml`}
+    />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+
+    <ThemeInit />
+    <Analytics />
+  </head>
+  <body class="dark:bg-slate-950 bg-white dark:text-white min-h-screen">
+    <a href="#main" class="skip-link">Skip to content</a>
+
+    <div class="relative min-h-screen">
+      <TopBar t={en} locale="en" />
+
+      <main
+        id="main"
+        class="relative z-10 mx-auto w-full max-w-[760px] px-5 md:px-8 pt-16 pb-24 md:pt-24 md:pb-32"
+      >
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

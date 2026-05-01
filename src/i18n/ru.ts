@@ -82,6 +82,7 @@ const ru: Translations = {
   CV: "Резюме",
   seeCV: "Посмотреть резюме",
   print: "Печать",
+  writing: "Заметки",
   yearsExperience: "лет опыта",
   technologies: "Стек",
   aiWorkflowLabel: "AI",

@@ -1,0 +1,87 @@
+---
+import { getCollection } from "astro:content";
+import WritingLayout from "../../layouts/WritingLayout.astro";
+
+const isProd = import.meta.env.PROD;
+const all = await getCollection("posts", ({ data }) =>
+  isProd ? !data.draft : true,
+);
+
+const posts = all.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+  year: "numeric",
+});
+---
+
+<WritingLayout
+  title="Writing"
+  description="Notes on engineering, AI workflows, and shipping product - from a full-stack engineer."
+>
+  <header class="mb-12 md:mb-16">
+    <a
+      href="/"
+      class="inline-flex items-center gap-1.5 text-[13px] text-gray-500 dark:text-gray-500 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300"
+    >
+      <span aria-hidden="true">&larr;</span>
+      <span>selim.services</span>
+    </a>
+
+    <h1
+      class="mt-6 font-bold leading-[1.05] tracking-tight text-gray-900 dark:text-white"
+      style="font-size: clamp(36px, 7vw, 56px);"
+    >
+      Writing
+    </h1>
+    <p
+      class="mt-4 max-w-[58ch] text-[16px] md:text-[17px] leading-[1.65] text-gray-600 dark:text-gray-400"
+    >
+      Notes on engineering, AI-augmented workflows, and what survives contact
+      with production. New posts land in the
+      <a
+        class="text-sky-700 dark:text-sky-200 hover:text-sky-900 dark:hover:text-sky-100 transition-colors"
+        href="/rss.xml">RSS feed</a
+      > first.
+    </p>
+  </header>
+
+  {
+    posts.length === 0 ? (
+      <p class="text-[15px] text-gray-500 dark:text-gray-500">
+        Drafts are in flight. Subscribe via RSS to catch the first one.
+      </p>
+    ) : (
+      <ul class="flex flex-col divide-y divide-gray-200 dark:divide-slate-800">
+        {posts.map((post) => (
+          <li class="py-7 first:pt-0">
+            <a
+              href={`/blog/${post.slug}/`}
+              class="group flex flex-col gap-2 text-gray-700 dark:text-gray-300 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300"
+            >
+              <span class="flex items-center gap-3 text-[12px] font-semibold uppercase tracking-[0.14em] text-gray-500 dark:text-gray-500">
+                <time datetime={post.data.pubDate.toISOString()}>
+                  {dateFormatter.format(post.data.pubDate)}
+                </time>
+                {post.data.draft ? (
+                  <span class="rounded-sm border border-amber-500/40 px-1.5 py-0.5 text-amber-600 dark:text-amber-300 dark:border-amber-300/40 normal-case tracking-normal text-[11px] font-medium">
+                    draft
+                  </span>
+                ) : null}
+              </span>
+              <h2 class="text-[20px] md:text-[22px] font-semibold leading-snug text-gray-900 dark:text-white group-hover:text-sky-700 dark:group-hover:text-sky-200 transition-colors duration-300">
+                {post.data.title}
+              </h2>
+              <p class="max-w-[68ch] text-[15px] leading-[1.6] text-gray-600 dark:text-gray-400">
+                {post.data.description}
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</WritingLayout>
