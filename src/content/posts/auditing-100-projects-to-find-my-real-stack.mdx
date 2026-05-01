@@ -1,0 +1,101 @@
+---
+title: "Auditing 100+ of my own projects to find my real stack"
+description: "I scanned 104 of my own repos, parsed every package.json and Dockerfile, and let the data overwrite the skills list on my portfolio. Here is what stayed."
+pubDate: 2026-05-01
+tags: [tech-stack, engineering, portfolio, typescript, audit]
+draft: false
+---
+
+Most engineering portfolios list a stack the way LinkedIn lists endorsements: a wishful set of logos pinned next to a name. I had the same problem. The list on [selim.services](https://selim.services/) drifted year by year. I added Nuxt when I started using it. I added Nest when one client paid for it. I never removed anything. By 2026 it had become a vibes-driven autobiography rather than a description of what I actually ship.
+
+So I deleted it and ran an audit instead. I pointed a small script at every repository I own across [github.com/selimdev00](https://github.com/selimdev00) and a few private mirrors, parsed every `package.json`, every `Dockerfile`, every `nuxt.config.*`, every `astro.config.*`, and counted what showed up where. The commit that landed the rewrite is `d773573 Replace stack with real usage from 100+ project audit`. This post is the long version of that commit message.
+
+## The audit method
+
+The premise was deliberately boring. No taste, no preference, no "this is the future of the web". Just a count of which dependencies appear in projects I committed to in the last three years, weighted by how often I actually pushed code there.
+
+The script walked 104 repositories. It cloned each, read the manifests, and emitted a flat CSV with the columns `repo`, `last_commit`, `framework`, `runtime`, `db`, `infra`, `lines_changed_last_year`. About 18 of those repos were dead - things like `nuxt-2-test-2019` or a Laravel toy from a Geekspace contract that ended in 2020. I kept them in the count because pretending they did not exist would defeat the point: an honest stack list includes the cobwebs.
+
+Two filters mattered. First, I dropped any dependency that showed up in fewer than three repositories - one-off experiments are not a stack, they are curiosity. Second, I weighted by `lines_changed_last_year`, because a `package.json` entry that has not been touched in two years carries less signal than one I rewrote last week. A library can be installed without being used. Git history does not lie about that the way `node_modules` does.
+
+The whole pipeline is roughly 80 lines of TypeScript. The interesting part is the manifest reader:
+
+```ts
+// scripts/audit/readManifest.ts
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+
+type Manifest = {
+  deps: string[];
+  scripts: Record<string, string>;
+};
+
+export async function readPackageJson(repo: string): Promise<Manifest | null> {
+  try {
+    const raw = await readFile(join(repo, "package.json"), "utf8");
+    const pkg = JSON.parse(raw) as {
+      dependencies?: Record<string, string>;
+      devDependencies?: Record<string, string>;
+      scripts?: Record<string, string>;
+    };
+    return {
+      deps: Object.keys({ ...pkg.dependencies, ...pkg.devDependencies }),
+      scripts: pkg.scripts ?? {},
+    };
+  } catch {
+    return null;
+  }
+}
+```
+
+That is it. No AST parsing, no semver normalization. The point was a count, not a survey. I chained it with a similar reader for `Dockerfile`, `compose.yaml`, and `.github/workflows/*.yml`, and let `Map<string, number>` do the rest.
+
+## What survived
+
+The numbers came out cleaner than I expected. Frontend-side, TypeScript was in 88 of 104 repos. Vue and Nuxt together appeared in 42 repos, more than any other framework family - 23% Vue, 18% Nuxt config files specifically. Next.js was 14, React Native was 9, Astro was 6, Preact was 4. Tailwind sat in 71 repos, which surprised me less than the fact that I had tried to remove it from two projects in 2024 and put it back inside a month.
+
+Backend was the part that got pruned. I had been listing five frameworks, and the data said three did real work: Hono in 11 recent services, Nest in 9 (mostly Sotnikov-era and a long-running Yuke product), Express in 13 mostly older repos, and Laravel in exactly 2 - both pre-2020 and untouched since. I kept Laravel on the published list because clients still ask about PHP work and I am willing to take it on, but I moved it to the bottom of the backend group. Node is the runtime under all of it.
+
+Data layer was a clean three-way split. Postgres in 19 services, Redis in 11 (every Hono service uses it for queues or cache), Prisma in 7, Drizzle in 5. SQLite showed up in 3 prototypes and got cut. MongoDB appeared once, in a 2019 client project, and got cut.
+
+Infra is where I expected the most clutter and found the least. Docker in 24 services. Cloudflare Pages or Workers in 8 sites. Nginx in 6 long-lived VPS deployments. pm2 in 5. GitHub Actions in 31 repos. There was no AWS, no Vercel-as-default, no Netlify - and listing any of those would have been a polite fiction.
+
+The AI tier is new and small on purpose. Claude Code, Cursor, MCP, and the OpenAI SDK each show up in real working code: Claude Code is in my daily workflow across the whole workspace, Cursor is the editor for the few repos that need its specific autocomplete, MCP servers power my custom tooling, and the OpenAI SDK appears in two product features. That is the entire AI claim. I refuse to put "LangChain" on a list when I have never shipped it.
+
+The full surviving list lives in [`src/lib/site.ts`](https://github.com/selimdev00/selimdev-client/blob/master/src/lib/site.ts) under `TECH_GROUPS`, grouped by role: frontend, backend, data, infra, ai. If you want the canonical answer to "what does Selim actually use", that file is it.
+
+## What I expected to find but did not
+
+I thought I would find Vue 2 still alive somewhere. It was not. The last Vue 2 commit was August 2020, on a Geekspace project that has been frozen for years. I had been listing "Vue 2 / Vue 3" on resumes out of habit. The audit deleted the slash.
+
+I expected SCSS to dominate styling. It did, in repos older than 2022. After 2022, Tailwind eats every new project I start, and SCSS only appears as legacy sustain. I removed SCSS from the public list because nobody hires on the strength of a 2019 preprocessor anymore, and pretending otherwise just dilutes the rest.
+
+I expected far more "AI plumbing" code. The honest count is two production features that touch an LLM API directly, plus a lot of Claude Code usage as an editor. Listing Claude Code as a tool I use is true. Listing "AI engineering" as a discipline I sell would not have been - I do not run evals, I do not maintain RAG pipelines, I do not ship agents to end users. Saying so is more useful to the next client than another buzzword on the page.
+
+I also expected the audit to surface a long tail of frameworks I had forgotten about. It did - 11 different state-management libraries, 4 form libraries, 3 router replacements - but none of them passed the three-repo threshold. They went in a private "things I have touched once" file that nobody needs to see. A skills list is a contract; an experiments folder is a diary.
+
+## Why the published list is shorter than the audit
+
+The portfolio shows about 27 items across five groups. The audit found roughly 60 dependencies that passed the threshold. The gap is intentional.
+
+A skills list has to answer a single question for the visitor: "if I hire this person, can they do the thing I need". Bun ranks high in my repos because I use it locally as a script runner, but no client has ever asked me to ship Bun in production, so it sits behind Node on the page. Vitest is in almost every repo, but listing test runners on a portfolio is the same energy as listing IDEs - it tells a hiring manager nothing they could not assume. tRPC, Zod, TanStack Query, and a dozen other libraries that I genuinely love did not make it because they are implementation details, not roles.
+
+The cut rule was: if it is a tool you would expect a senior engineer at this stack to use anyway, do not list it. A senior TypeScript engineer using Zod is like a carpenter using a tape measure. You do not put it on the business card.
+
+That decision rule is also what kept the AI tier short. I will not list four AI tools when only four can be justified by code I have actually shipped. The whole point of the audit is that the page now agrees with the repos.
+
+## What I would do differently next time
+
+Two things. First, I should have weighted by client revenue, not just lines of code. A repo that earned five figures of contract income deserves more weight than one I built over a weekend, even if both have similar diff stats. The current method is biased toward whichever project I happened to refactor most recently. Linking commit volume to invoice data is a separate audit and a longer post.
+
+Second, the script should have read commit messages, not just file contents. A `package.json` tells you what was installed. A commit history tells you what was actually solved. The phrase `fix prisma migration drift on Postgres 16` in a commit message is more diagnostic of real Postgres skill than the presence of `@prisma/client` in dependencies. The next pass will run the audit against the message log too, probably with a small classifier rather than regex - this is one of the few places where pointing an LLM at the data genuinely earns its keep, and the [Anthropic SDK docs on prompt caching](https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching) make that cheap enough to do in a single batch.
+
+The thing the audit did not need was a fancy tool. The whole exercise ran on `node:fs/promises`, a `Map`, and `git log --since`. There is a market full of "tech stack analyzer" SaaS products, all of them solving an organizational problem. For one engineer auditing one engineer, the script is the entire tool.
+
+## What this changes for the portfolio
+
+The page used to list logos. It now lists roles, with logos as evidence. Frontend, backend, data, infra, ai - in that order, because that is how a client thinks about scope when they brief a project. Each group is sorted by audit weight, not by what I find most interesting. That ordering will look stale in 12 months, which is fine - the audit is now a script I can re-run, and the resulting CSV diffs against the previous run. The skills list is no longer a static artifact; it is a build output.
+
+If you came here from the homepage and want to verify the claim, the file is [`src/lib/site.ts`](https://github.com/selimdev00/selimdev-client/blob/master/src/lib/site.ts), the audit script lives in a private repo for now, and the full set of public projects is at [github.com/selimdev00](https://github.com/selimdev00). Open any of them. The dependencies you find will match the list on the homepage. That is the only standard the page is held to.
+
+Future audits will run on a schedule. The one I cared about was the first - the one that forced me to admit I had been describing a developer who existed three years ago.
