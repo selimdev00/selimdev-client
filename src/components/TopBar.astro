@@ -7,15 +7,16 @@ import type { Translations } from "../i18n/types";
 interface Props {
   t: Translations;
   locale: Locale;
+  showLangSwitcher?: boolean;
 }
 
-const { t, locale } = Astro.props;
+const { t, locale, showLangSwitcher = true } = Astro.props;
 ---
 
 <div
   class="fixed top-4 right-4 md:top-6 md:right-8 z-30 flex items-center gap-3 no-print"
 >
-  <LangSwitcher current={locale} />
+  {showLangSwitcher && <LangSwitcher current={locale} />}
   <ThemeToggle
     client:load
     lightLabel={t.lightMode}
