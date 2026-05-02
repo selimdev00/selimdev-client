@@ -59,4 +59,20 @@ export interface Translations {
     label: string;
     items: { q: string; a: string }[];
   };
+  contact: {
+    label: string;
+    intro: string;
+    name: string;
+    email: string;
+    message: string;
+    submit: string;
+    submitting: string;
+    successTitle: string;
+    successBody: string;
+    errorGeneric: string;
+    errorInvalidName: string;
+    errorInvalidEmail: string;
+    errorInvalidMessage: string;
+    errorServer: string;
+  };
 }

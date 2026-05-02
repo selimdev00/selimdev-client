@@ -137,6 +137,23 @@ const ru: Translations = {
       },
     ],
   },
+  contact: {
+    label: "Написать",
+    intro:
+      "Telegram - быстрее всего. Если удобнее по почте - форма приходит мне в инбокс, отвечаю обычно в течение рабочего дня.",
+    name: "Имя",
+    email: "Email",
+    message: "О чём задача?",
+    submit: "Отправить",
+    submitting: "Отправляю",
+    successTitle: "Принято.",
+    successBody: "Ответ придёт на почту - обычно в течение рабочего дня.",
+    errorGeneric: "Не отправилось. Попробуй ещё раз или напиши в Telegram.",
+    errorInvalidName: "Укажи имя.",
+    errorInvalidEmail: "Email выглядит некорректно.",
+    errorInvalidMessage: "Сообщение слишком короткое.",
+    errorServer: "Сервер не настроен. Пока пиши в Telegram.",
+  },
 };
 
 export default ru;

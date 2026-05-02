@@ -4,15 +4,18 @@ import { socials } from "../data/socials";
 import { spokenLanguages } from "../data/spoken-languages";
 import { site } from "../lib/site";
 import SectionHeading from "./SectionHeading.astro";
+import ContactForm from "./islands/ContactForm.tsx";
 import type { Translations } from "../i18n/types";
+import type { Locale } from "../lib/site";
 
 interface Props {
   t: Translations;
+  locale: Locale;
   class?: string;
 }
 
-const { t, class: className = "" } = Astro.props;
-const isRu = Astro.currentLocale === "ru";
+const { t, locale, class: className = "" } = Astro.props;
+const isRu = locale === "ru";
 const cvLightHref = isRu ? "/cv/light.ru.pdf" : "/cv/light.pdf";
 const cvDarkHref = isRu ? "/cv/dark.ru.pdf" : "/cv/dark.pdf";
 ---
@@ -110,6 +113,35 @@ const cvDarkHref = isRu ? "/cv/dark.ru.pdf" : "/cv/dark.pdf";
         }
       </ul>
     </div>
+  </div>
+
+  <div class="mt-14 md:mt-16 pt-10 border-t border-gray-200 dark:border-slate-800 flex flex-col gap-5">
+    <div class="flex flex-col gap-2 max-w-[58ch]">
+      <p class="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-500 dark:text-gray-500">
+        {t.contact.label}
+      </p>
+      <p class="text-[14px] leading-[1.6] text-gray-600 dark:text-gray-400">
+        {t.contact.intro}
+      </p>
+    </div>
+    <ContactForm
+      client:load
+      locale={locale}
+      strings={{
+        name: t.contact.name,
+        email: t.contact.email,
+        message: t.contact.message,
+        submit: t.contact.submit,
+        submitting: t.contact.submitting,
+        successTitle: t.contact.successTitle,
+        successBody: t.contact.successBody,
+        errorGeneric: t.contact.errorGeneric,
+        errorInvalidName: t.contact.errorInvalidName,
+        errorInvalidEmail: t.contact.errorInvalidEmail,
+        errorInvalidMessage: t.contact.errorInvalidMessage,
+        errorServer: t.contact.errorServer,
+      }}
+    />
   </div>
 
   <div class="mt-12" set:html={t.footerContent}></div>

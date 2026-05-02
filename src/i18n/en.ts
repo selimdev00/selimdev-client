@@ -137,6 +137,23 @@ const en: Translations = {
       },
     ],
   },
+  contact: {
+    label: "Write",
+    intro:
+      "Telegram is fastest. If you prefer email, this form lands in my inbox - I usually reply within a working day.",
+    name: "Name",
+    email: "Email",
+    message: "What is the work?",
+    submit: "Send",
+    submitting: "Sending",
+    successTitle: "Got it.",
+    successBody: "Reply lands in your inbox - usually within a working day.",
+    errorGeneric: "Send failed. Try again or message on Telegram.",
+    errorInvalidName: "Name is required.",
+    errorInvalidEmail: "Email looks off.",
+    errorInvalidMessage: "Message is too short.",
+    errorServer: "Server is misconfigured. Please use Telegram for now.",
+  },
 };
 
 export default en;
