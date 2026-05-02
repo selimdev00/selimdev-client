@@ -15,12 +15,12 @@ const { t } = Astro.props;
   data-fade-on-scroll
   aria-labelledby="faq-heading"
 >
-  <SectionHeading label={t.faq.label} />
+  <SectionHeading id="faq-heading" label={t.faq.label} />
 
   <dl class="mt-8 flex flex-col divide-y divide-gray-200 dark:divide-slate-800">
     {
       t.faq.items.map((item) => (
-        <div class="grid grid-cols-1 gap-2 md:grid-cols-[14rem_1fr] md:gap-x-8 py-5">
+        <div class="grid grid-cols-1 gap-2 md:grid-cols-[14rem_1fr] lg:grid-cols-[16rem_1fr] md:gap-x-8 py-5">
           <dt class="text-[14px] md:text-[15px] font-semibold leading-snug text-gray-900 dark:text-white">
             {item.q}
           </dt>

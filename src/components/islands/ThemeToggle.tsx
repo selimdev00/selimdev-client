@@ -5,15 +5,17 @@ interface Props {
   darkLabel: string;
 }
 
+function readInitialDark() {
+  if (typeof document === "undefined") return false;
+  return document.documentElement.classList.contains("dark");
+}
+
 export default function ThemeToggle({ lightLabel, darkLabel }: Props) {
-  const [isDark, setIsDark] = useState(false);
-  const [mounted, setMounted] = useState(false);
+  const [isDark, setIsDark] = useState(readInitialDark);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
-    if (typeof document === "undefined") return;
-    setIsDark(document.documentElement.classList.contains("dark"));
-    setMounted(true);
+    setIsDark(readInitialDark());
   }, []);
 
   const applyTheme = (next: boolean) => {
@@ -70,19 +72,18 @@ export default function ThemeToggle({ lightLabel, darkLabel }: Props) {
     });
   };
 
-  const checked = mounted ? isDark : false;
-  const label = checked ? lightLabel : darkLabel;
+  const label = isDark ? lightLabel : darkLabel;
 
   return (
     <button
       ref={buttonRef}
       type="button"
       onClick={toggle}
-      aria-pressed={checked}
+      aria-pressed={isDark}
       aria-label={label}
-      class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-950 text-gray-600 dark:text-gray-300 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300"
+      class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-950 text-gray-600 dark:text-gray-300 hover:text-sky-700 dark:hover:text-sky-200 transition-colors duration-300"
     >
-      {checked ? (
+      {isDark ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="14"

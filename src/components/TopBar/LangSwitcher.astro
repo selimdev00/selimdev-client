@@ -25,12 +25,12 @@ const items: { code: Locale; label: string; href: string }[] = [
         <a
           href={item.href}
           class:list={[
-            "px-3 py-2 leading-none transition-colors duration-300",
+            "px-3 py-2.5 leading-none transition-colors duration-300",
             active
               ? "bg-sky-700 dark:bg-sky-300 text-white dark:text-slate-950"
               : "text-gray-600 dark:text-gray-400 hover:text-sky-700 dark:hover:text-sky-200",
           ]}
-          aria-current={active ? "true" : undefined}
+          aria-current={active ? "page" : undefined}
           aria-label={item.code === "en" ? "English" : "Русский"}
         >
           {item.label}

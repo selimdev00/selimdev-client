@@ -19,11 +19,12 @@ const years = totalExperienceYears();
       <picture>
         <source type="image/webp" srcset="/avatar-face.webp" />
         <img
-          src="/avatar-face.png"
+          src="/avatar-face.jpg"
           alt={`${site.ownerName} portrait`}
           width="112"
           height="149"
           loading="eager"
+          fetchpriority="high"
           decoding="async"
           class="absolute inset-0 w-full h-full object-cover scale-[2.1] origin-top -translate-y-8"
           style="object-position: 50% 0%;"

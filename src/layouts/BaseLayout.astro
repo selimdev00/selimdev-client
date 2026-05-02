@@ -48,6 +48,14 @@ const canonical = locale === "ru" ? `${site.url}/ru/` : `${site.url}/`;
     <link rel="alternate" hreflang="ru" href={`${site.url}/ru/`} />
     <link rel="alternate" hreflang="x-default" href={`${site.url}/`} />
 
+    <link
+      rel="preload"
+      as="image"
+      href="/avatar-face.webp"
+      type="image/webp"
+      fetchpriority="high"
+    />
+
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -57,6 +65,11 @@ const canonical = locale === "ru" ? `${site.url}/ru/` : `${site.url}/`;
     <Analytics />
   </head>
   <body class="dark:text-white min-h-screen">
+    <div
+      class="fixed inset-0 -z-10 bg-white dark:bg-slate-950 pointer-events-none"
+      aria-hidden="true"
+    >
+    </div>
     <slot />
   </body>
 </html>
