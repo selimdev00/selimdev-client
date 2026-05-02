@@ -18,9 +18,7 @@ const toLabel = item.to === "now" ? t.now : formatMonthYear(item.to, locale);
 const isOngoing = item.to === "now";
 ---
 
-<article
-  class="group/item relative transition-opacity duration-300 group-hover/list:opacity-40 hover:!opacity-100 focus-within:!opacity-100"
->
+<article class="relative">
   <header class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
     <p
       class="text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-500 dark:text-gray-500 leading-tight tabular-nums"

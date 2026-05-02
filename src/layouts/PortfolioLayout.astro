@@ -7,7 +7,6 @@ import TechStrip from "../components/TechStrip.astro";
 import ExperienceList from "../components/Experience/List.astro";
 import Faq from "../components/Faq.astro";
 import Footer from "../components/Footer.astro";
-import CursorGradient from "../components/islands/CursorGradient.tsx";
 import BottomPanel from "../components/islands/BottomPanel.tsx";
 import type { Translations } from "../i18n/types";
 import type { Locale } from "../lib/site";
@@ -24,8 +23,6 @@ const { t, locale } = Astro.props;
   <a href="#main" class="skip-link">{t.skipToContent}</a>
 
   <div class="relative min-h-screen">
-    <CursorGradient client:idle />
-
     <TopBar t={t} locale={locale} />
 
     <main

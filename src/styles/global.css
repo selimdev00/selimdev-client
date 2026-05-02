@@ -13,10 +13,12 @@
 html {
   scroll-behavior: smooth;
   background-color: #ffffff;
+  color-scheme: light;
 }
 
 html.dark {
   background-color: #020617;
+  color-scheme: dark;
   --rail-line: rgba(186, 230, 253, 0.22);
 }
 
@@ -167,56 +169,6 @@ body {
   width: 64px;
 }
 
-.mouse-gradient {
-  --mx: 50%;
-  --my: 35%;
-  background:
-    radial-gradient(
-      circle at var(--mx) var(--my),
-      rgba(2, 132, 199, 0.18),
-      rgba(2, 132, 199, 0) 80%
-    ),
-    radial-gradient(
-      ellipse 100% 80% at 50% 0%,
-      rgba(56, 189, 248, 0.06),
-      rgba(56, 189, 248, 0) 100%
-    ),
-    radial-gradient(
-      ellipse 100% 80% at 50% 100%,
-      rgba(2, 132, 199, 0.08),
-      rgba(2, 132, 199, 0) 100%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(2, 132, 199, 0.04) 0%,
-      rgba(56, 189, 248, 0.04) 100%
-    );
-}
-
-.dark .mouse-gradient {
-  background:
-    radial-gradient(
-      circle at var(--mx) var(--my),
-      rgba(56, 189, 248, 0.16),
-      rgba(56, 189, 248, 0) 80%
-    ),
-    radial-gradient(
-      ellipse 100% 80% at 50% 0%,
-      rgba(56, 189, 248, 0.06),
-      rgba(56, 189, 248, 0) 100%
-    ),
-    radial-gradient(
-      ellipse 100% 80% at 50% 100%,
-      rgba(125, 211, 252, 0.05),
-      rgba(125, 211, 252, 0) 100%
-    ),
-    linear-gradient(
-      180deg,
-      rgba(56, 189, 248, 0.04) 0%,
-      rgba(186, 230, 253, 0.03) 100%
-    );
-}
-
 .rail-line {
   background: var(--rail-line);
 }
@@ -332,8 +284,7 @@ body[data-menu-open="true"] {
   }
 
   .no-print,
-  .fixed,
-  .mouse-gradient {
+  .fixed {
     display: none !important;
   }
 
