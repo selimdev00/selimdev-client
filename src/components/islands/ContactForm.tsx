@@ -178,6 +178,12 @@ export default function ContactForm({ locale, strings }: Props) {
           rows={5}
           value={message}
           onInput={(e) => setMessage((e.target as HTMLTextAreaElement).value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              (e.currentTarget.form as HTMLFormElement | null)?.requestSubmit();
+            }
+          }}
           class={inputBase + " resize-y min-h-[120px]"}
         />
       </div>
