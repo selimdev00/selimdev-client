@@ -1,0 +1,97 @@
+---
+title: "The 30-second test: what a senior client actually checks on your portfolio"
+description: "The 30-second checklist that a senior client actually runs on your freelance portfolio before they decide to message you, listed in real scan order here."
+pubDate: 2026-04-19
+tags: [portfolio, freelance, conversion, design, senior]
+draft: false
+---
+
+The first time I watched a session recording of a real Upwork lead landing on [selim.services](/), I learned more about my portfolio in 28 seconds than in two years of redesigns. They opened the page on a 13-inch laptop, scrolled once, hovered over two project cards, opened DevTools for about four seconds, switched back to the tab, copied my Telegram handle, and closed the tab. Total time on page: 28 seconds. They messaged me on Telegram nine minutes later. The contract closed the next week.
+
+That session is not an outlier. It is the median. Across the inbound traffic I can attribute - Upwork invitation acceptances, Telegram referrals, the occasional cold email from a tech lead - the decision to message me happens in well under a minute. Most of those visitors never scroll past the second screen. Some never scroll at all. The "30 seconds" framing in the title is not a metaphor or a marketing rounding. It is approximately the median time a qualified senior reviewer spends on the page before they either reach for a CTA or close the tab. The Nielsen Norman Group has been writing about this shape of behavior for years; their work on [first impressions and how users read on the web](https://www.nngroup.com/articles/) all points the same way. People scan. They do not read. Especially when the thing being scanned is a stranger they are about to pay money to.
+
+This post is the checklist of what actually gets looked at on a senior engineer's portfolio in those 30 seconds, in order, with the engineering reason behind each item. It is targeted at the audience I belong to: senior freelancers, indie consultants, and contract engineers who own their own personal site and want it to do more work than a LinkedIn profile can.
+
+## The first paragraph above the fold is doing all the work
+
+Most portfolios think the hero is doing the work. The hero is not doing the work. The hero is the title bar of a window the visitor has not yet decided to read. A name and a job title prove nothing. "Senior Full Stack Developer" is a phrase a junior can also type.
+
+What gets read is the first paragraph that contains a number. "8 years", "100+ projects", "Hono and Postgres on Hetzner", "Vue, Nuxt, Tailwind, Cloudflare". Numbers are how a senior reviewer checks reality, because numbers are falsifiable. They can open GitHub and verify the count. They can read a project repo and verify the stack. They cannot verify "passionate about clean code". One sentence is doing 80% of the credibility work above the fold, and it is almost never the one the portfolio owner thinks it is.
+
+The writing rule that follows from this is brutal: the first sentence on your page should be the one that contains the most checkable facts about your work. Not the warmest, not the cleverest, not the most narrative. The most checkable. If your hero says "I build modern web applications with care", delete it and replace it with the sentence two paragraphs down that lists the actual stack and years of experience. Then delete the two paragraphs.
+
+## The stack list has to be falsifiable, or it is a tell
+
+The stack list is the second thing that gets scanned. It is also the section where most senior reviewers form their first hard opinion, because the stack list is where credibility gets cheap.
+
+"Full-stack JavaScript developer" is not a stack list. It is a job title pretending to be a stack list. It is unfalsifiable. A junior who has shipped one Next.js project can write that line. A senior who has shipped a hundred can also write that line. The line tells the reviewer nothing.
+
+"Vue, Nuxt, Hono, Postgres, Drizzle, Cloudflare, Hetzner, Docker" is a stack list. It is falsifiable in two clicks. Open my GitHub. The repos either contain those technologies or they do not. The list is a contract. If you list Postgres and your only public projects use SQLite, the contract is broken and the visitor will spot it.
+
+Specificity does the trick that buzzwords cannot. "Hetzner" is a higher-trust word than "Cloud" because almost nobody puts it in a portfolio unless they actually pay a Hetzner invoice. "Drizzle" is a higher-trust word than "ORM" for the same reason. The more specific your list, the more it reads as the inventory of a working professional, and the less it reads as a sales sheet. I wrote a longer post about how I derived my own stack list from an audit of my repos in [auditing 100+ of my own projects to find my real stack](/blog/auditing-100-projects-to-find-my-real-stack/); the short version is that the list on the page should match the dependencies in the repos, and a senior reviewer can tell when it does not.
+
+## The first project card is the entire portfolio
+
+Senior reviewers do not read the project list. They look at the first card. If the first card answers two questions in two seconds - what is this and is it real - they may glance at the second. If the first card fails, the rest of the grid is invisible.
+
+The two questions the card has to answer are not abstract. The name has to describe the project in roughly five words. "Memekit - meme template editor for designers" is a name. "Project Phoenix" is not a name, it is a code word. The visitor has no context for your internal naming conventions. Ship the description in the title.
+
+The screenshot has to be a real screenshot of the live product, not a Figma mockup, not a stylized device frame floating in a gradient. Mockups read as marketing. Marketing reads as "this thing does not exist or is not finished". A flat screenshot of the actual UI reads as "this is shipped". The difference is enormous and almost nobody who ships their first portfolio gets it right.
+
+The link has to open a live thing. Not a 404. Not a "coming soon". Not a GitHub README with no demo URL. If the project is dead, do not list it. If the project is live but private, replace the link with a screenshot gallery and say so. A 404 on a portfolio link is the single fastest way to lose a senior reviewer, because it converts a credibility question into a settled answer.
+
+## Senior reviewers open DevTools
+
+This is the part of the test that almost no portfolio owner accounts for, because the portfolio owner is not the visitor.
+
+A senior engineer reviewing a senior contractor opens DevTools. Sometimes for two seconds, sometimes for ten, but they open it. They are not running a code review. They are checking five things in parallel, and they are checking them fast.
+
+They glance at the Network tab to see bundle weight and request count. A 4MB hero image on a personal site is a tell. A page that loads 60 third-party scripts is a tell. They open Console to see if there are red errors on a static page. There should not be any; if there are, they were left there by someone who does not check their own work. They look at the Elements panel for the structure - whether the markup is semantic or a wall of divs, whether the headings nest correctly, whether `<html>` has a `lang` attribute. On a multilingual site they specifically look for `hreflang` links, because the absence of them on a site that ships in two languages is diagnostic of a developer who never ran their own SEO audit.
+
+They check Lighthouse, or at least eyeball the metrics they would expect Lighthouse to surface. The two web.dev articles on [Largest Contentful Paint](https://web.dev/articles/lcp) and [Cumulative Layout Shift](https://web.dev/articles/cls) describe the two numbers that show up most in casual pre-engagement reviews, because they are the two numbers a visitor can feel without measuring. A page that flashes content into place at 1.5 seconds and then jumps when the font loads has already lost a credibility tax that no copy can buy back.
+
+Finally, they paste the URL into a chat. Slack, Telegram, iMessage. They want to see the OG image preview. If the preview is a default screenshot of the page, or worse, blank, the credibility tax is real. The OG image is the only piece of your portfolio the reviewer can share with a colleague, and they will not share something that previews as a blank rectangle. Tuning this is a one-hour task. Almost nobody does it.
+
+There is also a class of portfolio that scrolljacks, animates every section into view from below, attaches a custom cursor that lags 200ms behind the real one, and lets a Lottie hero loop forever in the background. The visitor cannot articulate why they distrust the page; they can only feel that it is trying too hard. The senior tell is restraint. Motion exists to acknowledge an action - a button press, a tab change, a hover - never to entertain. A page that animates on entry is taxing the reader's attention to perform a personality, and a senior reviewer registers it in two seconds. Dark mode that is actually tuned - real contrast ratios, a different accent palette, not just "invert all the things" - reads the same way a properly written `.dockerignore` reads to a backend engineer. They cannot tell you why it matters, but they remember which portfolios had it.
+
+## What does not get looked at, and trying to message you
+
+A surprising amount of a portfolio does not get read at all. The "About me" essay does not get read in 30 seconds, and probably not on the second visit either; the visitor is not interested in your origin story, they are interested in whether you can do their job. The testimonials block does not get read because self-curated quotes from clients you chose to highlight are advertising, not evidence. Skill percentage bars get noticed once and actively reduce credibility, because no one with eight years of experience would represent their skill as "Vue 87%". The giant headshot does nothing. The contact form with six fields does not get filled out. A blog with one post titled "My first blog post" damages credibility by demonstrating a project that was started and abandoned in public. This is not a minimalism argument; it is a signal-to-noise argument. The visitor only has 30 seconds of attention - spend it on the things that move the needle.
+
+The last test inside that window is not visual. It is the visitor trying to imagine the act of contacting you. Multiple equal-weight CTAs are the most common failure: "Contact me", "Hire me", "Let's chat", "Book a call", "Email me" - five buttons, five paths, no obvious primary. The visitor does not have to choose; they leave. The site is the resume, and the resume should make the next action obvious. One next step per surface; multiple equal-weight CTAs are a failure of nerve.
+
+The contact form is the second-most-common failure. Six fields, a captcha, a "subject" dropdown, a 1000-character description. A senior client closing the tab in 30 seconds is not going to fill it out. They want a Telegram handle, an email address, or a marketplace profile they recognize. Telegram and Upwork outperform any contact form I have ever shipped, because they convert "I might message this person" into "I am already typing in a familiar interface". The link target matters as much as the label - hovering "Contact" and seeing `/contact` produces the same close-the-tab response as a 404; hovering "Telegram" and seeing `https://t.me/...` produces the opposite.
+
+## The senior tells, in detail
+
+These are the things a visitor cannot articulate but registers in 1-2 seconds.
+
+Type scale and rhythm. You do not have to be a designer to feel inconsistent spacing. A page where every section uses a slightly different padding, a slightly different heading size, and a slightly different line-height feels off without the reader knowing why. The fix is not picking better numbers; it is picking fewer numbers and reusing them everywhere.
+
+Touch targets on mobile. A senior reviewer often arrives on mobile, especially via Telegram link. If your project cards are 28px tall and the tap accidentally hits the wrong card, you have lost the visit. The fix is a single rule: nothing tappable smaller than 44px on a side, ever.
+
+First contentful paint. A flash of unstyled content on a portfolio is a credibility hit, because it is the kind of thing a senior reviewer assumes you would catch on your own page first. The web.dev articles on [LCP](https://web.dev/articles/lcp) and [CLS](https://web.dev/articles/cls) cover the two metrics that most often map to "did this feel solid when it loaded".
+
+Dark mode that is actually tuned. The accent color usually has to change between light and dark; a hex value that reads as "calm sky blue" in light mode often reads as "neon" in dark mode. A portfolio with a dark mode that respects this small thing is doing one of the highest-leverage credibility moves available.
+
+i18n that reads as native. If your site ships in two languages and the second language reads as a Google Translate fallback, every Russian-speaking visitor will close the tab. The bilingual claim is a feature, not a setting. The Russian copy on this site is hand-tuned line by line and the Russian reviewers I have heard from notice it specifically.
+
+The portfolios that fail the senior-tells test all fail for predictable reasons. The Bootstrap-template "Hi I am a passionate developer" page reads as "I bought a template". The dark-plus-neon dev-influencer aesthetic - purple gradients, glow shadows, animated particles - reads as "junior trying very hard". The Behance-style decorative animation reel - oversized illustrations, parallax everything, scroll-triggered reveals on every paragraph - reads as "wrong audience"; the visitor came to evaluate an engineer and found a designer's portfolio. The personal-brand-coach giant CTA - massive headshot, "let's build something amazing together" in 80px type, testimonials with stock photos - reads as "this is a salesperson, not an engineer". Each of these fails for a structural reason: they fill the space with content that does not change a senior reviewer's decision, and they crowd out the things that would.
+
+## How to test your own portfolio in 30 seconds
+
+Hand your phone to a non-technical friend. Open the page. Ask "what does this person do, and how would you message them". Time it. If the answer is not in 30 seconds, the page does not work. Notice that this test does not ask whether they liked it.
+
+Run Lighthouse on mobile. Anything below 95 across performance, accessibility, best practices, and SEO is a tell on a portfolio - not because the score itself matters to a client, but because the things the score measures are exactly the things a senior reviewer notices in DevTools. A 78 on accessibility means a missing `lang` attribute or unlabelled buttons, and that is the kind of finding that ends an evaluation.
+
+Paste your URL into a Telegram message and a Slack message. Look at the preview. If the OG image is a default screenshot, your share preview is doing nothing for you, and your share preview is the asset most likely to get forwarded inside a hiring team. Fix it once. It pays for itself.
+
+Open the page on a 4G throttled connection in DevTools. Watch what happens in the first 1.5 seconds. If you see a flash, a layout shift, or a long blank screen, fix that before you write any new copy. Performance is the cheapest credibility multiplier you have access to, and the most often skipped.
+
+Try to message yourself. Pretend you are a stranger. Count the clicks from landing to message-sent. If it is more than two, you have a problem. If it is more than three, you have lost the inbound entirely.
+
+The reason all of these tests work is the same reason the 30-second test is the only test that matters for inbound. A portfolio for a senior contractor is not a content destination. Nobody is here to browse a gallery, read your essays, or admire your typography for its own sake. They are here to close one open question: is this person worth a message. The site is the resume; proof beats claim; one next step per surface. Those three rules survive the test because they describe what the test is actually measuring.
+
+Long copy, dense bios, and elaborate project narratives are content for visitors you do not have. The visitor you do have will close the tab in 30 seconds unless you give them a reason not to. The reason is not a story. It is a number, a stack, a screenshot, and a single CTA that lands them in a chat with you. Build for that visitor. Cut everything that is not for them.
+
+If you want to compare notes, my own homepage is at [selim.services](/) and the longer methodology behind the stack list is in the sister post on [auditing 100+ of my own projects](/blog/auditing-100-projects-to-find-my-real-stack/). Both pages are written under the same constraint as this post: they have to survive a 30-second scan by a stranger who is about to decide whether I am real.

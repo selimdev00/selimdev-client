@@ -1,0 +1,116 @@
+---
+title: "A senior engineer's Lighthouse 100/100 checklist, after 30 sites"
+description: "A checklist for hitting Lighthouse 100/100/100/100 - the architecture decisions, the boring 88-to-94 fixes, and the cargo-cult performance tactics to skip."
+pubDate: 2026-04-12
+tags: [lighthouse, performance, web-vitals, seo, accessibility]
+draft: false
+---
+
+A perfect Lighthouse score is not a flex. It is also not, as the cynical reading goes, a synthetic number that has nothing to do with real users. It is something in between. A 100/100/100/100 means the site is built such that being fast in the field is now your only remaining job. The synthetic test has stopped catching obvious mistakes, the lab has nothing left to flag, and any remaining slowness will be measured against real-user data, not against a `lighthouse --preset=desktop` run on your laptop. That is what the score is good for. It is the smoke test, not the goal.
+
+I have shipped roughly 30 sites over the last 8 years - client work, my own products, the Yuke LLC properties, and the personal portfolio you are reading this on. The portfolio at [selim.services](/) currently runs a clean 100/100/100/100 on Lighthouse mobile. It is Astro 5 on Cloudflare Pages, and the score is not interesting in itself. What is interesting is that I have dragged maybe 20 of those 30 sites up from a stubborn 88 or 92 at some point, and the patterns that drop the score are almost always the same. The patterns that fix it are almost always the same too. This post is a checklist, sorted by category, so that the next time someone hands you a site sitting at 91/96/93/100 you know exactly which three changes to make.
+
+There is also a softer reason to care. Anyone evaluating you as a senior hire will run Lighthouse on your portfolio. Not most. All. A portfolio at 100/100/100/100 is one of the cheapest credibility moves on the web. I cover the broader version of this argument in the sister post on [auditing 100+ of my own projects to find my real stack](/blog/auditing-100-projects-to-find-my-real-stack/). The score is part of the same idea: the site is the resume.
+
+## A 100 is an architecture decision, not an optimization pass
+
+The single most important thing to understand about Lighthouse is that you do not optimize your way to 100 on a site that was not built for it. You can shave milliseconds, swap PNGs for AVIFs, defer a script or two, and you will move from 88 to 92, maybe to 94, and then you will hit a ceiling that no amount of tuning will break through. The ceiling is the architecture. Static generation versus client-rendered SPA. Edge delivery versus a single origin server in one region. Self-hosted variable fonts versus a Google Fonts `<link>`. One framework versus a Rube Goldberg of three. These are the foundation, and the score on a Wednesday afternoon is mostly a function of which foundation you chose six months earlier.
+
+If you are starting a new project and you want a 100 to be the easy default, here is the short list. Static generation by default - Astro, Nuxt `generate`, Next.js static export, Hugo, Eleventy, the specific tool matters less than the principle that HTML arrives pre-built. Edge or CDN delivery - Cloudflare Pages, Cloudflare Workers, Vercel edge, Netlify edge, the principle being that the first byte does not cross a continent. Self-hosted variable fonts, subset to the glyphs you actually use, with `font-display: swap`. One framework, one stylesheet, one image pipeline. And no client-side analytics until the page is in front of a real user - defer until idle, defer until consent, or skip entirely if you do not actually look at the dashboard.
+
+A site built on those defaults usually sits at 96-100 before any tuning. A site built without them caps out around 92, and the remaining 8 points cost more engineering hours than the original build.
+
+## The Performance category
+
+This is the one everybody looks at first and the one most likely to slip after launch. The metrics worth memorizing are LCP, CLS, TBT, and INP. The green 90+ band sits at roughly LCP under 2.5s, CLS under 0.1, TBT under 200ms, INP under 200ms. The 100 thresholds are tighter: LCP comfortably under 1.2s on the lab mobile profile, CLS under 0.05, TBT effectively at zero, INP not measured directly in the lab but watched closely in the field. I aim for the 100 thresholds, not the green ones, because the green band is where you live with one viral blog post away from a 78.
+
+LCP under 1.2s on mobile is the single hardest metric to satisfy on a content site, and the only way to do it reliably is to ship the hero image as a small modern format and preload it. AVIF first, WebP fallback, dimensions baked into the markup, and a `<link rel="preload" as="image" fetchpriority="high">` in the head. If your hero is text on a gradient, congratulations, your LCP is whichever paragraph is largest above the fold and you do not need to preload an image. Either way, the LCP element should be obvious to you - if you cannot name it without checking DevTools, the page is not designed, it is assembled. Read [web.dev on LCP](https://web.dev/articles/lcp) for the canonical metric definition; it is short and worth the 5 minutes.
+
+CLS under 0.05 is mostly a discipline problem, not a tooling problem. Reserve dimensions for every `img`, every `video`, every `iframe`. Width and height attributes on images even when CSS sizes them - the browser uses the ratio to allocate space before the image loads. Preload web fonts so the font swap happens before the first paint, not 800ms in. Avoid injecting cookie banners, GDPR widgets, or "subscribe to our newsletter" overlays at the top of the document - they are the single most common source of a 0.18 CLS spike on otherwise clean sites. The [web.dev CLS article](https://web.dev/articles/cls) walks through the math; the short version is that one late-loading hero image can cost you the entire score.
+
+TBT near zero is a hard constraint on what scripts run during page load. The correct number of blocking scripts above the fold is zero. If you have a third-party SDK that insists on loading synchronously, that SDK is wrong and you should replace it. If you have a framework runtime that hydrates the entire page on first load, that framework is making a tradeoff that the score will not forgive. This is where Astro's "islands" model actually pays its rent - by default the page has zero JavaScript, and you opt islands in one at a time. Read [web.dev on TBT](https://web.dev/articles/tbt) if you want the lab-versus-field nuance, but the practical rule is: treat any script tag in the head as a debt to be paid down.
+
+INP under 200ms is the metric that replaced FID in 2024, and it is the one that catches sites that scored well in the lab but felt sluggish in the hand. INP measures the time from a user interaction (tap, click, keystroke) to the next paint. A 90th-percentile INP above 200ms means at least 1 in 10 of your users will feel the page is unresponsive. The fixes are unglamorous: reduce work in event handlers, debounce search inputs, idle-defer expensive recalculations, never block the main thread for more than a frame on a tap. The [web.dev INP article](https://web.dev/articles/inp) has good worked examples; the practical rule is to assume any handler that is not trivial belongs in a `requestIdleCallback` or off the main thread entirely.
+
+Image strategy underpins all of the above. Use the framework's image component if it has one - Astro's `<Image>`, Next.js's `<Image>`, Nuxt's `<NuxtImg>` - or hand-roll `srcset` and `sizes` if it does not. Always AVIF, with a WebP fallback for the long tail of browsers that still need it. Always dimensions attributes on the markup. Lazy-load below the fold; eager-load and preload above. The single biggest performance win I have shipped on a client site in the last two years was replacing a 280 KB hero PNG with a 22 KB AVIF and adding a preload link. It moved the score from 89 to 99 in one commit.
+
+A short, real config snippet from the Astro config that powers this blog:
+
+```js
+// astro.config.mjs
+import { defineConfig } from "astro/config";
+
+export default defineConfig({
+  image: {
+    service: { entrypoint: "astro/assets/services/sharp" },
+    domains: [],
+    remotePatterns: [{ protocol: "https" }],
+  },
+  build: {
+    inlineStylesheets: "auto",
+  },
+  experimental: {
+    clientPrerender: true,
+  },
+});
+```
+
+That is it for the perf-relevant Astro config. `inlineStylesheets: "auto"` lets the build inline small CSS into the HTML, avoiding a render-blocking request for above-the-fold styles. `clientPrerender: true` opts into the speculation-rules API for instant nav between pages. The image service picks Sharp, which gives you AVIF and WebP transparently. The whole block is 12 lines and it is responsible for maybe 6 score points across LCP and TBT.
+
+## The Accessibility category
+
+Accessibility is the easiest category to score 100 on and the easiest category to actually fail. The Lighthouse audit only checks a subset of WCAG, so a 100 here means "no automated check failed", not "this site is accessible". You still need to test with a screen reader. But the automated checks catch the most common mistakes, and getting them all green is a 30-minute job on a clean site.
+
+The non-negotiables: color contrast verified for both light and dark themes, 4.5:1 for body and 3:1 for large text. If you are running `slate-950` background with `slate-400` body text, you are at about 3.8:1 and you have already failed. The portfolio palette here is `#374151` ink on `#ffffff` paper for day mode and `#ffffff`-only-on-the-name plus `#7dd3fc` accents on `#020617` for night mode, which clears AA at the body sizes I use; I picked `sky-700` over `sky-600` for day-mode links specifically so 14px link copy clears AA on white without bumping size or weight. That kind of decision belongs at the design-token layer, not in a one-off CSS override.
+
+Focus-visible everywhere. Never `outline: none` without a replacement. Tab through your own site once a quarter; if you cannot tell where the focus is at any point, your keyboard users cannot either. Semantic HTML, one h1 per page, real landmarks (`header`, `main`, `nav`, `footer`), and a skip-to-content link if the nav is non-trivial. Alt text that is informative when the image carries information and empty (`alt=""`) when it is decorative - "decorative as noise" is worse than empty, because a screen reader will read "image, photo of mountain, decorative" out loud and you have made the page louder for no reason.
+
+Forms: every input has a label, labels are properly associated via `for`/`id` or wrapping, error messages live in `aria-describedby`, required fields are marked in both label text and `aria-required`. On nav, `aria-current="page"` on the active item is a one-line change that screen readers genuinely use. None of this is hard. All of it is forgotten on the first round of every site I have audited.
+
+## The Best Practices category
+
+Best Practices used to be a checklist of "did you ship HTTPS, did you avoid `document.write`", and it is still mostly that. The interesting change in the last two years is that it now scores you on console output. A single `console.error` in production drops the score. A single `console.warn` from a third-party SDK can drop it 7 points. This catches a lot of sites that shipped a Sentry config without the proper environment guard.
+
+The rules I check before launch: strict Content-Security-Policy where the stack allows it - at minimum no `unsafe-inline` scripts. HTTPS, HSTS preloaded, no mixed content, no insecure form actions. No `console.error` or `console.warn` in production - if a third-party SDK is noisy, wrap or replace it, do not ship it raw. Image aspect ratios match displayed dimensions - a 1600x900 image displayed at 800x450 fails the audit even though it is technically fine, because Lighthouse cannot tell whether you meant to oversample. And no third-party scripts above the fold; if you must include one (a chat widget, an analytics tag, a CMP), lazy-mount it after first interaction, never before.
+
+CSP is the one most projects skip and the one with the largest blast radius if you ever get an XSS. Cloudflare Pages makes it cheap to add via a `_headers` file; Vercel via `vercel.json`; Astro via the integration. The default for a static site can be as tight as `default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-ancestors 'none'`, with `'unsafe-inline'` on styles only because Astro inlines small stylesheets and you do not want to maintain a hash list. Tighten further if you can. Read [the developer.chrome.com Lighthouse overview](https://developer.chrome.com/docs/lighthouse/overview) for the full audit list - most of them are settings, not engineering.
+
+## The SEO category
+
+SEO is where teams get lazy because the score is easy and the actual SEO work is hard. The Lighthouse SEO audit is a hygiene check, not a ranking simulator - it tells you whether a crawler can read your page, not whether anyone will find it. But hygiene matters and the score is cheap. The non-negotiables: one `<title>`, one `<meta name="description">` per page, both populated from page-specific data not site-wide defaults. `hreflang` on every locale variant, `<link rel="canonical">` on every page pointing to the canonical URL with no redirect chain in between. JSON-LD structured data: at minimum `WebSite` plus `Person` for a portfolio, plus `BlogPosting` on each post, plus `FAQPage` if you have FAQs. The portfolio here injects a `WebSite + Person + ProfilePage` graph on the homepage and a `BlogPosting` on each post; the blog index has nothing extra because there is nothing extra to claim.
+
+Sitemap and robots wired to your real URL set, not the placeholder set the framework generates by default. OpenGraph and Twitter meta with a static OG image at exactly 1200x630. Mobile viewport meta - yes, in 2026, this still ships missing on roughly a third of the sites I audit, usually because somebody removed it during a Tailwind migration and nobody noticed. Add it back. The fix is a one-line change in the head and it is responsible for the difference between "this looks like a website" and "this looks like a 2008 microsite" on every share preview.
+
+## The boring 88-to-94 problems and the boring fixes
+
+This is the section I would have wanted three years ago. The score sits stubbornly at 88 or 92 and you have already done the obvious things. Here is the list of small, common, high-impact problems I see over and over. None of them are clever. All of them move the needle.
+
+Google Fonts loaded via the `<link rel="stylesheet">` tag is almost always the LCP killer on a content site. The `link` blocks render, the font CSS arrives, the font file arrives, and the LCP text paints 600ms later than it should. Self-host the font file (variable, subset, woff2), preload it with `<link rel="preload" as="font" type="font/woff2" crossorigin>`, and the LCP drops by a measurable amount on every device class.
+
+A single 250 KB hero PNG drops Performance by 6 to 8 points. AVIF brings it back. There is no in-between fix; do not try to optimize the PNG with mozjpeg or pngquant unless you are stuck on a CMS that cannot serve modern formats. AVIF is supported everywhere that matters, the encoder is widely available, and the file size delta on hero photography is routinely 8 to 12 times smaller than PNG at visual parity.
+
+One `console.warn` from a third-party SDK can drop Best Practices by 7 points. The fix is to either configure the SDK to silence it, wrap the SDK to swallow it, or replace the SDK. Do not ship around it.
+
+A redirect chain on the canonical URL is a silent SEO score hit. The crawler resolves it eventually, but Lighthouse counts the chain, and the score reflects that. The most common cause is a www-to-apex redirect that itself goes through an HTTP-to-HTTPS hop. Collapse the chain at the edge - one redirect, max - and the score recovers.
+
+Tap targets under 48x48 pixels on mobile are an Accessibility hit even on a clean site. This is the fix that catches every "minimalist" footer with 12px social icon links. Bump the hit area, not necessarily the visual size - padding works, `min-width`/`min-height` work, an absolutely-positioned overlay link works.
+
+A late-mounted analytics script that fires before the page is interactive will tank both Performance and Best Practices. If you genuinely need analytics, defer until idle, defer until consent, or use a server-side approach that does not ship a client tag at all. I run zero client-side analytics on this site, and I have not missed the data once.
+
+## What is not on the checklist
+
+There is a long list of things engineers do to chase a perfect score that are either neutral or actively harmful, and they all share the same vibe of "I read a blog post in 2019 and I have been doing this ever since". The most common: aggressive code-splitting on a small site. On anything under maybe 50 routes, the round-trip cost of fetching a dozen tiny chunks beats the parse cost of a single bundle. Splitting helps when the bundles are large and the routes are independent; it hurts when the bundles are small and the routes are interlinked.
+
+Service workers on a static portfolio. Zero performance gain on the first visit (where Lighthouse actually measures), zero meaningful gain on repeat visits because Cloudflare's edge cache already serves the HTML in 30ms, and a real risk of the cache-bug class where you ship a fix and 10% of your visitors see the broken version for 24 hours. Skip it unless you are building an offline-first PWA, which a portfolio is not.
+
+Micro-optimizations on Tailwind class generation. Purging is automatic in v3 and v4. The output stylesheet on a typical content site is 8 to 14 KB gzipped. There is nothing to optimize. Move on.
+
+"Removing React to get to 100" when the framework is not the bottleneck. If your site is 90 KB of React shipping a 4 KB hero image, the framework is not the problem. Ripping out React and rewriting in vanilla JS will move the score by 1 or 2 points and will cost you a month. Fix the image, ship the fonts properly, defer the analytics, and stop blaming the framework. The framework choice matters at the architecture stage, not at the score-tuning stage.
+
+## The 100 is not the goal
+
+The point of the checklist is not to win an arbitrary number. The point is that performance, accessibility, security, and SEO stop being recurring tickets and become a default state of the build. When the architecture is right and the checklist is internalized, you do not "go optimize" before launches. The score is just the smoke test, and a site that hits 100/100/100/100 the first time you run Lighthouse on it is a site that was built well, not a site that was tuned well.
+
+If you have to "go optimize", you already lost the architecture. That is the whole thesis. The portfolio you are reading this on hits 100/100/100/100 not because I spent a weekend tuning it, but because I built it on a static-by-default framework with edge delivery and self-hosted fonts and a single image pipeline, and I never installed the third-party scripts that would have dropped the score. Treating my own site as production code - the same standard I apply to a paying client - is the actual move. The score is a side effect.
+
+This is the same argument I made in the [auditing 100+ projects](/blog/auditing-100-projects-to-find-my-real-stack/) post: the artifact is the proof. A skills list backed by a script is more credible than a skills list backed by a designer's whim. A 100/100/100/100 backed by an architecture is more credible than a 100/100/100/100 backed by a tuning sprint. In both cases the page is making a claim and the page itself is the evidence. If you have not yet, run Lighthouse on your own portfolio right now, in an incognito window, on a throttled mobile profile. Whatever number comes back is the floor of what the next reviewer will see. Either you ship from there, or you fix what is wrong with the foundation. There is not a third option.

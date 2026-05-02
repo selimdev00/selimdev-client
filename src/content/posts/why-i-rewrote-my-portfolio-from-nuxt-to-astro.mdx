@@ -1,0 +1,110 @@
+---
+title: "Why I rewrote my portfolio from Nuxt to Astro, in numbers"
+description: "I rewrote my portfolio from Nuxt 3 to Astro 5 and tracked every metric that moved. Build time, bundle, Lighthouse, dev boot - the receipts for the swap."
+pubDate: 2026-04-26
+tags: [astro, nuxt, performance, portfolio, frontend]
+draft: false
+---
+
+The honest answer to "should I rewrite my portfolio" is almost always no. A working site is a paid asset. A rewrite is a debt taken out against the next month of weekends, and the typical payoff is a different shade of blue and a slightly faster `Lighthouse` score that nobody reads. Most rewrites I have shipped for clients started life as a vibe and ended life as a budget overrun. So when I caught myself drafting a "let's move the portfolio to Astro" branch in late March, I made myself do something boring first: write down the metrics that would justify the move, set the threshold each one had to clear, and only start cutting code if the numbers made it past the bar. They did. The Nuxt 3 build was healthy and I liked it. I rewrote it anyway because the post-deploy numbers - build time, cold-page transfer, dev boot, Lighthouse mobile - moved by enough margin to make the next year of writing on this site easier. This post is the receipts for that decision.
+
+## The Nuxt 3 baseline I was happy with
+
+The previous version of [selim.services](/) was a Nuxt 3 single-page site with `@nuxtjs/i18n`, a typed composable layer that doubled as the content model, and a small `@vueuse/motion` cursor gradient. I covered the content model in the sister post on [auditing my real stack](/blog/auditing-100-projects-to-find-my-real-stack/) - all data lived in `composables/use*.ts` arrays of typed objects, and the components only rendered translation keys. That part was genuinely good. Adding a new project was three lines in one composable plus two strings in `lang/en.js` and `lang/ru.js`. Nothing about that DX was wrong.
+
+The plugins were also fine. Numbered files (`00.motion.ts`, `01.gesture.client.ts`, `02.luxon.ts`, `03.analytics.client.ts`) loaded in a deterministic order, the `.client.ts` suffix gave me browser-only registration without ceremony, and `useLocaleHead` injected `<html lang dir>` and hreflang for free. The i18n module did not just "kind of" work - it was the most polished part of the codebase. Russian-speaking visitors got `/ru/...` URLs, the cookie strategy persisted choice, and the language switcher was a one-line composable wrapping `useI18n`. If you came to me asking what to use for a bilingual marketing site today, I would still say `@nuxtjs/i18n` without thinking twice. There is no Astro equivalent that comes close on ergonomics. We will get back to that.
+
+What was wearing thin was less about Nuxt and more about the shape of my site relative to Nuxt's strengths. The portfolio is not an application. It has one route, one layout, no auth, no per-user state, no API routes, no server-rendered personalization. It is a static document with two interactive flourishes: a language switcher and a cursor-following gradient. Nuxt loads Vue, the Nuxt runtime, the i18n runtime, and a hydration payload to render that document. Even with `lazyHydrate` and aggressive code splitting, I was shipping ~120 KB of compressed JavaScript to render text, an avatar, and a list of links. The build time on a site with twelve components had crept past twenty seconds. The dev server boot from a fresh clone hovered around three and a half seconds before HMR became responsive. None of these numbers were a problem in isolation. Together, they were the wrong shape for a site that is - by deliberate design per [PRODUCT.md](https://github.com/selimdev00/selimdev-client/blob/master/PRODUCT.md) - a trust artifact a senior reviewer scans in thirty seconds.
+
+The trigger was not performance. It was friction. I had drafted three blog posts in `Notion` over six months and shipped none of them, because adding a blog to the Nuxt site meant either pulling in `@nuxt/content`, building an MDX pipeline manually, or shipping a separate subdomain. Every option felt like more weight on a chassis I did not need to be that heavy. So I went looking for the shape that fit.
+
+## The Astro 5 hypothesis
+
+Astro's pitch is simple enough to be checked against your repo in an afternoon: zero JavaScript on the page by default, opt into "islands" of interactivity component by component, and let the content collections module own typed Markdown / MDX with first-class schema validation. The [Astro documentation](https://docs.astro.build) is unusually disciplined about saying what the framework is not - it is not a SPA framework, it does not want to own your state management, and if your page is mostly application surface, you should keep using a framework that is. That candor mattered. I trusted the pitch more because the docs were explicit about the cases where Astro is the wrong call.
+
+For my site, the shape fit. The homepage is a static document with two small interactive bits. The blog wants typed frontmatter, MDX, and an RSS feed. The bilingual story can live as `/` and `/ru/` page trees. There is no per-user state, no API surface, no auth. The hypothesis was that I could move the entire site to Astro, keep the language switcher and cursor gradient as `Preact` islands (smaller than Vue's runtime, same component model), and ship a homepage that sent ~10 KB of JavaScript instead of ~120 KB. If the numbers held, the next year of writing on this site would feel different - faster builds, faster dev cycle, and content collections to write into instead of a hand-rolled blog pipeline.
+
+I gave myself one weekend to spike it. The spike got far enough by Sunday night that I committed to a full rewrite.
+
+## The numbers
+
+I tracked five numbers across the rewrite. I am sharing them with the same caveat I would give a client: these are my numbers on my hardware (`M2 Pro`, `Node 22`), measured against the same content set rendered by both stacks, and your mileage will vary depending on what you put in the page. They are directional, not benchmarks.
+
+| Metric                          | Nuxt 3        | Astro 5      | Delta              |
+| ------------------------------- | ------------- | ------------ | ------------------ |
+| Production build                | ~22s          | ~6s          | -73%               |
+| Cold-page JS transfer (`/`)     | ~120 KB gz    | ~9 KB gz     | -92%               |
+| Lighthouse mobile (perf score)  | 96            | 100          | +4 pts             |
+| Dev server boot, fresh clone    | ~3.4s         | ~0.7s        | -79%               |
+| Cloudflare Pages deploy story   | CI -> CF      | CI -> CF     | unchanged          |
+
+The build time is the metric I care about least and that surprised me most. Twenty-two seconds is not slow by any reasonable standard, but it is slow enough that I had stopped running `npm run build` locally before pushing. Six seconds is fast enough that I now run it as a pre-push reflex. That changes the failure mode of the site - production bugs get caught in the loop instead of on `Cloudflare Pages` build logs. Cheap builds are not a productivity number, they are a defect-rate number.
+
+The cold-page transfer is the metric that matters most for the brand. The portfolio's first job is to convince a senior reviewer that the person who built it has taste. A reviewer who opens DevTools and sees nine kilobytes of compressed JavaScript on a portfolio page is going to read that as a deliberate engineering choice - because it is. A reviewer who sees one hundred and twenty kilobytes on the same page reads it as "another Nuxt site". Both are valid framework choices. Only one of them looks like restraint. Restraint is the point of the site.
+
+Lighthouse mobile moved from 96 to 100 on performance, with the other three categories already at 100. The four-point delta is mostly LCP - the previous build hydrated Vue before painting the avatar in some throttled-CPU runs, and removing the runtime removed the variance. If you want the long version of why LCP dominates this kind of score, the [web.dev guide on LCP](https://web.dev/articles/lcp) is the canonical reference. The honest framing here is that 96 was already fine. A four-point Lighthouse bump is not a reason to rewrite a site on its own, and I would distrust anyone who told you it was. It is a confirmation, not a justification.
+
+The dev server boot is the second metric I undersold to myself going in. Three and a half seconds versus seven hundred milliseconds does not sound like much until you measure how often you restart the dev server in a week. For me, on a multi-project workspace where I context-switch between five repos in a single afternoon, dev boot time is a tax I pay dozens of times. Astro's boot is fast enough that the cost has effectively gone to zero. Nuxt's was not catastrophic, but it was a thing I felt every time.
+
+The deploy story is what did not move, and I want to be loud about that because rewrite posts always pretend cost dropped where it did not. Both versions of the site build in CI and ship to `Cloudflare Pages`. The bandwidth bill is rounding error in both cases - we are talking about static assets behind a CDN. There is no cost story here. I did not save a dollar a month. Anyone telling you they rewrote their personal site in Astro and saved on infrastructure is selling you something.
+
+## The schema that sold me on content collections
+
+Half of why the rewrite ended up being worth it is the blog pipeline. Content collections are a small idea executed cleanly: define a `Zod` schema for your frontmatter, write Markdown / MDX in `src/content/<collection>/`, and get typed `getCollection` reads in your pages. The whole config for this site is fourteen lines, and it is the file I was most relieved to write:
+
+```ts
+// src/content/config.ts
+import { defineCollection, z } from "astro:content";
+
+const posts = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { posts };
+```
+
+That is it. Fourteen lines replaces what would have been a `@nuxt/content` dependency, an `nuxt.config.ts` block, and a custom typed query layer for frontmatter access. Adding `updatedDate` to the schema does what you would expect - it propagates as an optional `Date` everywhere I read posts, the build fails loudly if I write the wrong type into a post's frontmatter, and the RSS feed picks it up without a single extra line in `src/pages/rss.xml.js`. This is the smallest possible surface area for "typed blog", and after a year of hand-rolling the equivalent on Nuxt, the contrast is not subtle.
+
+The other half is how the blog page becomes a single Astro file with no client JavaScript at all. Every post route is rendered at build time, the page transitions are CSS, and the only script that loads on `/blog/` is the `Preact` island for the dark-mode toggle. Compare that to the same page on Nuxt: a Vue runtime, a Nuxt runtime, a hydration payload for a static page. The savings are not theoretical, they are visible in the network panel.
+
+## What broke or got worse
+
+I want to spend equal time on what the rewrite cost me, because it was not a clean win and I would mislead you if I framed it as one.
+
+The biggest loss is i18n. Astro's built-in `i18n` config is a routing primitive - it tells the build "here are your locales, here is the default, here is whether to prefix the default" - and that is the whole feature. It does not give you `t()`, it does not give you a typed translation file, it does not give you a language switcher composable, and it does not give you SEO `alternate` link tags. All of that has to be hand-built. I have a `src/i18n/` folder with my own `t()` function, my own typed dictionary, and my own switcher logic. It works, it is well under a hundred lines, and the DX is fine. But "fine" is a step down from `@nuxtjs/i18n`, which was excellent. If your portfolio is bilingual and that is your primary axis of complexity, you should weigh this honestly. Nuxt is still better at i18n than Astro. The framework choice does not change that.
+
+The second loss is component portability. I had two interactive widgets on the Nuxt site - the language switcher and the cursor gradient - both written in idiomatic Vue with `@vueuse` composables. The cursor gradient in particular leaned on `useSpring(useMotionProperties(...))` in a way that did not have a one-to-one Preact translation. I ended up rewriting it in plain TypeScript on a `requestAnimationFrame` loop, which is shorter and faster and probably what I should have done in Vue too, but it was a half-day of work I had not budgeted. The general lesson: if you bring a Vue or React component to Astro and try to port it to a different framework island, you will spend more time than you think untangling library assumptions. Plain Astro components plus a single `<script>` block at the bottom would have been the right call from the start.
+
+The third loss is `View Transitions`. Astro's view-transitions support is genuinely nicer than what I had cobbled together in Nuxt. But it locks in a particular routing assumption - that your `<head>` and persistent UI live in a layout component that applies the `<ViewTransitions />` directive consistently. I had to refactor my header twice before the transitions stopped flickering on locale switches. This is a tradeoff, not a bug, and I am keeping the feature, but it cost me an evening I had not planned for.
+
+The fourth thing - more confession than complaint - is that I underestimated style migration. The Nuxt site used Tailwind and a small SCSS layer for the cursor gradient and a couple of typography overrides. Moving to Tailwind 3 in Astro went smoothly, but I had to delete and rewrite about eighty lines of SCSS that had grown opinions I did not remember writing. That is not Astro's fault. It is what happens when you move house and notice how much furniture you do not actually use.
+
+If I did it again, two things would change. First, I would not use `Preact` for the islands. I reached for it reflexively because it was the smallest framework runtime that mapped to what I knew, and the cost was carrying a `@astrojs/preact` integration plus the Preact runtime to render two widgets that did not need a framework. Plain TypeScript in `<script>` tags inside `.astro` components would have shipped the same UI with zero framework runtime on the page - another four or five kilobytes shed and one fewer dependency. The framework-island generality is a feature you only collect rent on if you have lots of islands. For two interactive bits on a static document, it is a tax. Second, I would write the i18n layer first, not last. I treated it as a port-it-when-the-rest-works problem and ended up rebuilding the same primitives three times before settling on a shape. Most of my "this is taking longer than I thought" hours on the rewrite were i18n debt, not Astro debt.
+
+What I would not change: content collections are exactly as good as they look, the Astro docs are exactly as good as they look, the `Cloudflare Pages` deploy story is unchanged from the Nuxt version, and the `Tailwind` integration is boring in the best way.
+
+## Why this is not "Astro vs Nuxt"
+
+I want to defuse the framework-allegiance reading of this post before someone takes a screenshot. This was not a referendum on `Nuxt`. [Nuxt](https://nuxt.com) is excellent. I still ship Nuxt for client projects where the page is application-shaped - real auth, real per-user state, real SSR with personalization, real API routes. The composable layer, the auto-imports, the module ecosystem, and the hydration story are all calibrated for that workload, and trying to do that work in Astro would be the symmetric mistake of what I would have made by staying on Nuxt for a static document.
+
+The decision was workload-shaped, not religion-shaped. My portfolio is a static document with two interactive flourishes and a blog. Astro is the right tool for that workload. A different site - say, a SaaS dashboard - would be the wrong tool, and I would not move it. Senior engineers do not pick frameworks by allegiance. They pick by the shape of what they are building, by the second-order operational cost of the choice, and by what the next year of work on that codebase will feel like. The right answer changes per project, and anyone who has a single-framework answer to every problem is selling identity, not engineering.
+
+The sister post on [auditing my own stack](/blog/auditing-100-projects-to-find-my-real-stack/) makes the same point in a different shape: the data said I use both Vue/Nuxt and Astro in real production code, weighted by the kind of project. The portfolio rewrite did not delete Nuxt from that list. It moved one site from one column to the other.
+
+## The actual reason it was worth it
+
+The numbers were the permission slip, not the reason. The reason was that I want to write more on this site, and the previous chassis made writing feel heavy. Adding a blog to the Nuxt build meant choosing a content pipeline, wiring it to the existing i18n setup, and deciding how to handle MDX. Adding a blog to the Astro build was: create `src/content/posts/`, define the schema in fourteen lines, write the post, push. The first post landed inside a week. This post is the second one inside a month. The cadence is the metric that justifies the rewrite, and the cadence is downstream of friction.
+
+The whole rewrite was a one-week effort spread across two weekends - call it twenty hours of actual work, plus a third weekend for polish and SEO meta and the blog scaffolding. For a site that earns me inbound contract work and signals my taste to senior reviewers, that is a cheap renovation. I spent more time last quarter debugging a single Vercel build cache issue on a different project than I did on this rewrite end to end.
+
+The output is a portfolio I want to add to instead of avoid. That is the only metric that actually matters for a personal site, and the only one a build dashboard cannot show you. The other numbers - the build time, the bundle, the Lighthouse score, the dev boot - earned the right to do the work. They were the permission slip. The reason was always going to be: write more.
+
+If you came here from a referral and want to verify any of the claims, the entire repo is at [github.com/selimdev00/selimdev-client](https://github.com/selimdev00/selimdev-client). Open the network panel on the [homepage](/), check the JS payload, and judge for yourself. That is the standard the page is held to.

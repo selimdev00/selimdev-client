@@ -1,0 +1,142 @@
+---
+title: "The 6 MCP servers I keep in every Claude Code project"
+description: "After six months of running Claude Code across 30 active repos, only 6 MCP servers survived the cull. Here is the kept set, the 14 cuts, and the rule."
+pubDate: 2026-05-02
+tags: [claude-code, mcp, ai-engineering, workflow, tooling]
+draft: false
+---
+
+Most "best MCP servers for Claude Code" lists I have read are aspirational vendor catalogs. Twenty entries, every one of them "essential", a screenshot of someone's editor with a sidebar full of green dots. None of them tell you which ones got removed three days later. After six months of running Claude Code as my daily driver across roughly 30 active repos in the [Yuke LLC workspace](https://selim.services), I have a much shorter list. Six servers stayed. Fourteen got cut. This is the post I would have wanted before I installed the first one.
+
+The rule that survived all six months is small enough to fit on a sticky note: an MCP server only earns a slot if it removes a specific friction in a workflow I do every week. Not every month. Not "in case I need it". Every week. Vendor lists are not a recommendation engine - they are a marketing surface for whoever can ship a `package.json` with `mcp` in the name. The right way to evaluate one is to ask which terminal tab or browser tab it deletes from your day.
+
+The other half of the rule is the cost rule, which I will return to at the end: every MCP server is a foreign API in your editor's context window. The surface area is not free. A green dot in your config has a real price in tokens, in latency, and in the model's tendency to reach for a shiny tool when a plain command would have worked.
+
+If you want the canonical Anthropic explanation of how MCP wires into Claude Code, that lives in [the Claude Code MCP docs](https://docs.anthropic.com/en/docs/claude-code/mcp) and the protocol itself is documented at [modelcontextprotocol.io](https://modelcontextprotocol.io). Read those once, then come back. Nothing below depends on a deep understanding of the protocol, only on having used it long enough to feel where it leaks.
+
+## The 6 that stayed
+
+### 1. Brave Search MCP
+
+Brave Search is the cheapest, fastest, least-cosplay version of "give the model a web". The API is unglamorous and that is exactly the point. I use it for two things: fact-checking before code suggestions land, and resolving "is this still the recommended way" questions on libraries that move quickly. A typical day will fire it five or ten times - usually a one-line "what is the current Cloudflare Pages limit on function bundle size", or "did Hono ship the new context API in 4.x". The answer comes back in under a second, in plain JSON, and I keep working.
+
+What it replaced is the bigger story. I used to pay for two "AI search" SaaS subscriptions and three different Chrome extensions that each promised to be the canonical search layer for an editor. Each of them tried to render results in a panel, tried to summarize, tried to be a product. Brave Search MCP just returns links and snippets. The model decides what to do with them. That is the right division of labor.
+
+The only failure mode worth knowing about: Brave occasionally returns a thin result set on very recent topics, and the model will sometimes treat a single low-quality blog post as canonical. The workflow rule I use is that any result that becomes a code suggestion has to come with a link I can click. No anonymous "according to a search" claims in commit messages.
+
+### 2. Context7 MCP
+
+Context7 is the only thing that reliably stops the model from inventing Next.js 16 APIs that do not exist. I am not exaggerating. The hub site at `projects/media-downloader/web/` runs on Next.js 16, which has enough breaking changes from 15 that even a careful model will quietly hallucinate a function name from training data. Context7 fetches the actual current docs for whatever library the conversation is about, on demand, before the model writes code. The hallucination rate on framework APIs in my repos dropped enough that I stopped reviewing every import line by line.
+
+The other place it pays off is during version migrations. When I moved a Hono service from 3.x to 4.x last quarter, Context7 was the difference between a clean diff and a half-day of "wait, that middleware signature is from the old version". Same story for a Drizzle upgrade where the query builder reshaped between minor versions. The library docs were current; the model used them; the diff went in.
+
+It is not a substitute for reading docs yourself on novel work. It is a substitute for the thirty times a day you would otherwise alt-tab to a docs page just to confirm a parameter name. Context7 cuts that tax to zero.
+
+### 3. Linear MCP
+
+I run [issue-driven work](https://linear.app) for almost everything that is not a one-line fix, and Linear MCP is the friction-cut that made it sustainable. Issue lookup, status transitions, comment posting, label changes - all from inside the editor, all without breaking flow. The first week I used it I noticed I was actually keeping issues up to date in real time, instead of batching status updates at the end of the day. That alone changed how my standup notes read.
+
+The specific workflow it earns its slot for: I open Claude Code, I say "pick up MAIN-953", and the model reads the issue, fetches the linked spec, looks at the relevant repo, and proposes a plan before I have written a single character. I review and approve. It moves the issue to In Progress. I work. When tests pass, it posts a summary comment, sets the state to In Review, and stops. The whole loop is encoded in the `/implement` slash command, but the Linear MCP is the part that makes it not a toy demo.
+
+The thing it is not for: project management theatre. I do not let the model create issues, edit cycles, or change project structure. Read and update on issues I already own, that is the slot. Anything beyond that is the kind of "AI does your PM job" pitch that ends in a backlog full of garbage tickets.
+
+### 4. Figma MCP (Dev Mode)
+
+Figma's official Dev Mode MCP is the only design-tool MCP I have kept past the trial week. The screenshot tool alone justifies it - I can paste a Figma URL, the model pulls the actual rendered frame, and we have a shared visual reference instead of a guessing game about what "the card with the avatar" means. For real frontend work that translates a design into Vue or React components, that single capability is worth the install.
+
+The deeper integration - design context, variable definitions, code connect mappings - is where it goes from "useful" to "structural". When the design uses tokens that are mapped to actual components in the codebase, the model can pick the right component instead of generating a fresh `<div className="...">` that duplicates an existing one. That is the difference between an AI-assisted design implementation that adds entropy to the codebase and one that subtracts it.
+
+Where I do not use it: speculative or exploratory UI work. If I am sketching, the design lives in code, and bringing Figma into the loop is overhead. The slot is earned only when there is an actual Figma file that has actual decisions in it.
+
+### 5. Notion MCP
+
+Most of my team coordination happens in Notion. The team page for 3205 is the root for plans, briefs, retros, and the running set of decisions that do not belong in any single repo. Notion MCP turns "open browser, search, copy, paste back into editor" into "ask the model to read the page". The first time it pulled in a brief I had written three weeks earlier and used it as context for an implementation plan, I knew it was staying.
+
+The slot it earns is unglamorous: lookup. Read the page. Find the linked subpage. Quote the relevant section back. I do not let it write into Notion freely - the writeback surface is large enough that I would rather control it manually than chase down a model that helpfully restructured my running notes. Read often, write rarely. That rule has held for the entire six months.
+
+There is a second-order benefit I did not predict: knowing the model can read Notion has changed what I put there. I now write briefs slightly more structurally - section headers, explicit "decision" lines, a terminology block at the top - because I know they will be parsed by something other than a human eye.
+
+### 6. A custom local stdio MCP for repo-specific scripts
+
+The sixth slot is reserved, project by project, for a custom local stdio MCP that wraps repeated three-step workflows against my own infra. The exact shape changes by repo. In the media-downloader API it is a small server that exposes `inspect_queue`, `peek_signed_url`, `dump_extractor_config`, and `flush_redis_namespace` - the four operations I would otherwise type out manually every time something looked off in a Hono service. In the SnapFrom extension repo it is a different one that wraps cookie-sync inspection and per-browser build status. In the zeroutil project it wraps the BullMQ job state and the ffmpeg worker logs.
+
+The point is not the specific tools. The point is the rule: any three-step workflow that hits your own infra and that you run more than twice a week is a candidate for a custom MCP. The implementation is usually under 200 lines of TypeScript with the official MCP SDK. The first one took me an afternoon. The fifth took an hour. It is the highest ROI category in the whole list because nobody else will ever ship the MCP that knows about the specific shape of your queue, your signed URLs, your cron jobs, your feature flags. You will.
+
+If you have never written one, start with the [Claude Code MCP guide](https://code.claude.com/docs/en/mcp), which covers stdio servers explicitly, and copy the smallest example. You do not need a remote server, you do not need authentication, you do not need a hosted endpoint. A local script the model can call is enough.
+
+## How the kept set is wired in
+
+The whole kept set lives in a single `.mcp.json` at the workspace root, with the custom per-repo server added via `claude mcp add` per project. The file is short on purpose:
+
+```json
+{
+  "mcpServers": {
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@brave/brave-search-mcp-server"],
+      "env": { "BRAVE_API_KEY": "${env:BRAVE_API_KEY}" }
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    },
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "@linear/mcp-server"],
+      "env": { "LINEAR_API_KEY": "${env:LINEAR_API_KEY}" }
+    },
+    "figma": {
+      "command": "npx",
+      "args": ["-y", "@figma/mcp-server"],
+      "env": { "FIGMA_ACCESS_TOKEN": "${env:FIGMA_ACCESS_TOKEN}" }
+    },
+    "notion": {
+      "command": "npx",
+      "args": ["-y", "@notionhq/notion-mcp-server"],
+      "env": { "NOTION_API_KEY": "${env:NOTION_API_KEY}" }
+    }
+  }
+}
+```
+
+The custom per-repo server is added inside that repo with `claude mcp add yuke-media-api -- node ./scripts/mcp/server.js`, which writes to the local config rather than the workspace one. That separation matters. The shared five are the same in every project. The custom one is a per-repo concern and should not pollute the workspace config or the model's tool list when I am working in an unrelated codebase.
+
+Two small operational notes. First, every secret comes from the OS keychain via Infisical, never from a literal value in the JSON, and never from a `.env` file that could end up in a screenshot. Second, the order in the file is the order the model sees the servers in its tool list, and there is a measurable difference in which tool the model reaches for first when the order changes. I keep Brave and Context7 at the top because they are the two I want it to consult before writing code.
+
+## The 14 that got cut
+
+These are grouped roughly by why they got cut. I will not pretend I gave each one a fair multi-week trial. Some of them were obvious in an afternoon.
+
+The first batch are duplicates of things Claude Code already does. **Generic filesystem MCPs** were the most obvious - Claude Code's native file tools are already comprehensive, and a second filesystem layer is just a way to confuse the model about which tool to reach for. **Memory MCPs** went the same way. The project's `CLAUDE.md` and the user-global `CLAUDE.md` already do this job, with the additional benefit of being readable by a human reviewer. A memory server is a database I have to back up; a markdown file is a file I can `git diff`.
+
+The second batch are tools where the existing CLI is already excellent. **GitHub MCPs** all got cut because the `gh` CLI is faster, scriptable, works in CI, and is something the model can call through normal bash without any MCP involvement at all. The same logic killed every **Postgres MCP** I tried - a `\d` in `psql` is faster, safer, and more honest about the query it is running than wrapping the connection in a tool the model can call without my eyes on it. Letting a model freely query a production database from the editor is a class of bad idea I am not interested in revisiting.
+
+The third batch are tools where the right interface is the dashboard, not the editor. **Sentry MCP** is the clearest example. Error triage is a visual, comparative task - you want the timeline, the user impact graph, the breadcrumbs side by side. Pulling a single error into the editor as JSON loses every dimension that makes triage triage. The dashboard is the right interface. Same logic for most analytics MCPs.
+
+The fourth batch are tools that overpromised on capability and underdelivered on reliability. **Playwright MCP** for casual browser scripting was the worst offender for me - long sessions degraded, page state drifted, and I ended up writing an ad-hoc Playwright script half the time anyway. The script is simpler. **Web scraper MCPs** were a category-wide cut - all of them re-implement Brave Search badly and add a JavaScript runtime to the loop for no benefit on the pages I actually care about.
+
+The fifth batch are tools solving an organizational problem I do not have. **Slack MCPs** are the clearest case. The signal-to-noise of pulling Slack into the editor is too low for a one-engineer workspace; a habit of searching Slack manually when I genuinely need something is a better workflow than letting a model pull threads opportunistically. **Agent orchestrator MCPs** are the same pattern at a different scale - they solve coordination between many agents, which is a problem you have when you are an org, not when you are one engineer with a deep skill set. I will revisit these if the org shape ever changes. Until then, every "agent mesh" MCP I tried added a layer of indirection without removing any work.
+
+The sixth batch I will name plainly: three vendor-specific MCPs that promised "AI-native CRM" got cut on principle. CRM does not need read access to my source code. The blast radius of a leaked tool call from an editor into a customer database is large enough that "the model will probably not do that" is not a sufficient guarantee. The principle generalizes - if the worst-case behavior of an MCP server is "leaks production customer data into a code suggestion", the slot is not earned no matter how convenient it would be in the best case.
+
+And the honest tail: at least four of the fourteen were "things I installed for an afternoon and removed before dinner". They added latency to every tool call, crowded the tool list, and the friction they were supposed to remove was either not friction I had or not friction they actually removed.
+
+## The cost rule
+
+Every MCP server in your config is a foreign API in your editor's context window. The model has to enumerate the tool surface to know what is available. Tool definitions cost tokens. Tool calls cost round-trips. A long tool list also subtly pushes the model toward reaching for tools instead of reasoning - the same way a developer who installs every VS Code extension ends up using the extensions instead of the language.
+
+The numbers are not catastrophic, but they are real. A typical kept-set tool surface costs me a few thousand tokens of overhead per session. A maximalist setup with twenty servers costs five times that, and the marginal value of servers seven through twenty was negative every time I measured it. The cost is not just tokens - it is the model's judgment about when to use a tool. The smaller the tool list, the more deliberately each one gets used.
+
+The rule I apply: if I cannot defend a server's slot in one sentence, it goes. Not "I might need it for an X workflow that I do once a quarter". A single sentence about a workflow I do this week, with a specific friction the server removes. If I have to qualify the sentence with "well, it could also" or "it might come in handy", that is a cut.
+
+## What I would build next
+
+There are two custom MCP servers I would build next if I had a free afternoon, and I am writing them down here partly to commit to it.
+
+The first is a small **commit-history-and-blame MCP** that wraps `git log`, `git blame`, and `git show` with sensible default scopes. The native shell tools work, but the model uses them inefficiently - it will run the same `git log` four times in a session because it forgot the result. A purpose-built server with a small amount of caching and a few opinionated query shapes ("who last touched this function", "what was the commit that introduced this string", "what changed in this file in the last sprint") would pay for itself in any debugging session. If you want to start there, the [Claude Code MCP docs](https://docs.anthropic.com/en/docs/claude-code/mcp) have a clean stdio template you can adapt in an afternoon.
+
+The second is a **deploy-status MCP** specific to the Hetzner / Cloudflare / Vercel mix I deploy to. The right shape is two or three tools - "what is currently live on this host", "what is the health endpoint returning", "what was the last successful deploy". Right now I do those three things by hand on every release. The pattern is identical to the per-repo custom MCP described above, just one level higher. If you deploy to a single platform, your version of this is even easier - one MCP, three tools, deployed as a stdio script you keep next to your editor config.
+
+If you take one thing from this post, take the rule, not the list. The list will be different in six months. The rule will not. An MCP server earns a slot only if it removes a specific friction in a workflow you do every week, and the cost of every server is real even when the value is not.
+
+If you want the longer arc this fits into - the broader audit of what I actually use versus what I claim to use - the previous post is [Auditing 100+ of my own projects to find my real stack](/blog/auditing-100-projects-to-find-my-real-stack/). Same exercise, different surface. The pattern repeats: the published list is shorter than the installed one, and the discipline is in the cuts.
