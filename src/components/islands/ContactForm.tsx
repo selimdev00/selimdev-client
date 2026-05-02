@@ -55,6 +55,26 @@ export default function ContactForm({ locale, strings }: Props) {
     e.preventDefault();
     if (status === "submitting") return;
 
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedMessage = message.trim();
+
+    if (trimmedName.length < 1) {
+      setStatus("error");
+      setErrorMsg(strings.errorInvalidName);
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      setStatus("error");
+      setErrorMsg(strings.errorInvalidEmail);
+      return;
+    }
+    if (trimmedMessage.length < 10) {
+      setStatus("error");
+      setErrorMsg(strings.errorInvalidMessage);
+      return;
+    }
+
     setStatus("submitting");
     setErrorMsg(null);
 
